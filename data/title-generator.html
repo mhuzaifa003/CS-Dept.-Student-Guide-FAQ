@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Official PDF Title Page Generator - CUST CS Dept.</title>
+<link rel="icon" type="image/x-icon" href="/files/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Times+New+Roman&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<!-- Include pdf-lib for generation -->
+<script src="https://unpkg.com/pdf-lib@1.4.0/dist/pdf-lib.min.js"></script>
+<style>
+  .generator-container { max-width: 600px; margin: 40px auto; padding: 0 20px; }
+  .controls-card { background: var(--card); border: 1px solid var(--rule); border-radius: 8px; padding: 30px; box-shadow: 0 4px 14px rgba(15, 42, 82, 0.09); }
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--navy); }
+  .form-group input, .form-group textarea { width: 100%; padding: 10px; border: 1px solid var(--rule); border-radius: var(--radius); font-family: 'Times New Roman', Times, serif; font-size: 15px; box-sizing: border-box; }
+  .form-group textarea { resize: vertical; height: 80px; }
+  .btn-download { background: var(--navy); color: white; border: none; padding: 12px; border-radius: var(--radius); cursor: pointer; font-weight: 600; width: 100%; font-size: 15px; margin-top: 10px; transition: background 0.15s ease; }
+  .btn-download:hover { background: var(--navy-soft); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap" style="max-width: 600px; margin: 0 auto; padding: 0 20px;">
+    <a href="../index.html" class="eyebrow" style="display:inline-block; text-decoration:none; color:var(--sidebar-ink); margin-bottom: 12px;">&larr; BACK TO HUB</a>
+    <h1>Title Page Generator</h1>
+    <p class="subtitle">The form below will generate a title page for your assignment. Visit <a href="archive.html">the Archive</a> for blank Title Pages.</p>
+  </div>
+</header>
+
+<main>
+  <div class="generator-container">
+    <div class="controls-card">
+      <form id="pdf-form" onsubmit="generatePDF(event)">
+        <div class="form-group">
+            <label>Student Name</label>
+            <input type="text" id="in-name" required placeholder="E.g. Muhammad Huzaifa">
+        </div>
+        <div class="form-group">
+            <label for="in-reg">Registration ID</label>
+            <input type="text" id="in-reg" required placeholder="E.g. 123456 | Auto BCS Prefix | Numeric Input Only" maxlength="6" minlength="6" pattern="\d{6}" inputmode="numeric">
+        </div>
+        <div class="form-group">
+          <label>Date</label>
+          <input type="text" id="in-date" required placeholder="E.g. Month/Date/Year">
+        </div>
+        <div class="form-group">
+          <label>Course Title</label>
+          <input type="text" id="in-course" required placeholder="E.g. Introduction to Programming">
+        </div>
+        <div class="form-group">
+          <label>Section</label>
+          <input type="text" id="in-section" required placeholder="E.g. 1, 2, 3">
+        </div>
+        <div class="form-group">
+          <label>Assignment No.</label>
+          <input type="text" id="in-assign" required placeholder="E.g. 1, 2, 3, 4">
+        </div>
+        <div class="form-group">
+          <label>Description / Topic</label>
+          <textarea id="in-desc" required placeholder="Assignment description... Note: Too long of a description may cause text clipping"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Submitted To</label>
+          <input type="text" id="in-teacher" required>
+        </div>
+        <button type="submit" class="btn-download" id="submit-btn">Download Title Page</button>
+      </form>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid" style="grid-template-columns: 1fr;">
+    <div class="footer-col footer-about" style="text-align: center;">
+      <p>Created by the CS Department Student Community.<br>This website is made by third-parties, while some of the content used is part of the university's official materials.<br><a href="../index.html"><b><u>Back to Hub</u></b></a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  async function generatePDF(event) {
+    event.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = "Generating PDF...";
+
+    try {
+      const existingPdfBytes = await fetch("../files/Title Page.pdf").then(res => res.arrayBuffer());
+      const pdfDoc = await PDFLib.PDFDocument.load(existingPdfBytes);
+      const firstPage = pdfDoc.getPages()[0];
+      const { height } = firstPage.getSize();
+
+      const timesFont = await pdfDoc.embedFont(PDFLib.StandardFonts.TimesRoman);
+      const fontSize = 14;
+
+      const name = document.getElementById('in-name').value;
+      const reg = 'BCS' + document.getElementById('in-reg').value;
+      const dateStr = document.getElementById('in-date').value;
+      const course = document.getElementById('in-course').value;
+      const section = document.getElementById('in-section').value;
+      const assign = document.getElementById('in-assign').value;
+      const desc = document.getElementById('in-desc').value;
+      const teacher = document.getElementById('in-teacher').value;
+
+      const drawField = (text, x, yFromTop, maxWidth = undefined) => {
+        firstPage.drawText(text, { 
+          x: x, 
+          y: height - yFromTop, 
+          size: fontSize, 
+          font: timesFont, 
+          ...(maxWidth ? { maxWidth } : {}) 
+        });
+      };
+
+      drawField(name, 141, 209);
+      drawField(reg, 141, 246);
+      drawField(dateStr, 141, 279);
+      drawField(course, 141, 310);
+      drawField(section, 141, 343);
+      drawField(assign, 189, 391);
+      drawField(desc, 172, 441, 360);
+      drawField(teacher, 185, 535);
+
+      const pdfBytes = await pdfDoc.save();
+      const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = `${reg}_${name}_${course}_A${assign} - TitlePage.pdf`;
+      link.click();
+
+      btn.disabled = false;
+      btn.textContent = "Download Title Page";
+    } catch (err) {
+      console.error(err);
+      alert("Error generating PDF: " + err.message);
+      btn.disabled = false;
+      btn.textContent = "Download Title Page";
+    }
+  }
+</script>
+</body>
+</html>

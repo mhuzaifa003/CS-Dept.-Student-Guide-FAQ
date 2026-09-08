@@ -1,0 +1,758 @@
+[
+    {
+        "courseId": "CS1133",
+        "courseName": "Introduction to Programming",
+        "semester": "1",
+        "preRequisiteCourses": [],
+        "coRequisiteCourses": [
+            "CS1131"
+        ],
+        "postRequisiteCourses": [
+            "CS1143",
+            "CSG1573",
+            "CS3613",
+            "CS3072",
+            "CS4192",
+            "CS4613",
+            "CS4573"
+        ]
+    },
+    {
+        "courseId": "CS1131",
+        "courseName": "Introduction to Programming Lab",
+        "semester": "1",
+        "preRequisiteCourses": [],
+        "coRequisiteCourses": [
+            "CS1133"
+        ],
+        "postRequisiteCourses": [
+            "CS1141",
+            "CS3071",
+            "CS4191"
+        ]
+    },
+    {
+        "courseId": "CSG1513",
+        "courseName": "Calculus and Analytical Geometry",
+        "semester": "1",
+        "preRequisiteCourses": [],
+        "coRequisiteCourses": [],
+        "postRequisiteCourses": [
+            "MTCS1033"
+        ]
+    },
+    {
+        "courseId": "CSG1022",
+        "courseName": "Ideology and Constitution of Pakistan",
+        "semester": "1",
+        "preRequisiteCourses": [],
+        "coRequisiteCourses": [],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CSG1612",
+        "courseName": "Applications of Information and Communication Technologies",
+        "semester": "1",
+        "preRequisiteCourses": [],
+        "coRequisiteCourses": [
+            "CSG1611"
+        ],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CSG1611",
+        "courseName": "Applications of Information and Communication Technologies Lab",
+        "semester": "1",
+        "preRequisiteCourses": [],
+        "coRequisiteCourses": [
+            "CSG1612"
+        ],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CSG1113",
+        "courseName": "Functional English",
+        "semester": "1",
+        "preRequisiteCourses": [],
+        "coRequisiteCourses": [],
+        "postRequisiteCourses": [
+            "CSG1123"
+        ]
+    },
+    {
+        "courseId": "MTCS1003",
+        "courseName": "Basic Mathematics I",
+        "semester": "1",
+        "preRequisiteCourses": [],
+        "coRequisiteCourses": [],
+        "postRequisiteCourses": [
+            "MTCS1103"
+        ]
+    },
+    {
+        "courseId": "CS1143",
+        "courseName": "Object Oriented Programming",
+        "semester": "2",
+        "preRequisiteCourses": [
+            "CS1133"
+        ],
+        "coRequisiteCourses": [
+            "CS1141"
+        ],
+        "postRequisiteCourses": [
+            "CS2143",
+            "CS2313"
+        ]
+    },
+    {
+        "courseId": "CS1141",
+        "courseName": "Object Oriented Programming Lab",
+        "semester": "2",
+        "preRequisiteCourses": [
+            "CS1131"
+        ],
+        "coRequisiteCourses": [
+            "CS1143"
+        ],
+        "postRequisiteCourses": [
+            "CS2141",
+            "CS2311"
+        ]
+    },
+    {
+        "courseId": "CSG1312",
+        "courseName": "Applied Physics",
+        "semester": "2",
+        "preRequisiteCourses": [],
+        "coRequisiteCourses": [],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CSG1311",
+        "courseName": "Applied Physics Lab",
+        "semester": "2",
+        "preRequisiteCourses": [],
+        "coRequisiteCourses": [],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CSG1123",
+        "courseName": "Expository Writing",
+        "semester": "2",
+        "preRequisiteCourses": [
+            "CSG1113"
+        ],
+        "coRequisiteCourses": [],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CSG1412",
+        "courseName": "Sociology",
+        "semester": "2",
+        "preRequisiteCourses": [],
+        "coRequisiteCourses": [],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CSG1573",
+        "courseName": "Discrete Structures",
+        "semester": "2",
+        "preRequisiteCourses": [
+            "CS1133"
+        ],
+        "coRequisiteCourses": [],
+        "postRequisiteCourses": [
+            "CS2512",
+            "CS2511",
+            "CS3283"
+        ]
+    },
+    {
+        "courseId": "CSG1021",
+        "courseName": "Fehm-ul-Quran I",
+        "semester": "2",
+        "preRequisiteCourses": [],
+        "coRequisiteCourses": [],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CSG1012",
+        "courseName": "Islamic Studies/Ethics",
+        "semester": "2",
+        "preRequisiteCourses": [],
+        "coRequisiteCourses": [],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "MTCS1103",
+        "courseName": "Basic Mathematics II",
+        "semester": "2",
+        "preRequisiteCourses": [
+            "MTCS1003"
+        ],
+        "coRequisiteCourses": [],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CS2143",
+        "courseName": "Data Structures",
+        "semester": "3",
+        "preRequisiteCourses": [
+            "CS1143"
+        ],
+        "coRequisiteCourses": [
+            "CS2141"
+        ],
+        "postRequisiteCourses": [
+            "CS2772",
+            "CS3163",
+            "CS3412"
+        ]
+    },
+    {
+        "courseId": "CS2141",
+        "courseName": "Data Structures Lab",
+        "semester": "3",
+        "preRequisiteCourses": [
+            "CS1141"
+        ],
+        "coRequisiteCourses": [
+            "CS2143"
+        ],
+        "postRequisiteCourses": [
+            "CS2771",
+            "CS3411"
+        ]
+    },
+    {
+        "courseId": "CSG2212",
+        "courseName": "Personal Grooming",
+        "semester": "3",
+        "preRequisiteCourses": [],
+        "coRequisiteCourses": [],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "MTCS1033",
+        "courseName": "Linear Algebra",
+        "semester": "3",
+        "preRequisiteCourses": [
+            "CSG1513"
+        ],
+        "coRequisiteCourses": [],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CS2313",
+        "courseName": "Introduction to Database Systems",
+        "semester": "3",
+        "preRequisiteCourses": [
+            "CS1143"
+        ],
+        "coRequisiteCourses": [
+            "CS2311"
+        ],
+        "postRequisiteCourses": [
+            "CS2223",
+            "CS2322",
+            "CS3192"
+        ]
+    },
+    {
+        "courseId": "CS2311",
+        "courseName": "Introduction to Database Systems Lab",
+        "semester": "3",
+        "preRequisiteCourses": [
+            "CS1141"
+        ],
+        "coRequisiteCourses": [
+            "CS2313"
+        ],
+        "postRequisiteCourses": [
+            "CS2321",
+            "CS3191"
+        ]
+    },
+    {
+        "courseId": "CS2512",
+        "courseName": "Digital Logic Design",
+        "semester": "3",
+        "preRequisiteCourses": [
+            "CSG1573"
+        ],
+        "coRequisiteCourses": [
+            "CS2511"
+        ],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CS2511",
+        "courseName": "Digital Logic Design Lab",
+        "semester": "3",
+        "preRequisiteCourses": [
+            "CSG1573"
+        ],
+        "coRequisiteCourses": [
+            "CS2512"
+        ],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CSG1031",
+        "courseName": "Fehm-ul-Quran II",
+        "semester": "3",
+        "preRequisiteCourses": [],
+        "coRequisiteCourses": [],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CS2223",
+        "courseName": "Software Engineering",
+        "semester": "4",
+        "preRequisiteCourses": [
+            "CS2313"
+        ],
+        "coRequisiteCourses": [],
+        "postRequisiteCourses": [
+            "CS4912"
+        ]
+    },
+    {
+        "courseId": "CS2322",
+        "courseName": "Database Management Systems",
+        "semester": "4",
+        "preRequisiteCourses": [
+            "CS2313"
+        ],
+        "coRequisiteCourses": [
+            "CS2321"
+        ],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CS2321",
+        "courseName": "Database Management Systems Lab",
+        "semester": "4",
+        "preRequisiteCourses": [
+            "CS2311"
+        ],
+        "coRequisiteCourses": [
+            "CS2322"
+        ],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CS2522",
+        "courseName": "Computer Organization and Assembly Language",
+        "semester": "4",
+        "preRequisiteCourses": [],
+        "coRequisiteCourses": [
+            "CS2521"
+        ],
+        "postRequisiteCourses": [
+            "CS3512",
+            "CS3432"
+        ]
+    },
+    {
+        "courseId": "CS2521",
+        "courseName": "Computer Organization and Assembly Language Lab",
+        "semester": "4",
+        "preRequisiteCourses": [],
+        "coRequisiteCourses": [
+            "CS2522"
+        ],
+        "postRequisiteCourses": [
+            "CS3511",
+            "CS3431"
+        ]
+    },
+    {
+        "courseId": "CS2772",
+        "courseName": "Computer Networks",
+        "semester": "4",
+        "preRequisiteCourses": [
+            "CS2143"
+        ],
+        "coRequisiteCourses": [
+            "CS2771"
+        ],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CS2771",
+        "courseName": "Computer Networks Lab",
+        "semester": "4",
+        "preRequisiteCourses": [
+            "CS2141"
+        ],
+        "coRequisiteCourses": [
+            "CS2772"
+        ],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CSG2812",
+        "courseName": "Civics and Professional Ethics",
+        "semester": "4",
+        "preRequisiteCourses": [],
+        "coRequisiteCourses": [],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "MTCS2053",
+        "courseName": "Multi-variate Calculus",
+        "semester": "4",
+        "preRequisiteCourses": [
+            "MTCS2063"
+        ],
+        "coRequisiteCourses": [],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CS3163",
+        "courseName": "Design and Analysis of Algorithms",
+        "semester": "5",
+        "preRequisiteCourses": [
+            "CS2143"
+        ],
+        "coRequisiteCourses": [],
+        "postRequisiteCourses": [
+            "CS3812",
+            "CS3811"
+        ]
+    },
+    {
+        "courseId": "CS3613",
+        "courseName": "Theory of Automata and Formal Languages",
+        "semester": "5",
+        "preRequisiteCourses": [
+            "CS1133"
+        ],
+        "coRequisiteCourses": [],
+        "postRequisiteCourses": [
+            "CS4622",
+            "CS4621"
+        ]
+    },
+    {
+        "courseId": "CS3283",
+        "courseName": "Graph Algorithms",
+        "semester": "5",
+        "preRequisiteCourses": [
+            "CSG1573"
+        ],
+        "coRequisiteCourses": [],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CS3412",
+        "courseName": "Operating Systems",
+        "semester": "5",
+        "preRequisiteCourses": [
+            "CS2143"
+        ],
+        "coRequisiteCourses": [
+            "CS3411"
+        ],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CS3411",
+        "courseName": "Operating Systems Lab",
+        "semester": "5",
+        "preRequisiteCourses": [
+            "CS2141"
+        ],
+        "coRequisiteCourses": [
+            "CS3412"
+        ],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CS3712",
+        "courseName": "Introduction to Information Security and Forensics",
+        "semester": "5",
+        "preRequisiteCourses": [
+            "CS3772"
+        ],
+        "coRequisiteCourses": [
+            "CS3711"
+        ],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CS3711",
+        "courseName": "Introduction to Information Security and Forensics Lab",
+        "semester": "5",
+        "preRequisiteCourses": [
+            "CS3772"
+        ],
+        "coRequisiteCourses": [
+            "CS3712"
+        ],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CS3512",
+        "courseName": "Computer Architecture",
+        "semester": "5",
+        "preRequisiteCourses": [
+            "CS2522"
+        ],
+        "coRequisiteCourses": [
+            "CS3511"
+        ],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CS3511",
+        "courseName": "Computer Architecture Lab",
+        "semester": "5",
+        "preRequisiteCourses": [
+            "CS2521"
+        ],
+        "coRequisiteCourses": [
+            "CS3512"
+        ],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CS3432",
+        "courseName": "Parallel and Distributed Computing",
+        "semester": "6",
+        "preRequisiteCourses": [
+            "CS2522"
+        ],
+        "coRequisiteCourses": [
+            "CS3431"
+        ],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CS3431",
+        "courseName": "Parallel and Distributed Computing Lab",
+        "semester": "6",
+        "preRequisiteCourses": [
+            "CS2521"
+        ],
+        "coRequisiteCourses": [
+            "CS3432"
+        ],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CS3812",
+        "courseName": "Artificial Intelligence",
+        "semester": "6",
+        "preRequisiteCourses": [
+            "CS3163"
+        ],
+        "coRequisiteCourses": [
+            "CS3811"
+        ],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CS3811",
+        "courseName": "Artificial Intelligence Lab",
+        "semester": "6",
+        "preRequisiteCourses": [
+            "CS3163"
+        ],
+        "coRequisiteCourses": [
+            "CS3812"
+        ],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "HMCS3033",
+        "courseName": "Technical and Business Writing",
+        "semester": "6",
+        "preRequisiteCourses": [],
+        "coRequisiteCourses": [],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CS3072",
+        "courseName": "Numerical Computing",
+        "semester": "6",
+        "preRequisiteCourses": [
+            "CS1133"
+        ],
+        "coRequisiteCourses": [
+            "CS3071"
+        ],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CS3071",
+        "courseName": "Numerical Computing Lab",
+        "semester": "6",
+        "preRequisiteCourses": [
+            "CS1131"
+        ],
+        "coRequisiteCourses": [
+            "CS3072"
+        ],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CS3192",
+        "courseName": "Web Application Development",
+        "semester": "6",
+        "preRequisiteCourses": [
+            "CS2313"
+        ],
+        "coRequisiteCourses": [
+            "CS3191"
+        ],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CS3191",
+        "courseName": "Web Application Development Lab",
+        "semester": "6",
+        "preRequisiteCourses": [
+            "CS2311"
+        ],
+        "coRequisiteCourses": [
+            "CS3192"
+        ],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CSG1032",
+        "courseName": "Pakistan Studies",
+        "semester": "6",
+        "preRequisiteCourses": [],
+        "coRequisiteCourses": [],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CS4622",
+        "courseName": "Compiler Construction",
+        "semester": "7",
+        "preRequisiteCourses": [
+            "CS3613"
+        ],
+        "coRequisiteCourses": [
+            "CS4621"
+        ],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CS4621",
+        "courseName": "Compiler Construction Lab",
+        "semester": "7",
+        "preRequisiteCourses": [
+            "CS3613"
+        ],
+        "coRequisiteCourses": [
+            "CS4622"
+        ],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CS4192",
+        "courseName": "Mobile Application Development",
+        "semester": "7",
+        "preRequisiteCourses": [
+            "CS1133"
+        ],
+        "coRequisiteCourses": [
+            "CS4191"
+        ],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CS4191",
+        "courseName": "Mobile Application Development Lab",
+        "semester": "7",
+        "preRequisiteCourses": [
+            "CS1131"
+        ],
+        "coRequisiteCourses": [
+            "CS4192"
+        ],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CS4912",
+        "courseName": "Design Project (Part-I)",
+        "semester": "7",
+        "preRequisiteCourses": [
+            "CS2223"
+        ],
+        "coRequisiteCourses": [],
+        "postRequisiteCourses": [
+            "CS4924"
+        ]
+    },
+    {
+        "courseId": "CS4613",
+        "courseName": "Machine Learning",
+        "semester": "7",
+        "preRequisiteCourses": [
+            "CS1133"
+        ],
+        "coRequisiteCourses": [],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CS3272",
+        "courseName": "Human Computer Interaction",
+        "semester": "7",
+        "preRequisiteCourses": [],
+        "coRequisiteCourses": [
+            "CS4271"
+        ],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CS3271",
+        "courseName": "Human Computer Interaction Lab",
+        "semester": "7",
+        "preRequisiteCourses": [],
+        "coRequisiteCourses": [
+            "CS4272"
+        ],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CS4573",
+        "courseName": "Blockchain Technology",
+        "semester": "7",
+        "preRequisiteCourses": [
+            "CS1133"
+        ],
+        "coRequisiteCourses": [],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CS3843",
+        "courseName": "Data Security and Cryptography",
+        "semester": "8",
+        "preRequisiteCourses": [],
+        "coRequisiteCourses": [],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "CS4924",
+        "courseName": "Design Project (Part-II)",
+        "semester": "8",
+        "preRequisiteCourses": [
+            "CS4912"
+        ],
+        "coRequisiteCourses": [],
+        "postRequisiteCourses": []
+    },
+    {
+        "courseId": "HMCS1033",
+        "courseName": "Personal Management and Grooming",
+        "semester": "8",
+        "preRequisiteCourses": [],
+        "coRequisiteCourses": [],
+        "postRequisiteCourses": []
+    }
+]

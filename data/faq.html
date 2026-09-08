@@ -1,0 +1,76 @@
+<!-- faq.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CS Dept. Student Guide & FAQ</title>
+<link rel="icon" type="image/x-icon" href="/files/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <h1 id="site-title">Student Guide & FAQ</h1>
+    <p class="subtitle" id="site-subtitle">Loading…</p>
+
+    <div class="search-row">
+      <label for="search" class="visually-hidden">Search questions</label>
+      <input type="search" id="search" placeholder="Search a question, e.g. “add/drop deadline”" autocomplete="off">
+      <span class="result-count" id="result-count" aria-live="polite"></span>
+    </div>
+  </div>
+</header>
+
+<div class="layout wrap">
+  <aside class="sidebar">
+    <p class="sidebar-heading">Categories</p>
+    <nav class="tabs" id="tabs" aria-label="Filter by category">
+    </nav>
+  </aside>
+
+  <main class="content">
+    <div id="faq-list" class="faq-list">
+      <p class="loading">Fetching answers…</p>
+    </div>
+    <p class="empty-state" id="empty-state" hidden>No questions match “<span id="empty-query"></span>”. Try a different word, or contact the Student Ambassador.</p>
+  </main>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <nav class="footer-col" aria-label="Quick links">
+      <p class="footer-heading">Quick Links</p>
+      <ul>
+        <li><a href="../files/timetable.pdf" target="_blank">Department Timetable</a></li>
+        <li><a href="../files/important_dates.pdf" target="_blank">Dates To Remember</a></li>
+        <li><a href="../files/course_offerings.pdf" target="_blank">Course Catalog</a></li>
+        <li><a href="../files/datesheet.pdf" target="_blank">Exam Datesheet</a></li>
+      </ul>
+    </nav>
+
+    <nav class="footer-col" aria-label="Resources">
+      <p class="footer-heading" aria-hidden="true" style="visibility:hidden">Quick Links</p>
+      <ul>
+        <li><a href="https://tasjeel.cust.edu.pk/student/dashboard" target="_blank">Student Portal</a></li>
+        <li><a href="https://cust.edu.pk/directory/" target="_blank">University Contact Directory</a></li>
+        <li><a href="https://cust.edu.pk/downloads/" target="_blank">Downloads</a></li>
+        <li><a href="map.html" target="_blank" style="visibility:hidden">Campus Map</a></li>
+      </ul>
+    </nav>
+
+    <div class="footer-col footer-about">
+      <p id="contact-line"></p>
+      <p><a href="../index.html"><b><u>Back to Hub</u></b></a></p>
+      <p class="updated" id="updated-line"></p>
+    </div>
+  </div>
+</footer>
+
+<script src="../app.js"></script>
+</body>
+</html>

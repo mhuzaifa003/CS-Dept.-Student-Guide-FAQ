@@ -1,0 +1,81 @@
+{
+  "meta": {
+    "department": "Computer Science",
+    "title": "Student Guide & FAQ",
+    "subtitle": "A growing library of answers to commonly asked questions and general guidance for students — accessible and up-to-date to fill gaps when needed.",
+    "contact": "Still have questions? Contact your Student Ambassador via <b><u>WhatsApp</u></b>.",
+    "lastUpdated": "2026-09-08"
+  },
+
+  "categories": [
+    "University Policies & Guidelines",
+    "Campus Facilities & Services",
+    "Academic Registration & Enrollment",
+    "IT Support & Student Portal",
+    "Scholarships & Financial Aid",
+    "Graduation & Alumni Services"
+  ],
+
+  "faqs": [
+    {
+      "category": "University Policies & Guidelines",
+      "question": "Where can I find the official university rulebook?",
+      "answer": "<p>Access the official university rulebook <a href='https://cust.edu.pk/wp-content/uploads/2026/01/Academic-Regulations-Book.pdf' target='_blank'><b><u>here</u></b></a>. Chapter 1 outlines foundational definitions, while Chapter 2 details Bachelor's degree regulations.</p><p>Where necessary, frequently applicable guidelines are summarized within this catalog for convenient reference.</p><p>In the event of any discrepancies, the official university rulebook shall take precedence.</p>"
+    },
+    {
+      "category": "University Policies & Guidelines",
+      "question": "What is the procedure for transferring to another university?",
+      "answer": "<p>To initiate a transfer to another institution, you must first contact the administration of the target university to discuss your specific case and verify their transfer eligibility criteria and required documentation.</p><p>Once the target university provides the required list of documents, please visit the <b><u>Administrative Offices at CUST</u></b> to request and collect the official records needed to complete your transfer process.</p>"
+    },
+    
+    {
+      "category": "Campus Facilities & Services",
+      "question": "What are the standard university office timings?",
+      "answer": "<p>Main administrative offices operate from 9:00 AM to 5:00 PM, Monday through Friday.</p>"
+    },
+    {
+      "category": "Campus Facilities & Services",
+      "question": "How do I register my vehicle for university parking?",
+      "answer": "<p>To register your vehicle, complete the <a href='https://docs.google.com/forms/d/e/1FAIpQLSc13RZSn0yZUb6JAqn8Srsp0ppB8xrUYKv_Hly6e1FItlRdiQ/viewform' target='_blank'><b><u>parking registration form</u></b></a> available on the <a href='https://www.facebook.com/share/p/1BHDxyCX9t/' target='_blank'><b><u>Student Affairs Facebook Page</u></b></a>.</p><p>Following submission, present your registered vehicle along with your student ID at the Main Entry Gate to collect your parking sticker.</p>"
+    },
+    
+    {
+      "category": "Academic Registration & Enrollment",
+      "question": "How do I enroll in courses for the upcoming semester?",
+      "answer": "<p>Semester enrollment typically opens a few weeks prior to classes commencing. Exact dates are announced via the official WhatsApp community and the <a href='https://cust.edu.pk/category/announcement/' target='_blank'><b><u>University Noticeboard</u></b></a>.</p><p>To register, navigate to the <a href='https://tasjeel.cust.edu.pk/student/enrollment/cards' target='_blank'><b><u>course registration portal</u></b></a> and select your desired classes. Please verify that all course prerequisites are met beforehand.</p><p>For assistance with registration errors, email <b><u>aodoc@cust.edu.pk</u></b> with:</p><ul><li>Your full name and registration number</li><li>A detailed description of the issue</li><li>A relevant screenshot of the error, if applicable</li></ul>"
+    },
+    {
+      "category": "Academic Registration & Enrollment",
+      "question": "What steps should I take if I accumulate three probations?",
+      "answer": "<p>Probation matters must be addressed directly with the Student Affairs Office prior to the closing of course enrollment for the upcoming semester.</p>"
+    },
+    {
+      "category": "Academic Registration & Enrollment",
+      "question": "What is the procedure to clear or remove a grade bracket?",
+      "answer": "<p>Please visit the Examination Office directly for guidance regarding clearing or removing brackets.</p>"
+    },
+    
+    {
+      "category": "IT Support & Student Portal",
+      "question": "My student portal or Microsoft Teams account is blocked. How can I unblock it?",
+      "answer": "<p>For any portal or MS Teams access errors, email <b><u>sysadmins@cust.edu.pk</u></b> with your account details and an attached screenshot of the error message.</p>"
+    },
+    {
+      "category": "IT Support & Student Portal",
+      "question": "What should I do if my registered phone number is inaccessible and I cannot receive verification codes?",
+      "answer": "<p>Please reach out directly to the IT Department for assistance with updating or verifying your contact details.</p>"
+    },
+    
+    {
+      "category": "Scholarships & Financial Aid",
+      "question": "How do I apply for kinship scholarships?",
+      "answer": "<p>Kinship scholarships are processed on a per-semester basis. To apply, visit the Registration Office after semester registration closes but before tuition fee payment is due.</p>"
+    },
+    
+    {
+      "category": "Graduation & Alumni Services",
+      "question": "How do I obtain my official transcript and degree certificate following graduation?",
+      "answer": "<p>Graduating students can request their official transcripts and degree certificates directly through the <b><u>Examination Office</u></b>.</p>"
+    }
+  ]
+}

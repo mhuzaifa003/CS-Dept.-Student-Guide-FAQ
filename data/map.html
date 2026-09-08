@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campus Map - CS Dept. Student Guide</title>
+<link rel="icon" type="image/x-icon" href="/files/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="../styles.css">
+<style>
+    .site-header .subtitle {
+        max-width: 100%;
+    }
+    /* Updated map container to play nicely with the CSS Grid layout */
+    #campus-map {
+        width: 100%;
+        height: 70vh;
+        border-radius: 8px;
+        border: 1px solid var(--rule);
+        background: #0f2a52;
+        box-shadow: 0 4px 14px rgba(15, 42, 82, 0.09);
+        z-index: 1; /* Prevents map controls from overlapping headers */
+    }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="wrap">
+        <h1>Interactive Campus Map</h1>
+        <p class="subtitle">Tailored specifically for incoming students, this visual guide is designed to help you navigate our campus with ease. While it highlights essential departmental locations, key facilities, and vital campus resources, please note that it covers select primary areas rather than the entire university grounds.</p>
+    </div>
+</header>
+
+<!-- Applied the "layout" class to activate the Sidebar/Content split -->
+<main class="layout wrap" style="padding-top: 40px; padding-bottom: 60px;">
+    
+    <!-- The Legend Sidebar -->
+    <aside class="sidebar">
+        <p class="sidebar-heading">Map Legend</p>
+        <nav class="tabs" id="legend-tabs" aria-label="Map Legend"></nav>
+    </aside>
+
+    <!-- The Map Container -->
+    <div class="content">
+        <div id="campus-map"></div>
+    </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid" style="grid-template-columns: 1fr;">
+    <div class="footer-col footer-about" style="text-align: center;">
+      <p>Created by the CS Department Student Community.<br>This website is made by third-parties, while some of the content used is part of the university's official materials.<br><a href="../index.html"><b><u>Back to Hub</u></b></a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+    var map = L.map('campus-map', {
+        crs: L.CRS.Simple,
+        minZoom: -1,
+        maxZoom: 4,
+        zoomSnap: 0.25,
+        attributionControl: false
+    });
+
+    // Dimensions must match the raw dimensions for campus-map.png
+    var w = 1640;
+    var h = 824;
+    var bounds = [[0, 0], [h, w]];
+
+    var image = L.imageOverlay('campus-map.png', bounds).addTo(map);
+
+    map.setView([h / 2, w / 2], 0.25);
+    map.setMaxBounds(bounds);
+
+    var locations = [
+        { name: "Block A", x: 591, y: 370, desc: "<b>Houses:</b><br>• Computer Lab<br>• Main Library<br>• Study Room" },
+        { name: "Block E", x: 796, y: 454, desc: "<b>Houses:</b><br>• Student Affairs Office<br>• Admissions Office" },
+        { name: "Student Parking Lot", x: 627, y: 484, desc: "" },
+        { name: "Infirmary", x: 805, y: 639, desc: "" },
+        { name: "REPLACE WITH BLOCK", x: 838, y: 535, desc: "<b>Houses:</b><br>• Girl's Common Room" },
+        { name: "REPLACE WITH BLOCK", x: 795, y: 622, desc: "<b>Houses:</b><br>• Sports Room<br>• Gymnasium" },
+        { name: "Cafeteria", x: 718, y: 543, desc: "<b>Houses:</b><br>• Indoor Dining Area<br>• Book Store" },
+        { name: "Riverside Bookshop", x: 582, y: 246, desc: "" },
+        { name: "Faculty / Visitors Parking Lot", x: 975, y: 245, desc: "" },
+        { name: "Mosque", x: 811, y: 473, desc: "<b>Houses:</b><br>• Prayer Hall<br>• Ablution Area" },
+        { name: "Block Temp", x: 853, y: 615, desc: "<b>Houses:</b><br>• Library<br>• Study Room" },
+    ];
+
+    var groupedLocations = {};
+
+    locations.forEach(function(loc) {
+        // 1. Place the marker
+        var marker = L.marker([loc.y, loc.x]).addTo(map);
+        marker.bindPopup(`<b>${loc.name}</b><br><span style="color: #55627a; font-size: 13px; line-height: 1.4; display: inline-block; margin-top: 4px;">${loc.desc}</span>`);
+        loc.markerRef = marker;
+
+        // 2. Group items with the exact same name for the sidebar
+        if (!groupedLocations[loc.name]) {
+            groupedLocations[loc.name] = { index: 0, pins: [] };
+        }
+        groupedLocations[loc.name].pins.push(loc);
+    });
+
+    // 3. Generate the Legend Buttons in the sidebar
+    var legendContainer = document.getElementById('legend-tabs');
+    Object.keys(groupedLocations).forEach(function(key) {
+        var btn = document.createElement("button");
+        btn.className = "tab";
+        btn.textContent = key;
+        
+        btn.addEventListener('click', function() {
+            var group = groupedLocations[key];
+            var targetPin = group.pins[group.index];
+            
+            // Pan map and open the popup
+            map.flyTo([targetPin.y, targetPin.x], 1.5, { duration: 0.5 });
+            targetPin.markerRef.openPopup();
+            
+            // Cycle to the next location if multiple exist under this name
+            group.index = (group.index + 1) % group.pins.length;
+
+            // Update button active state (blue highlight)
+            Array.from(legendContainer.children).forEach(c => c.setAttribute("aria-pressed", "false"));
+            btn.setAttribute("aria-pressed", "true");
+        });
+        
+        legendContainer.appendChild(btn);
+    });    
+    /* Click-to-log Helper Function | uncomment to use
+    map.on('click', function(e) {
+        var x = Math.round(e.latlng.lng);
+        var y = Math.round(e.latlng.lat);
+        console.log(`Clicked Coordinates -> y: ${y}, x: ${x}`);
+        alert(`x: ${x}, y: ${y},`);
+    });
+    */
+</script>
+
+</body>
+</html>
