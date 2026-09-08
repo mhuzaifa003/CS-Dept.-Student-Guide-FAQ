@@ -78,18 +78,30 @@
     map.setView([h / 2, w / 2], 0.25);
     map.setMaxBounds(bounds);
 
+    var categoryDefinitions = {
+        administrative: "Administrative Offices",
+        bookshop: "Bookstore & Supplies",
+        studentServices: "Common Rooms & Student Services",
+        libraries: "Libraries & Study Rooms",
+        health: "Health & Wellness",
+        dining: "Dining & Shops",
+        parking: "Parking",
+        religious: "Religious Facilities",
+        recreation: "Recreation"
+    };
+
     var locations = [
-        { name: "Block A", x: 591, y: 370, desc: "<b>Houses:</b><br>• Computer Lab<br>• Main Library<br>• Study Room" },
-        { name: "Block E", x: 796, y: 454, desc: "<b>Houses:</b><br>• Student Affairs Office<br>• Admissions Office" },
-        { name: "Student Parking Lot", x: 627, y: 484, desc: "" },
-        { name: "Infirmary", x: 805, y: 639, desc: "" },
-        { name: "REPLACE WITH BLOCK", x: 838, y: 535, desc: "<b>Houses:</b><br>• Girl's Common Room" },
-        { name: "REPLACE WITH BLOCK", x: 795, y: 622, desc: "<b>Houses:</b><br>• Sports Room<br>• Gymnasium" },
-        { name: "Cafeteria", x: 718, y: 543, desc: "<b>Houses:</b><br>• Indoor Dining Area<br>• Book Store" },
-        { name: "Riverside Bookshop", x: 582, y: 246, desc: "" },
-        { name: "Faculty / Visitors Parking Lot", x: 975, y: 245, desc: "" },
-        { name: "Mosque", x: 811, y: 473, desc: "<b>Houses:</b><br>• Prayer Hall<br>• Ablution Area" },
-        { name: "Block Temp", x: 853, y: 615, desc: "<b>Houses:</b><br>• Library<br>• Study Room" },
+        { name: "Block A", tags: ["libraries"], x: 591, y: 370, desc: "<b>Houses:</b><br>• Computer Lab<br>• Main Library<br>• Study Room" },
+        { name: "Block E", tags: ["administrative"], x: 796, y: 454, desc: "<b>Houses:</b><br>• Student Affairs Office<br>• Admissions Office" },
+        { name: "Block X", tags: ["studentServices"], x: 838, y: 535, desc: "<b>Houses:</b><br>• Girl's Common Room" },
+        { name: "Block X", tags: ["recreation"], x: 795, y: 622, desc: "<b>Houses:</b><br>• Sports Room<br>• Gymnasium" },
+        { name: "Block X", tags: ["libraries"], x: 853, y: 615, desc: "<b>Houses:</b><br>• Library<br>• Study Room" },
+        { name: "Infirmary", tags: ["health"], x: 805, y: 639, desc: "" },
+        { name: "Cafeteria", tags: ["dining", "bookshop"], x: 718, y: 543, desc: "<b>Houses:</b><br>• Indoor Dining Area<br>• Book Store" },
+        { name: "Riverside Bookshop", tags: ["bookshop"], x: 582, y: 246, desc: "" },
+        { name: "Faculty / Visitors Parking Lot", tags: ["parking"], x: 975, y: 245, desc: "" },
+        { name: "Student Parking Lot", tags: ["parking"], x: 627, y: 484, desc: "" },
+        { name: "Mosque", tags: ["religious"], x: 811, y: 473, desc: "<b>Houses:</b><br>• Prayer Hall<br>• Ablution Area" },
     ];
 
     var groupedLocations = {};
@@ -100,29 +112,35 @@
         marker.bindPopup(`<b>${loc.name}</b><br><span style="color: #55627a; font-size: 13px; line-height: 1.4; display: inline-block; margin-top: 4px;">${loc.desc}</span>`);
         loc.markerRef = marker;
 
-        // 2. Group items with the exact same name for the sidebar
-        if (!groupedLocations[loc.name]) {
-            groupedLocations[loc.name] = { index: 0, pins: [] };
-        }
-        groupedLocations[loc.name].pins.push(loc);
+        // 2. Group the pin by each assigned tag so the sidebar category is based on tags, not pin name
+        var tags = Array.isArray(loc.tags) ? loc.tags : [loc.tags];
+        tags.forEach(function(tag) {
+            if (!categoryDefinitions[tag]) return;
+            if (!groupedLocations[tag]) {
+                groupedLocations[tag] = { label: categoryDefinitions[tag], index: 0, pins: [] };
+            }
+            groupedLocations[tag].pins.push(loc);
+        });
     });
 
-    // 3. Generate the Legend Buttons in the sidebar
+    // 3. Generate the Legend Buttons in the sidebar using the configured category names
     var legendContainer = document.getElementById('legend-tabs');
-    Object.keys(groupedLocations).forEach(function(key) {
+    Object.keys(categoryDefinitions).forEach(function(tag) {
+        if (!groupedLocations[tag]) return;
+
         var btn = document.createElement("button");
         btn.className = "tab";
-        btn.textContent = key;
+        btn.textContent = groupedLocations[tag].label;
         
         btn.addEventListener('click', function() {
-            var group = groupedLocations[key];
+            var group = groupedLocations[tag];
             var targetPin = group.pins[group.index];
-            
+             
             // Pan map and open the popup
             map.flyTo([targetPin.y, targetPin.x], 1.5, { duration: 0.5 });
             targetPin.markerRef.openPopup();
             
-            // Cycle to the next location if multiple exist under this name
+            // Cycle to the next location if multiple exist under this tag
             group.index = (group.index + 1) % group.pins.length;
 
             // Update button active state (blue highlight)
@@ -132,14 +150,13 @@
         
         legendContainer.appendChild(btn);
     });    
-    /* Click-to-log Helper Function | uncomment to use
+    // Click-to-log Helper Function | uncomment to use
     map.on('click', function(e) {
         var x = Math.round(e.latlng.lng);
         var y = Math.round(e.latlng.lat);
         console.log(`Clicked Coordinates -> y: ${y}, x: ${x}`);
         alert(`x: ${x}, y: ${y},`);
     });
-    */
 </script>
 
 </body>
