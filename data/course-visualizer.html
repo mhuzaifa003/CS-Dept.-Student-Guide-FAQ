@@ -1,199 +1,562 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course Requirement Visualizer - CS Dept.</title>
     <link rel="icon" type="image/x-icon" href="../files/favicon.ico">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="../styles.css">
     <style>
-        .visualizer-page .site-header { padding-bottom: 30px; }
-        .visualizer-page .site-header .subtitle { max-width: 760px; }
-        .visualizer-main { padding-top: 28px; padding-bottom: 64px; }
+        .visualizer-page .site-header {
+            padding-bottom: 30px;
+        }
+
+        .visualizer-page .site-header .subtitle {
+            max-width: 760px;
+        }
+
+        .visualizer-main {
+            padding-top: 28px;
+            padding-bottom: 64px;
+        }
 
         .control-panel {
             background: var(--card);
             border: 1px solid var(--rule);
             border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(15,42,82,.06);
+            box-shadow: 0 1px 3px rgba(15, 42, 82, .06);
             padding: 18px;
             margin-bottom: 22px;
         }
-        .mode-tabs { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
-        .mode-tab {
-            border: 1px solid var(--rule); background: var(--paper); color:var(--navy);
-            border-radius: var(--radius); padding:9px 13px; cursor:pointer;
-            font:600 12px var(--font-mono); letter-spacing:.03em;
-        }
-        .mode-tab:hover { border-color: var(--navy-soft); }
-        .mode-tab.active { background:var(--navy); color:var(--card); border-color:var(--navy); }
 
-        .filters { display:grid; grid-template-columns:minmax(0, 2fr) minmax(220px, 1fr) minmax(235px, 1.15fr); gap:12px; align-items:end; }
-        .field { min-width:0; }
+        .mode-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .mode-tab {
+            border: 1px solid var(--rule);
+            background: var(--paper);
+            color: var(--navy);
+            border-radius: var(--radius);
+            padding: 9px 13px;
+            cursor: pointer;
+            font: 600 12px var(--font-mono);
+            letter-spacing: .03em;
+        }
+
+        .mode-tab:hover {
+            border-color: var(--navy-soft);
+        }
+
+        .mode-tab.active {
+            background: var(--navy);
+            color: var(--card);
+            border-color: var(--navy);
+        }
+
+        .filters {
+            display: grid;
+            grid-template-columns: minmax(0, 2fr) minmax(min(100%, 220px), 1fr) minmax(min(100%, 235px), 1.15fr);
+            gap: 12px;
+            align-items: end;
+        }
+
+        .field {
+            min-width: 0;
+        }
+
         .field label {
-            display:block; margin:0 0 6px; color:var(--ink-soft);
-            font:600 11px var(--font-mono); letter-spacing:.09em; text-transform:uppercase;
+            display: block;
+            margin: 0 0 6px;
+            color: var(--ink-soft);
+            font: 600 11px var(--font-mono);
+            letter-spacing: .09em;
+            text-transform: uppercase;
         }
+
         .control {
-            width:100%; min-height:44px; border:1.5px solid var(--navy); border-radius:var(--radius);
-            background:var(--paper); color:var(--ink); padding:10px 12px; font:15px var(--font-body);
+            width: 100%;
+            min-height: 44px;
+            border: 1.5px solid var(--navy);
+            border-radius: var(--radius);
+            background: var(--paper);
+            color: var(--ink);
+            padding: 10px 12px;
+            font: 15px var(--font-body);
         }
-        .control:focus { outline:2px solid var(--focus); outline-offset:2px; }
+
+        .control:focus {
+            outline: 2px solid var(--focus);
+            outline-offset: 2px;
+        }
+
         .helper {
-            margin:12px 0 0; color:var(--ink-soft); font-size:13px;
+            margin: 12px 0 0;
+            color: var(--ink-soft);
+            font-size: 13px;
         }
+
         .toggle-wrap {
-            display:flex; align-items:center; justify-content:space-between; gap:14px;
-            min-height:44px; padding:8px 11px; border:1.5px solid var(--rule);
-            border-radius:var(--radius); background:var(--paper);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            min-height: 44px;
+            padding: 8px 11px;
+            border: 1.5px solid var(--rule);
+            border-radius: var(--radius);
+            background: var(--paper);
         }
-        .toggle-copy { min-width:0; }
-        .toggle-title { display:block; color:var(--navy); font:600 13px var(--font-body); }
-        .toggle-help { display:block; margin-top:1px; color:var(--ink-soft); font:500 10px var(--font-mono); }
+
+        .toggle-copy {
+            min-width: 0;
+        }
+
+        .toggle-title {
+            display: block;
+            color: var(--navy);
+            font: 600 13px var(--font-body);
+        }
+
+        .toggle-help {
+            display: block;
+            margin-top: 1px;
+            color: var(--ink-soft);
+            font: 500 10px var(--font-mono);
+        }
+
         .switch {
-            position:relative; flex:0 0 auto; width:44px; height:24px;
+            position: relative;
+            flex: 0 0 auto;
+            width: 44px;
+            height: 24px;
         }
-        .switch input { position:absolute; opacity:0; width:1px; height:1px; }
+
+        .switch input {
+            position: absolute;
+            opacity: 0;
+            width: 1px;
+            height: 1px;
+        }
+
         .switch-track {
-            position:absolute; inset:0; border-radius:999px; background:#c9d0dc; cursor:pointer;
-            transition:background .15s ease;
+            position: absolute;
+            inset: 0;
+            border-radius: 999px;
+            background: #c9d0dc;
+            cursor: pointer;
+            transition: background .15s ease;
         }
+
         .switch-track::after {
-            content:""; position:absolute; width:18px; height:18px; left:3px; top:3px;
-            border-radius:50%; background:#fff; box-shadow:0 1px 3px rgba(15,42,82,.22);
-            transition:transform .15s ease;
+            content: "";
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            left: 3px;
+            top: 3px;
+            border-radius: 50%;
+            background: #fff;
+            box-shadow: 0 1px 3px rgba(15, 42, 82, .22);
+            transition: transform .15s ease;
         }
-        .switch input:checked + .switch-track { background:var(--navy); }
-        .switch input:checked + .switch-track::after { transform:translateX(20px); }
-        .switch input:focus-visible + .switch-track { outline:2px solid var(--focus); outline-offset:2px; }
+
+        .switch input:checked+.switch-track {
+            background: var(--navy);
+        }
+
+        .switch input:checked+.switch-track::after {
+            transform: translateX(20px);
+        }
+
+        .switch input:focus-visible+.switch-track {
+            outline: 2px solid var(--focus);
+            outline-offset: 2px;
+        }
+
         .view-meta {
-            display:flex; flex-wrap:wrap; gap:9px 16px; justify-content:space-between; align-items:center;
-            margin:0 0 14px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px 16px;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 0 14px;
         }
+
         .view-meta h2 {
-            margin:0; font:700 20px/1.2 var(--font-display); color:var(--navy);
+            margin: 0;
+            font: 700 20px/1.2 var(--font-display);
+            color: var(--navy);
         }
-        .view-meta .count { font:500 11px var(--font-mono); color:var(--ink-soft); }
-        .legend { display:flex; flex-wrap:wrap; gap:10px; font-size:12px; color:var(--ink-soft); }
-        .legend-item { display:inline-flex; align-items:center; gap:6px; }
-        .swatch { width:12px; height:12px; border-radius:3px; border:1px solid var(--rule); }
-        .swatch.pre { background:#dff1e4; border-color:#8fc89c; }
-        .swatch.post { background:#f7dddf; border-color:#d78c96; }
-        .swatch.current { background:var(--card); border:2px solid var(--red); }
-        .swatch.co { background:#f5f0df; border-color:#c8b87e; }
+
+        .view-meta .count {
+            font: 500 11px var(--font-mono);
+            color: var(--ink-soft);
+        }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 12px;
+            color: var(--ink-soft);
+        }
+
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .swatch {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+            border: 1px solid var(--rule);
+        }
+
+        .swatch.pre {
+            background: #dff1e4;
+            border-color: #8fc89c;
+        }
+
+        .swatch.post {
+            background: #f7dddf;
+            border-color: #d78c96;
+        }
+
+        .swatch.current {
+            background: var(--card);
+            border: 2px solid var(--red);
+        }
+
+        .swatch.co {
+            background: #f5f0df;
+            border-color: #c8b87e;
+        }
 
         .chart-shell {
-            position:relative; overflow:auto; background:var(--card); border:1px solid var(--rule);
-            border-radius:8px; box-shadow:0 1px 3px rgba(15,42,82,.06);
-        }
-        .chart {
-            position:relative; min-width:1240px; padding:28px 24px 36px;
-        }
-        .semester-heads {
-            position:relative; display:grid; grid-template-columns:repeat(8, minmax(136px, 1fr));
-            gap:16px; min-height:32px; margin:0 0 18px; z-index:2;
-        }
-        .semester-head {
-            text-align:center; color:var(--ink-soft); font:600 11px var(--font-mono);
-            letter-spacing:.1em; text-transform:uppercase;
-        }
-        .semester-head span {
-            display:inline-block; padding:5px 8px; border-bottom:2px solid var(--rule);
+            position: relative;
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            background: var(--card);
+            border: 1px solid var(--rule);
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(15, 42, 82, .06);
         }
 
-        .graph-stage { position:relative; min-height:640px; }
+        .chart {
+            position: relative;
+            min-width: 1240px;
+            padding: 28px 24px 36px;
+        }
+
+        .semester-heads {
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(8, minmax(136px, 1fr));
+            gap: 16px;
+            min-height: 32px;
+            margin: 0 0 18px;
+            z-index: 2;
+        }
+
+        .semester-head {
+            text-align: center;
+            color: var(--ink-soft);
+            font: 600 11px var(--font-mono);
+            letter-spacing: .1em;
+            text-transform: uppercase;
+        }
+
+        .semester-head span {
+            display: inline-block;
+            padding: 5px 8px;
+            border-bottom: 2px solid var(--rule);
+        }
+
+        .graph-stage {
+            position: relative;
+            min-height: 640px;
+        }
+
         .graph-grid {
-            position:absolute; inset:0; display:grid; grid-template-columns:repeat(8, minmax(136px, 1fr));
-            gap:16px; pointer-events:none;
+            position: absolute;
+            inset: 0;
+            display: grid;
+            grid-template-columns: repeat(8, minmax(136px, 1fr));
+            gap: 16px;
+            pointer-events: none;
         }
+
         .graph-lane {
-            background:rgba(15,42,82,.022); border:1px solid rgba(221,226,234,.8); border-radius:6px;
+            background: rgba(15, 42, 82, .022);
+            border: 1px solid rgba(221, 226, 234, .8);
+            border-radius: 6px;
         }
-        .graph-stage { min-height:680px; }
-        .graph-grid { z-index:0; }
+
+        .graph-stage {
+            min-height: 680px;
+        }
+
+        .graph-grid {
+            z-index: 0;
+        }
+
         .edge-layer {
-            position:absolute; inset:0; width:100%; height:100%; overflow:visible;
-            pointer-events:none; z-index:4;
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+            pointer-events: none;
+            z-index: 4;
         }
-        .chart-shell.no-edges .edge-layer { display:none; }
-        .edge-halo { fill:none; stroke:var(--card); stroke-width:6; opacity:.96; vector-effect:non-scaling-stroke; }
-        .edge { fill:none; stroke:#52627a; stroke-width:1.55; opacity:.92; vector-effect:non-scaling-stroke; }
-        .edge.pre-edge { stroke:#3f8250; }
-        .edge.post-edge { stroke:#b54e5a; }
-        .edge.co-edge { stroke:#9b8a4c; stroke-dasharray:5 4; opacity:.95; }
-        .edge.hidden { opacity:0; }
-        .arrow { fill:#52627a; }
-        .arrow.pre-arrow { fill:#3f8250; }
-        .arrow.post-arrow { fill:#b54e5a; }
+
+        .chart-shell.no-edges .edge-layer {
+            display: none;
+        }
+
+        .edge-halo {
+            fill: none;
+            stroke: var(--card);
+            stroke-width: 6;
+            opacity: .96;
+            vector-effect: non-scaling-stroke;
+        }
+
+        .edge {
+            fill: none;
+            stroke: #52627a;
+            stroke-width: 1.55;
+            opacity: .92;
+            vector-effect: non-scaling-stroke;
+        }
+
+        .edge.pre-edge {
+            stroke: #3f8250;
+        }
+
+        .edge.post-edge {
+            stroke: #b54e5a;
+        }
+
+        .edge.co-edge {
+            stroke: #9b8a4c;
+            stroke-dasharray: 5 4;
+            opacity: .95;
+        }
+
+        .edge.hidden {
+            opacity: 0;
+        }
+
+        .arrow {
+            fill: #52627a;
+        }
+
+        .arrow.pre-arrow {
+            fill: #3f8250;
+        }
+
+        .arrow.post-arrow {
+            fill: #b54e5a;
+        }
 
         .course-grid {
-            position:relative; display:grid; grid-template-columns:repeat(8, minmax(136px, 1fr));
-            gap:16px; align-items:start; z-index:auto; padding-top:42px;
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(8, minmax(136px, 1fr));
+            gap: 16px;
+            align-items: start;
+            z-index: auto;
+            padding-top: 42px;
         }
-        .semester-col { display:flex; flex-direction:column; gap:10px; min-width:0; }
+
+        .semester-col {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            min-width: 0;
+        }
+
         .course-card {
-            position:relative; z-index:1; background:var(--card); border:1px solid var(--rule);
-            border-left:4px solid var(--navy); border-radius:7px; padding:10px 10px 9px;
-            min-height:86px; box-shadow:0 1px 3px rgba(15,42,82,.06);
-            transition:box-shadow .15s ease, border-color .15s ease, transform .15s ease;
+            position: relative;
+            z-index: 1;
+            background: var(--card);
+            border: 1px solid var(--rule);
+            border-left: 4px solid var(--navy);
+            border-radius: 7px;
+            padding: 10px 10px 9px;
+            min-height: 86px;
+            box-shadow: 0 1px 3px rgba(15, 42, 82, .06);
+            transition: box-shadow .15s ease, border-color .15s ease, transform .15s ease;
         }
+
         .course-card:hover,
         .course-card:focus-within,
         .course-card.is-raised {
-            z-index:20; box-shadow:0 5px 14px rgba(15,42,82,.1); transform:translateY(-1px);
+            z-index: 20;
+            box-shadow: 0 5px 14px rgba(15, 42, 82, .1);
+            transform: translateY(-1px);
         }
-        .course-card { cursor:pointer; }
-        .course-card.pre { background:#dff1e4; border-left-color:#3f8250; border-color:#b8dbbf; }
-        .course-card.post { background:#f7dddf; border-left-color:#b54e5a; border-color:#e2b7bc; }
-        .course-card.current { border-color:var(--red); border-left-color:var(--red); box-shadow:0 0 0 2px rgba(200,16,46,.08); }
-        .course-card.co { background:#f5f0df; border-left-color:#9b8a4c; border-color:#ddd2a9; }
-        .course-card.related { opacity:1; }
-        .course-card.muted { opacity:.25; filter:saturate(.4); }
-        .course-code { display:block; margin-bottom:4px; color:var(--navy-soft); font:600 10px var(--font-mono); letter-spacing:.04em; }
-        .course-name { color:var(--navy); font:600 13px/1.28 var(--font-display); }
-        .course-sem { display:block; margin-top:7px; color:var(--ink-soft); font:500 9.5px var(--font-mono); }
+
+        .course-card {
+            cursor: pointer;
+        }
+
+        .course-card.pre {
+            background: #dff1e4;
+            border-left-color: #3f8250;
+            border-color: #b8dbbf;
+        }
+
+        .course-card.post {
+            background: #f7dddf;
+            border-left-color: #b54e5a;
+            border-color: #e2b7bc;
+        }
+
+        .course-card.current {
+            border-color: var(--red);
+            border-left-color: var(--red);
+            box-shadow: 0 0 0 2px rgba(200, 16, 46, .08);
+        }
+
+        .course-card.co {
+            background: #f5f0df;
+            border-left-color: #9b8a4c;
+            border-color: #ddd2a9;
+        }
+
+        .course-card.related {
+            opacity: 1;
+        }
+
+        .course-card.muted {
+            opacity: .25;
+            filter: saturate(.4);
+        }
+
+        .course-code {
+            display: block;
+            margin-bottom: 4px;
+            color: var(--navy-soft);
+            font: 600 10px var(--font-mono);
+            letter-spacing: .04em;
+        }
+
+        .course-name {
+            color: var(--navy);
+            font: 600 13px/1.28 var(--font-display);
+        }
+
+        .course-sem {
+            display: block;
+            margin-top: 7px;
+            color: var(--ink-soft);
+            font: 500 9.5px var(--font-mono);
+        }
 
         .status-note {
-            padding:12px 14px; margin:0 0 14px; background:var(--paper); border:1px solid var(--rule);
-            border-left:4px solid var(--navy-soft); border-radius:6px; color:var(--ink-soft); font-size:13px;
+            padding: 12px 14px;
+            margin: 0 0 14px;
+            background: var(--paper);
+            border: 1px solid var(--rule);
+            border-left: 4px solid var(--navy-soft);
+            border-radius: 6px;
+            color: var(--ink-soft);
+            font-size: 13px;
         }
-        .status-note strong { color:var(--navy); }
-        .empty-state { padding:42px 16px; text-align:center; color:var(--ink-soft); }
-        .empty-state strong { display:block; color:var(--navy); font:600 18px var(--font-display); margin-bottom:6px; }
+
+        .status-note strong {
+            color: var(--navy);
+        }
+
+        .empty-state {
+            padding: 42px 16px;
+            text-align: center;
+            color: var(--ink-soft);
+        }
+
+        .empty-state strong {
+            display: block;
+            color: var(--navy);
+            font: 600 18px var(--font-display);
+            margin-bottom: 6px;
+        }
 
         @media (max-width: 980px) {
-            .filters { grid-template-columns:1fr 1fr; }
-            .field#course-field { grid-column:1 / -1; }
+            .filters {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .field#course-field {
+                grid-column: 1 / -1;
+            }
         }
+
         @media (max-width: 800px) {
-            .filters { grid-template-columns:1fr; }
-            .field#course-field { grid-column:auto; }
-            .control-panel { padding:14px; }
-            .visualizer-main { padding-top:20px; }
-            .chart { min-width:1080px; }
+            .filters {
+                grid-template-columns: 1fr;
+            }
+
+            .field#course-field {
+                grid-column: auto;
+            }
+
+            .control-panel {
+                padding: 14px;
+            }
+
+            .visualizer-main {
+                padding-top: 20px;
+            }
+
+            .chart {
+                min-width: 1080px;
+            }
         }
+
         @media (prefers-reduced-motion: reduce) {
-            .course-card { transition:none; }
-            .course-card:hover { transform:none; }
+            .course-card {
+                transition: none;
+            }
+
+            .course-card:hover {
+                transform: none;
+            }
         }
     </style>
 </head>
+
 <body class="visualizer-page">
     <header class="site-header">
         <div class="wrap">
             <p class="eyebrow">CURRICULUM TOOLS</p>
             <h1>Course Requirement Visualizer</h1>
-            <p class="subtitle">See the complete curriculum dependency graph, or filter to track dependencies for a specific course or semester. Tap on a course to hide dependency arrows.</p>
+            <p class="subtitle">See the complete curriculum dependency graph, or filter to track dependencies for a
+                specific course or semester. Tap on a course to hide dependency arrows.</p>
         </div>
     </header>
 
     <main class="wrap visualizer-main">
         <section class="control-panel" aria-label="Visualizer controls">
             <div class="mode-tabs" role="tablist" aria-label="Visualization mode">
-                <button class="mode-tab active" id="mode-full" role="tab" aria-selected="true" type="button">Full curriculum</button>
-                <button class="mode-tab" id="mode-course" role="tab" aria-selected="false" type="button">Course lookup</button>
-                <button class="mode-tab" id="mode-semester" role="tab" aria-selected="false" type="button">Semester lookup</button>
+                <button class="mode-tab active" id="mode-full" role="tab" aria-selected="true" type="button">Full
+                    curriculum</button>
+                <button class="mode-tab" id="mode-course" role="tab" aria-selected="false" type="button">Course
+                    lookup</button>
+                <button class="mode-tab" id="mode-semester" role="tab" aria-selected="false" type="button">Semester
+                    lookup</button>
             </div>
 
             <div class="filters">
@@ -236,7 +599,8 @@
                     </div>
                 </div>
             </div>
-            <p class="helper" id="control-helper">The default view shows every course from the curriculum JSON, grouped by semester.</p>
+            <p class="helper" id="control-helper">The default view shows every course from the curriculum JSON, grouped
+                by semester.</p>
         </section>
 
         <div id="status-note" class="status-note" hidden></div>
@@ -258,19 +622,22 @@
                     <div class="semester-heads" id="semester-heads"></div>
                     <div class="graph-stage" id="graph-stage">
                         <div class="graph-grid" id="graph-grid"></div>
-                            <svg class="edge-layer" id="edge-layer" aria-hidden="true">
-                                <defs>
-                                    <marker id="arrow-default" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto" markerUnits="strokeWidth">
-                                        <path d="M0,0 L7,3.5 L0,7 z" class="arrow"></path>
-                                    </marker>
-                                    <marker id="arrow-pre" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto" markerUnits="strokeWidth">
-                                        <path d="M0,0 L7,3.5 L0,7 z" class="pre-arrow"></path>
-                                    </marker>
-                                    <marker id="arrow-post" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto" markerUnits="strokeWidth">
-                                        <path d="M0,0 L7,3.5 L0,7 z" class="post-arrow"></path>
-                                    </marker>
-                                </defs>
-                            </svg>
+                        <svg class="edge-layer" id="edge-layer" aria-hidden="true">
+                            <defs>
+                                <marker id="arrow-default" markerWidth="7" markerHeight="7" refX="6" refY="3.5"
+                                    orient="auto" markerUnits="strokeWidth">
+                                    <path d="M0,0 L7,3.5 L0,7 z" class="arrow"></path>
+                                </marker>
+                                <marker id="arrow-pre" markerWidth="7" markerHeight="7" refX="6" refY="3.5"
+                                    orient="auto" markerUnits="strokeWidth">
+                                    <path d="M0,0 L7,3.5 L0,7 z" class="pre-arrow"></path>
+                                </marker>
+                                <marker id="arrow-post" markerWidth="7" markerHeight="7" refX="6" refY="3.5"
+                                    orient="auto" markerUnits="strokeWidth">
+                                    <path d="M0,0 L7,3.5 L0,7 z" class="post-arrow"></path>
+                                </marker>
+                            </defs>
+                        </svg>
                         <div class="course-grid" id="course-grid"></div>
                     </div>
                 </div>
@@ -279,15 +646,17 @@
     </main>
 
     <footer class="site-footer">
-      <div class="wrap footer-grid" style="grid-template-columns: 1fr;">
-        <div class="footer-col footer-about" style="text-align: center;">
-          <p>Created by the CS Department Student Community.<br>This website is made by third-parties, while some of the content used is part of the university's official materials.<br><a href="../index.html"><b><u>Back to Hub</u></b></a></p>
+        <div class="wrap footer-grid" style="grid-template-columns: 1fr;">
+            <div class="footer-col footer-about" style="text-align: center;">
+                <p>Created by the CS Department Student Community.<br>This website is made by third-parties, while some
+                    of the content used is part of the university's official materials.<br><a
+                        href="../index.html"><b><u>Back to Hub</u></b></a></p>
+            </div>
         </div>
-      </div>
     </footer>
 
     <script>
-        const FALLBACK_COURSES = [{"courseId":"CS1133","courseName":"Introduction to Programming","semester":"1","preRequisiteCourses":[],"coRequisiteCourses":["CS1131"],"postRequisiteCourses":["CS1143","CSG1573","CS3613","CS3072","CS4192","CS4613","CS4573"]},{"courseId":"CS1131","courseName":"Introduction to Programming Lab","semester":"1","preRequisiteCourses":[],"coRequisiteCourses":["CS1133"],"postRequisiteCourses":["CS1141","CS3071","CS4191"]},{"courseId":"CSG1513","courseName":"Calculus and Analytical Geometry","semester":"1","preRequisiteCourses":[],"coRequisiteCourses":[],"postRequisiteCourses":["MTCS1033"]},{"courseId":"CSG1022","courseName":"Ideology and Constitution of Pakistan","semester":"1","preRequisiteCourses":[],"coRequisiteCourses":[],"postRequisiteCourses":[]},{"courseId":"CSG1612","courseName":"Applications of Information and Communication Technologies","semester":"1","preRequisiteCourses":[],"coRequisiteCourses":["CSG1611"],"postRequisiteCourses":[]},{"courseId":"CSG1611","courseName":"Applications of Information and Communication Technologies Lab","semester":"1","preRequisiteCourses":[],"coRequisiteCourses":["CSG1612"],"postRequisiteCourses":[]},{"courseId":"CSG1113","courseName":"Functional English","semester":"1","preRequisiteCourses":[],"coRequisiteCourses":[],"postRequisiteCourses":["CSG1123"]},{"courseId":"MTCS1003","courseName":"Basic Mathematics I","semester":"1","preRequisiteCourses":[],"coRequisiteCourses":[],"postRequisiteCourses":["MTCS1103"]},{"courseId":"CS1143","courseName":"Object Oriented Programming","semester":"2","preRequisiteCourses":["CS1133"],"coRequisiteCourses":["CS1141"],"postRequisiteCourses":["CS2143","CS2313"]},{"courseId":"CS1141","courseName":"Object Oriented Programming Lab","semester":"2","preRequisiteCourses":["CS1131"],"coRequisiteCourses":["CS1143"],"postRequisiteCourses":["CS2141","CS2311"]},{"courseId":"CSG1312","courseName":"Applied Physics","semester":"2","preRequisiteCourses":[],"coRequisiteCourses":[],"postRequisiteCourses":[]},{"courseId":"CSG1311","courseName":"Applied Physics Lab","semester":"2","preRequisiteCourses":[],"coRequisiteCourses":[],"postRequisiteCourses":[]},{"courseId":"CSG1123","courseName":"Expository Writing","semester":"2","preRequisiteCourses":["CSG1113"],"coRequisiteCourses":[],"postRequisiteCourses":[]},{"courseId":"CSG1412","courseName":"Sociology","semester":"2","preRequisiteCourses":[],"coRequisiteCourses":[],"postRequisiteCourses":[]},{"courseId":"CSG1573","courseName":"Discrete Structures","semester":"2","preRequisiteCourses":["CS1133"],"coRequisiteCourses":[],"postRequisiteCourses":["CS2512","CS2511","CS3283"]},{"courseId":"CSG1021","courseName":"Fehm-ul-Quran I","semester":"2","preRequisiteCourses":[],"coRequisiteCourses":[],"postRequisiteCourses":[]},{"courseId":"CSG1012","courseName":"Islamic Studies/Ethics","semester":"2","preRequisiteCourses":[],"coRequisiteCourses":[],"postRequisiteCourses":[]},{"courseId":"MTCS1103","courseName":"Basic Mathematics II","semester":"2","preRequisiteCourses":["MTCS1003"],"coRequisiteCourses":[],"postRequisiteCourses":[]},{"courseId":"CS2143","courseName":"Data Structures","semester":"3","preRequisiteCourses":["CS1143"],"coRequisiteCourses":["CS2141"],"postRequisiteCourses":["CS2772","CS3163","CS3412"]},{"courseId":"CS2141","courseName":"Data Structures Lab","semester":"3","preRequisiteCourses":["CS1141"],"coRequisiteCourses":["CS2143"],"postRequisiteCourses":["CS2771","CS3411"]},{"courseId":"CSG2212","courseName":"Personal Grooming","semester":"3","preRequisiteCourses":[],"coRequisiteCourses":[],"postRequisiteCourses":[]},{"courseId":"MTCS1033","courseName":"Linear Algebra","semester":"3","preRequisiteCourses":["CSG1513"],"coRequisiteCourses":[],"postRequisiteCourses":[]},{"courseId":"CS2313","courseName":"Introduction to Database Systems","semester":"3","preRequisiteCourses":["CS1143"],"coRequisiteCourses":["CS2311"],"postRequisiteCourses":["CS2223","CS2322","CS3192"]},{"courseId":"CS2311","courseName":"Introduction to Database Systems Lab","semester":"3","preRequisiteCourses":["CS1141"],"coRequisiteCourses":["CS2313"],"postRequisiteCourses":["CS2321","CS3191"]},{"courseId":"CS2512","courseName":"Digital Logic Design","semester":"3","preRequisiteCourses":["CSG1573"],"coRequisiteCourses":["CS2511"],"postRequisiteCourses":[]},{"courseId":"CS2511","courseName":"Digital Logic Design Lab","semester":"3","preRequisiteCourses":["CSG1573"],"coRequisiteCourses":["CS2512"],"postRequisiteCourses":[]},{"courseId":"CSG1031","courseName":"Fehm-ul-Quran II","semester":"3","preRequisiteCourses":[],"coRequisiteCourses":[],"postRequisiteCourses":[]},{"courseId":"CS2223","courseName":"Software Engineering","semester":"4","preRequisiteCourses":["CS2313"],"coRequisiteCourses":[],"postRequisiteCourses":["CS4912"]},{"courseId":"CS2322","courseName":"Database Management Systems","semester":"4","preRequisiteCourses":["CS2313"],"coRequisiteCourses":["CS2321"],"postRequisiteCourses":[]},{"courseId":"CS2321","courseName":"Database Management Systems Lab","semester":"4","preRequisiteCourses":["CS2311"],"coRequisiteCourses":["CS2322"],"postRequisiteCourses":[]},{"courseId":"CS2522","courseName":"Computer Organization and Assembly Language","semester":"4","preRequisiteCourses":[],"coRequisiteCourses":["CS2521"],"postRequisiteCourses":["CS3512","CS3432"]},{"courseId":"CS2521","courseName":"Computer Organization and Assembly Language Lab","semester":"4","preRequisiteCourses":[],"coRequisiteCourses":["CS2522"],"postRequisiteCourses":["CS3511","CS3431"]},{"courseId":"CS2772","courseName":"Computer Networks","semester":"4","preRequisiteCourses":["CS2143"],"coRequisiteCourses":["CS2771"],"postRequisiteCourses":[]},{"courseId":"CS2771","courseName":"Computer Networks Lab","semester":"4","preRequisiteCourses":["CS2141"],"coRequisiteCourses":["CS2772"],"postRequisiteCourses":[]},{"courseId":"CSG2812","courseName":"Civics and Professional Ethics","semester":"4","preRequisiteCourses":[],"coRequisiteCourses":[],"postRequisiteCourses":[]},{"courseId":"MTCS2053","courseName":"Multi-variate Calculus","semester":"4","preRequisiteCourses":["MTCS2063"],"coRequisiteCourses":[],"postRequisiteCourses":[]},{"courseId":"CS3163","courseName":"Design and Analysis of Algorithms","semester":"5","preRequisiteCourses":["CS2143"],"coRequisiteCourses":[],"postRequisiteCourses":["CS3812","CS3811"]},{"courseId":"CS3613","courseName":"Theory of Automata and Formal Languages","semester":"5","preRequisiteCourses":["CS1133"],"coRequisiteCourses":[],"postRequisiteCourses":["CS4622","CS4621"]},{"courseId":"CS3283","courseName":"Graph Algorithms","semester":"5","preRequisiteCourses":["CSG1573"],"coRequisiteCourses":[],"postRequisiteCourses":[]},{"courseId":"CS3412","courseName":"Operating Systems","semester":"5","preRequisiteCourses":["CS2143"],"coRequisiteCourses":["CS3411"],"postRequisiteCourses":[]},{"courseId":"CS3411","courseName":"Operating Systems Lab","semester":"5","preRequisiteCourses":["CS2141"],"coRequisiteCourses":["CS3412"],"postRequisiteCourses":[]},{"courseId":"CS3712","courseName":"Introduction to Information Security and Forensics","semester":"5","preRequisiteCourses":["CS3772"],"coRequisiteCourses":["CS3711"],"postRequisiteCourses":[]},{"courseId":"CS3711","courseName":"Introduction to Information Security and Forensics Lab","semester":"5","preRequisiteCourses":["CS3772"],"coRequisiteCourses":["CS3712"],"postRequisiteCourses":[]},{"courseId":"CS3512","courseName":"Computer Architecture","semester":"5","preRequisiteCourses":["CS2522"],"coRequisiteCourses":["CS3511"],"postRequisiteCourses":[]},{"courseId":"CS3511","courseName":"Computer Architecture Lab","semester":"5","preRequisiteCourses":["CS2521"],"coRequisiteCourses":["CS3512"],"postRequisiteCourses":[]},{"courseId":"CS3432","courseName":"Parallel and Distributed Computing","semester":"6","preRequisiteCourses":["CS2522"],"coRequisiteCourses":["CS3431"],"postRequisiteCourses":[]},{"courseId":"CS3431","courseName":"Parallel and Distributed Computing Lab","semester":"6","preRequisiteCourses":["CS2521"],"coRequisiteCourses":["CS3432"],"postRequisiteCourses":[]},{"courseId":"CS3812","courseName":"Artificial Intelligence","semester":"6","preRequisiteCourses":["CS3163"],"coRequisiteCourses":["CS3811"],"postRequisiteCourses":[]},{"courseId":"CS3811","courseName":"Artificial Intelligence Lab","semester":"6","preRequisiteCourses":["CS3163"],"coRequisiteCourses":["CS3812"],"postRequisiteCourses":[]},{"courseId":"HMCS3033","courseName":"Technical and Business Writing","semester":"6","preRequisiteCourses":[],"coRequisiteCourses":[],"postRequisiteCourses":[]},{"courseId":"CS3072","courseName":"Numerical Computing","semester":"6","preRequisiteCourses":["CS1133"],"coRequisiteCourses":["CS3071"],"postRequisiteCourses":[]},{"courseId":"CS3071","courseName":"Numerical Computing Lab","semester":"6","preRequisiteCourses":["CS1131"],"coRequisiteCourses":["CS3072"],"postRequisiteCourses":[]},{"courseId":"CS3192","courseName":"Web Application Development","semester":"6","preRequisiteCourses":["CS2313"],"coRequisiteCourses":["CS3191"],"postRequisiteCourses":[]},{"courseId":"CS3191","courseName":"Web Application Development Lab","semester":"6","preRequisiteCourses":["CS2311"],"coRequisiteCourses":["CS3192"],"postRequisiteCourses":[]},{"courseId":"CSG1032","courseName":"Pakistan Studies","semester":"6","preRequisiteCourses":[],"coRequisiteCourses":[],"postRequisiteCourses":[]},{"courseId":"CS4622","courseName":"Compiler Construction","semester":"7","preRequisiteCourses":["CS3613"],"coRequisiteCourses":["CS4621"],"postRequisiteCourses":[]},{"courseId":"CS4621","courseName":"Compiler Construction Lab","semester":"7","preRequisiteCourses":["CS3613"],"coRequisiteCourses":["CS4622"],"postRequisiteCourses":[]},{"courseId":"CS4192","courseName":"Mobile Application Development","semester":"7","preRequisiteCourses":["CS1133"],"coRequisiteCourses":["CS4191"],"postRequisiteCourses":[]},{"courseId":"CS4191","courseName":"Mobile Application Development Lab","semester":"7","preRequisiteCourses":["CS1131"],"coRequisiteCourses":["CS4192"],"postRequisiteCourses":[]},{"courseId":"CS4912","courseName":"Design Project (Part-I)","semester":"7","preRequisiteCourses":["CS2223"],"coRequisiteCourses":[],"postRequisiteCourses":["CS4924"]},{"courseId":"CS4613","courseName":"Machine Learning","semester":"7","preRequisiteCourses":["CS1133"],"coRequisiteCourses":[],"postRequisiteCourses":[]},{"courseId":"CS3272","courseName":"Human Computer Interaction","semester":"7","preRequisiteCourses":[],"coRequisiteCourses":["CS4271"],"postRequisiteCourses":[]},{"courseId":"CS3271","courseName":"Human Computer Interaction Lab","semester":"7","preRequisiteCourses":[],"coRequisiteCourses":["CS4272"],"postRequisiteCourses":[]},{"courseId":"CS4573","courseName":"Blockchain Technology","semester":"7","preRequisiteCourses":["CS1133"],"coRequisiteCourses":[],"postRequisiteCourses":[]},{"courseId":"CS3843","courseName":"Data Security and Cryptography","semester":"8","preRequisiteCourses":[],"coRequisiteCourses":[],"postRequisiteCourses":[]},{"courseId":"CS4924","courseName":"Design Project (Part-II)","semester":"8","preRequisiteCourses":["CS4912"],"coRequisiteCourses":[],"postRequisiteCourses":[]},{"courseId":"HMCS1033","courseName":"Personal Management and Grooming","semester":"8","preRequisiteCourses":[],"coRequisiteCourses":[],"postRequisiteCourses":[]}];
+        const FALLBACK_COURSES = [{ "courseId": "CS1133", "courseName": "Introduction to Programming", "semester": "1", "preRequisiteCourses": [], "coRequisiteCourses": ["CS1131"], "postRequisiteCourses": ["CS1143", "CSG1573", "CS3613", "CS3072", "CS4192", "CS4613", "CS4573"] }, { "courseId": "CS1131", "courseName": "Introduction to Programming Lab", "semester": "1", "preRequisiteCourses": [], "coRequisiteCourses": ["CS1133"], "postRequisiteCourses": ["CS1141", "CS3071", "CS4191"] }, { "courseId": "CSG1513", "courseName": "Calculus and Analytical Geometry", "semester": "1", "preRequisiteCourses": [], "coRequisiteCourses": [], "postRequisiteCourses": ["MTCS1033"] }, { "courseId": "CSG1022", "courseName": "Ideology and Constitution of Pakistan", "semester": "1", "preRequisiteCourses": [], "coRequisiteCourses": [], "postRequisiteCourses": [] }, { "courseId": "CSG1612", "courseName": "Applications of Information and Communication Technologies", "semester": "1", "preRequisiteCourses": [], "coRequisiteCourses": ["CSG1611"], "postRequisiteCourses": [] }, { "courseId": "CSG1611", "courseName": "Applications of Information and Communication Technologies Lab", "semester": "1", "preRequisiteCourses": [], "coRequisiteCourses": ["CSG1612"], "postRequisiteCourses": [] }, { "courseId": "CSG1113", "courseName": "Functional English", "semester": "1", "preRequisiteCourses": [], "coRequisiteCourses": [], "postRequisiteCourses": ["CSG1123"] }, { "courseId": "MTCS1003", "courseName": "Basic Mathematics I", "semester": "1", "preRequisiteCourses": [], "coRequisiteCourses": [], "postRequisiteCourses": ["MTCS1103"] }, { "courseId": "CS1143", "courseName": "Object Oriented Programming", "semester": "2", "preRequisiteCourses": ["CS1133"], "coRequisiteCourses": ["CS1141"], "postRequisiteCourses": ["CS2143", "CS2313"] }, { "courseId": "CS1141", "courseName": "Object Oriented Programming Lab", "semester": "2", "preRequisiteCourses": ["CS1131"], "coRequisiteCourses": ["CS1143"], "postRequisiteCourses": ["CS2141", "CS2311"] }, { "courseId": "CSG1312", "courseName": "Applied Physics", "semester": "2", "preRequisiteCourses": [], "coRequisiteCourses": [], "postRequisiteCourses": [] }, { "courseId": "CSG1311", "courseName": "Applied Physics Lab", "semester": "2", "preRequisiteCourses": [], "coRequisiteCourses": [], "postRequisiteCourses": [] }, { "courseId": "CSG1123", "courseName": "Expository Writing", "semester": "2", "preRequisiteCourses": ["CSG1113"], "coRequisiteCourses": [], "postRequisiteCourses": [] }, { "courseId": "CSG1412", "courseName": "Sociology", "semester": "2", "preRequisiteCourses": [], "coRequisiteCourses": [], "postRequisiteCourses": [] }, { "courseId": "CSG1573", "courseName": "Discrete Structures", "semester": "2", "preRequisiteCourses": ["CS1133"], "coRequisiteCourses": [], "postRequisiteCourses": ["CS2512", "CS2511", "CS3283"] }, { "courseId": "CSG1021", "courseName": "Fehm-ul-Quran I", "semester": "2", "preRequisiteCourses": [], "coRequisiteCourses": [], "postRequisiteCourses": [] }, { "courseId": "CSG1012", "courseName": "Islamic Studies/Ethics", "semester": "2", "preRequisiteCourses": [], "coRequisiteCourses": [], "postRequisiteCourses": [] }, { "courseId": "MTCS1103", "courseName": "Basic Mathematics II", "semester": "2", "preRequisiteCourses": ["MTCS1003"], "coRequisiteCourses": [], "postRequisiteCourses": [] }, { "courseId": "CS2143", "courseName": "Data Structures", "semester": "3", "preRequisiteCourses": ["CS1143"], "coRequisiteCourses": ["CS2141"], "postRequisiteCourses": ["CS2772", "CS3163", "CS3412"] }, { "courseId": "CS2141", "courseName": "Data Structures Lab", "semester": "3", "preRequisiteCourses": ["CS1141"], "coRequisiteCourses": ["CS2143"], "postRequisiteCourses": ["CS2771", "CS3411"] }, { "courseId": "CSG2212", "courseName": "Personal Grooming", "semester": "3", "preRequisiteCourses": [], "coRequisiteCourses": [], "postRequisiteCourses": [] }, { "courseId": "MTCS1033", "courseName": "Linear Algebra", "semester": "3", "preRequisiteCourses": ["CSG1513"], "coRequisiteCourses": [], "postRequisiteCourses": [] }, { "courseId": "CS2313", "courseName": "Introduction to Database Systems", "semester": "3", "preRequisiteCourses": ["CS1143"], "coRequisiteCourses": ["CS2311"], "postRequisiteCourses": ["CS2223", "CS2322", "CS3192"] }, { "courseId": "CS2311", "courseName": "Introduction to Database Systems Lab", "semester": "3", "preRequisiteCourses": ["CS1141"], "coRequisiteCourses": ["CS2313"], "postRequisiteCourses": ["CS2321", "CS3191"] }, { "courseId": "CS2512", "courseName": "Digital Logic Design", "semester": "3", "preRequisiteCourses": ["CSG1573"], "coRequisiteCourses": ["CS2511"], "postRequisiteCourses": [] }, { "courseId": "CS2511", "courseName": "Digital Logic Design Lab", "semester": "3", "preRequisiteCourses": ["CSG1573"], "coRequisiteCourses": ["CS2512"], "postRequisiteCourses": [] }, { "courseId": "CSG1031", "courseName": "Fehm-ul-Quran II", "semester": "3", "preRequisiteCourses": [], "coRequisiteCourses": [], "postRequisiteCourses": [] }, { "courseId": "CS2223", "courseName": "Software Engineering", "semester": "4", "preRequisiteCourses": ["CS2313"], "coRequisiteCourses": [], "postRequisiteCourses": ["CS4912"] }, { "courseId": "CS2322", "courseName": "Database Management Systems", "semester": "4", "preRequisiteCourses": ["CS2313"], "coRequisiteCourses": ["CS2321"], "postRequisiteCourses": [] }, { "courseId": "CS2321", "courseName": "Database Management Systems Lab", "semester": "4", "preRequisiteCourses": ["CS2311"], "coRequisiteCourses": ["CS2322"], "postRequisiteCourses": [] }, { "courseId": "CS2522", "courseName": "Computer Organization and Assembly Language", "semester": "4", "preRequisiteCourses": [], "coRequisiteCourses": ["CS2521"], "postRequisiteCourses": ["CS3512", "CS3432"] }, { "courseId": "CS2521", "courseName": "Computer Organization and Assembly Language Lab", "semester": "4", "preRequisiteCourses": [], "coRequisiteCourses": ["CS2522"], "postRequisiteCourses": ["CS3511", "CS3431"] }, { "courseId": "CS2772", "courseName": "Computer Networks", "semester": "4", "preRequisiteCourses": ["CS2143"], "coRequisiteCourses": ["CS2771"], "postRequisiteCourses": [] }, { "courseId": "CS2771", "courseName": "Computer Networks Lab", "semester": "4", "preRequisiteCourses": ["CS2141"], "coRequisiteCourses": ["CS2772"], "postRequisiteCourses": [] }, { "courseId": "CSG2812", "courseName": "Civics and Professional Ethics", "semester": "4", "preRequisiteCourses": [], "coRequisiteCourses": [], "postRequisiteCourses": [] }, { "courseId": "MTCS2053", "courseName": "Multi-variate Calculus", "semester": "4", "preRequisiteCourses": ["MTCS2063"], "coRequisiteCourses": [], "postRequisiteCourses": [] }, { "courseId": "CS3163", "courseName": "Design and Analysis of Algorithms", "semester": "5", "preRequisiteCourses": ["CS2143"], "coRequisiteCourses": [], "postRequisiteCourses": ["CS3812", "CS3811"] }, { "courseId": "CS3613", "courseName": "Theory of Automata and Formal Languages", "semester": "5", "preRequisiteCourses": ["CS1133"], "coRequisiteCourses": [], "postRequisiteCourses": ["CS4622", "CS4621"] }, { "courseId": "CS3283", "courseName": "Graph Algorithms", "semester": "5", "preRequisiteCourses": ["CSG1573"], "coRequisiteCourses": [], "postRequisiteCourses": [] }, { "courseId": "CS3412", "courseName": "Operating Systems", "semester": "5", "preRequisiteCourses": ["CS2143"], "coRequisiteCourses": ["CS3411"], "postRequisiteCourses": [] }, { "courseId": "CS3411", "courseName": "Operating Systems Lab", "semester": "5", "preRequisiteCourses": ["CS2141"], "coRequisiteCourses": ["CS3412"], "postRequisiteCourses": [] }, { "courseId": "CS3712", "courseName": "Introduction to Information Security and Forensics", "semester": "5", "preRequisiteCourses": ["CS3772"], "coRequisiteCourses": ["CS3711"], "postRequisiteCourses": [] }, { "courseId": "CS3711", "courseName": "Introduction to Information Security and Forensics Lab", "semester": "5", "preRequisiteCourses": ["CS3772"], "coRequisiteCourses": ["CS3712"], "postRequisiteCourses": [] }, { "courseId": "CS3512", "courseName": "Computer Architecture", "semester": "5", "preRequisiteCourses": ["CS2522"], "coRequisiteCourses": ["CS3511"], "postRequisiteCourses": [] }, { "courseId": "CS3511", "courseName": "Computer Architecture Lab", "semester": "5", "preRequisiteCourses": ["CS2521"], "coRequisiteCourses": ["CS3512"], "postRequisiteCourses": [] }, { "courseId": "CS3432", "courseName": "Parallel and Distributed Computing", "semester": "6", "preRequisiteCourses": ["CS2522"], "coRequisiteCourses": ["CS3431"], "postRequisiteCourses": [] }, { "courseId": "CS3431", "courseName": "Parallel and Distributed Computing Lab", "semester": "6", "preRequisiteCourses": ["CS2521"], "coRequisiteCourses": ["CS3432"], "postRequisiteCourses": [] }, { "courseId": "CS3812", "courseName": "Artificial Intelligence", "semester": "6", "preRequisiteCourses": ["CS3163"], "coRequisiteCourses": ["CS3811"], "postRequisiteCourses": [] }, { "courseId": "CS3811", "courseName": "Artificial Intelligence Lab", "semester": "6", "preRequisiteCourses": ["CS3163"], "coRequisiteCourses": ["CS3812"], "postRequisiteCourses": [] }, { "courseId": "HMCS3033", "courseName": "Technical and Business Writing", "semester": "6", "preRequisiteCourses": [], "coRequisiteCourses": [], "postRequisiteCourses": [] }, { "courseId": "CS3072", "courseName": "Numerical Computing", "semester": "6", "preRequisiteCourses": ["CS1133"], "coRequisiteCourses": ["CS3071"], "postRequisiteCourses": [] }, { "courseId": "CS3071", "courseName": "Numerical Computing Lab", "semester": "6", "preRequisiteCourses": ["CS1131"], "coRequisiteCourses": ["CS3072"], "postRequisiteCourses": [] }, { "courseId": "CS3192", "courseName": "Web Application Development", "semester": "6", "preRequisiteCourses": ["CS2313"], "coRequisiteCourses": ["CS3191"], "postRequisiteCourses": [] }, { "courseId": "CS3191", "courseName": "Web Application Development Lab", "semester": "6", "preRequisiteCourses": ["CS2311"], "coRequisiteCourses": ["CS3192"], "postRequisiteCourses": [] }, { "courseId": "CSG1032", "courseName": "Pakistan Studies", "semester": "6", "preRequisiteCourses": [], "coRequisiteCourses": [], "postRequisiteCourses": [] }, { "courseId": "CS4622", "courseName": "Compiler Construction", "semester": "7", "preRequisiteCourses": ["CS3613"], "coRequisiteCourses": ["CS4621"], "postRequisiteCourses": [] }, { "courseId": "CS4621", "courseName": "Compiler Construction Lab", "semester": "7", "preRequisiteCourses": ["CS3613"], "coRequisiteCourses": ["CS4622"], "postRequisiteCourses": [] }, { "courseId": "CS4192", "courseName": "Mobile Application Development", "semester": "7", "preRequisiteCourses": ["CS1133"], "coRequisiteCourses": ["CS4191"], "postRequisiteCourses": [] }, { "courseId": "CS4191", "courseName": "Mobile Application Development Lab", "semester": "7", "preRequisiteCourses": ["CS1131"], "coRequisiteCourses": ["CS4192"], "postRequisiteCourses": [] }, { "courseId": "CS4912", "courseName": "Design Project (Part-I)", "semester": "7", "preRequisiteCourses": ["CS2223"], "coRequisiteCourses": [], "postRequisiteCourses": ["CS4924"] }, { "courseId": "CS4613", "courseName": "Machine Learning", "semester": "7", "preRequisiteCourses": ["CS1133"], "coRequisiteCourses": [], "postRequisiteCourses": [] }, { "courseId": "CS3272", "courseName": "Human Computer Interaction", "semester": "7", "preRequisiteCourses": [], "coRequisiteCourses": ["CS4271"], "postRequisiteCourses": [] }, { "courseId": "CS3271", "courseName": "Human Computer Interaction Lab", "semester": "7", "preRequisiteCourses": [], "coRequisiteCourses": ["CS4272"], "postRequisiteCourses": [] }, { "courseId": "CS4573", "courseName": "Blockchain Technology", "semester": "7", "preRequisiteCourses": ["CS1133"], "coRequisiteCourses": [], "postRequisiteCourses": [] }, { "courseId": "CS3843", "courseName": "Data Security and Cryptography", "semester": "8", "preRequisiteCourses": [], "coRequisiteCourses": [], "postRequisiteCourses": [] }, { "courseId": "CS4924", "courseName": "Design Project (Part-II)", "semester": "8", "preRequisiteCourses": ["CS4912"], "coRequisiteCourses": [], "postRequisiteCourses": [] }, { "courseId": "HMCS1033", "courseName": "Personal Management and Grooming", "semester": "8", "preRequisiteCourses": [], "coRequisiteCourses": [], "postRequisiteCourses": [] }];
         const state = {
             courses: [],
             mode: "full",
@@ -360,7 +729,7 @@
         }
 
         function updateModeButtons() {
-            [["full","mode-full"],["course","mode-course"],["semester","mode-semester"]].forEach(([mode,id]) => {
+            [["full", "mode-full"], ["course", "mode-course"], ["semester", "mode-semester"]].forEach(([mode, id]) => {
                 const active = state.mode === mode;
                 $(id).classList.toggle("active", active);
                 $(id).setAttribute("aria-selected", active ? "true" : "false");
@@ -369,10 +738,10 @@
 
         function populateControls() {
             $("course-options").innerHTML = state.courses
-                .slice().sort((a,b) => a.courseId.localeCompare(b.courseId))
+                .slice().sort((a, b) => a.courseId.localeCompare(b.courseId))
                 .map(c => `<option value="${c.courseId}">${c.courseName}</option>`).join("");
 
-            const semesters = [...new Set(state.courses.map(c => Number(c.semester)))].sort((a,b)=>a-b);
+            const semesters = [...new Set(state.courses.map(c => Number(c.semester)))].sort((a, b) => a - b);
             $("semester-select").innerHTML = `<option value="">Select a semester…</option>` +
                 semesters.map(s => `<option value="${s}">Semester ${s}</option>`).join("");
         }
@@ -513,8 +882,8 @@
                 } else {
                     title = "Course lookup";
                     note = q
-                      ? "No matching course was found. Try a course code such as <strong>CS2143</strong> or a course name."
-                      : "Start typing a course code or course name to build a trimmed dependency view.";
+                        ? "No matching course was found. Try a course code such as <strong>CS2143</strong> or a course name."
+                        : "Start typing a course code or course name to build a trimmed dependency view.";
                 }
             }
 
@@ -557,16 +926,16 @@
             }
 
             return { visibleCourses, roles, edges, title, note, focusIds };
-          }
+        }
 
         function render() {
-            const {visibleCourses, roles, edges, title, note} = buildView();
+            const { visibleCourses, roles, edges, title, note } = buildView();
             state.currentEdges = edges;
             $("view-heading").textContent = title;
-            $("view-count").textContent = `${visibleCourses.length} course${visibleCourses.length===1 ? "" : "s"}`;
+            $("view-count").textContent = `${visibleCourses.length} course${visibleCourses.length === 1 ? "" : "s"}`;
             setStatus(note);
 
-            const semesters = [...new Set(state.courses.map(c => Number(c.semester)))].sort((a,b)=>a-b);
+            const semesters = [...new Set(state.courses.map(c => Number(c.semester)))].sort((a, b) => a - b);
             $("semester-heads").innerHTML = semesters.map(s => `<div class="semester-head"><span>Semester ${s}</span></div>`).join("");
             $("graph-grid").innerHTML = semesters.map(() => `<div class="graph-lane"></div>`).join("");
 
@@ -577,8 +946,8 @@
                 return col;
             });
 
-            const bySem = new Map(semesters.map((s,i)=>[s, cols[i]]));
-            visibleCourses.slice().sort((a,b)=>Number(a.semester)-Number(b.semester) || a.courseId.localeCompare(b.courseId))
+            const bySem = new Map(semesters.map((s, i) => [s, cols[i]]));
+            visibleCourses.slice().sort((a, b) => Number(a.semester) - Number(b.semester) || a.courseId.localeCompare(b.courseId))
                 .forEach(course => bySem.get(Number(course.semester)).appendChild(makeCard(course, roles.get(course.courseId) || "")));
 
             $("course-grid").replaceChildren(...cols);
@@ -627,54 +996,54 @@
                 });
             });
 
-          function addPath(d, kind) {
-              const halo = document.createElementNS("http://www.w3.org/2000/svg", "path");
-              halo.setAttribute("d", d);
-              halo.setAttribute("class", "edge-halo");
-              svg.appendChild(halo);
+            function addPath(d, kind) {
+                const halo = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                halo.setAttribute("d", d);
+                halo.setAttribute("class", "edge-halo");
+                svg.appendChild(halo);
 
-              const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
-              p.setAttribute("d", d);
-              p.setAttribute("class", `edge ${kind}-edge`);
-              p.setAttribute("marker-end", kind === "pre" ? "url(#arrow-pre)" : kind === "post" ? "url(#arrow-post)" : "url(#arrow-default)");
-              svg.appendChild(p);
-          }
+                const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                p.setAttribute("d", d);
+                p.setAttribute("class", `edge ${kind}-edge`);
+                p.setAttribute("marker-end", kind === "pre" ? "url(#arrow-pre)" : kind === "post" ? "url(#arrow-post)" : "url(#arrow-default)");
+                svg.appendChild(p);
+            }
 
-          const seen = new Set();
-          for (const line of edges) {
-              if (!cards.has(line.from) || !cards.has(line.to)) continue;
-              const key = `${line.from}→${line.to}:${line.kind}`;
-              if (seen.has(key)) continue;
-              seen.add(key);
+            const seen = new Set();
+            for (const line of edges) {
+                if (!cards.has(line.from) || !cards.has(line.to)) continue;
+                const key = `${line.from}→${line.to}:${line.kind}`;
+                if (seen.has(key)) continue;
+                seen.add(key);
 
-              const a = cardMeta.get(line.from);
-              const b = cardMeta.get(line.to);
-              if (!a || !b) continue;
+                const a = cardMeta.get(line.from);
+                const b = cardMeta.get(line.to);
+                if (!a || !b) continue;
 
-              const sameColumn = a.semester === b.semester;
-              let d;
+                const sameColumn = a.semester === b.semester;
+                let d;
 
-              if (sameColumn) {
-                // Co-requisites (or any same-semester relation) route vertically around the right edge of the source/target cards.
-                const sideX = Math.max(a.x2, b.x2) + 12;
-                const startY = a.cy;
-                const endY = b.cy;
-                d = `M ${a.x2} ${startY} L ${sideX} ${startY} L ${sideX} ${endY} L ${b.x2} ${endY}`;
-              } else if (b.x1 >= a.x1) {
-                // Relationships flow directly from source to destination., Card crossing is deliberate: to make long dependency chains easier to visually trace.
-                const startX = a.x2;
-                const endX = b.x1;
-                const bendX = (startX + endX) / 2;
-                d = `M ${startX} ${a.cy} L ${bendX} ${a.cy} L ${bendX} ${b.cy} L ${endX} ${b.cy}`;
-              } else {
-                const startX = a.x1;
-                const endX = b.x2;
-                const bendX = (startX + endX) / 2;
-                d = `M ${startX} ${a.cy} L ${bendX} ${a.cy} L ${bendX} ${b.cy} L ${endX} ${b.cy}`;
-              }
+                if (sameColumn) {
+                    // Co-requisites (or any same-semester relation) route vertically around the right edge of the source/target cards.
+                    const sideX = Math.max(a.x2, b.x2) + 12;
+                    const startY = a.cy;
+                    const endY = b.cy;
+                    d = `M ${a.x2} ${startY} L ${sideX} ${startY} L ${sideX} ${endY} L ${b.x2} ${endY}`;
+                } else if (b.x1 >= a.x1) {
+                    // Relationships flow directly from source to destination., Card crossing is deliberate: to make long dependency chains easier to visually trace.
+                    const startX = a.x2;
+                    const endX = b.x1;
+                    const bendX = (startX + endX) / 2;
+                    d = `M ${startX} ${a.cy} L ${bendX} ${a.cy} L ${bendX} ${b.cy} L ${endX} ${b.cy}`;
+                } else {
+                    const startX = a.x1;
+                    const endX = b.x2;
+                    const bendX = (startX + endX) / 2;
+                    d = `M ${startX} ${a.cy} L ${bendX} ${a.cy} L ${bendX} ${b.cy} L ${endX} ${b.cy}`;
+                }
 
-              addPath(d, line.kind);
-          }
+                addPath(d, line.kind);
+            }
         }
 
         $("course-grid").addEventListener("click", (event) => {
@@ -719,7 +1088,7 @@
 
         async function loadCourses() {
             try {
-                const response = await fetch("course-requirements.json", { cache:"no-store" });
+                const response = await fetch("course-requirements.json", { cache: "no-store" });
                 if (!response.ok) throw new Error("JSON request failed");
                 const parsed = await response.json();
                 if (!Array.isArray(parsed) || !parsed.length) throw new Error("Invalid course data");
@@ -740,4 +1109,5 @@
         loadCourses();
     </script>
 </body>
+
 </html>

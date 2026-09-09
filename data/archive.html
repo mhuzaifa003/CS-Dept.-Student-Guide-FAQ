@@ -1,18 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Archive - CS Dept.</title>
     <link rel="icon" type="image/x-icon" href="../files/favicon.ico">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="../styles.css">
     <style>
-        .drive-tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
-        .drive-tabs .tab { border: 1px solid var(--rule); border-radius: var(--radius); color: var(--navy); font-weight: 600; }
-        .drive-tabs .tab[aria-pressed="true"] { background: var(--navy); color: white; border-color: var(--navy); }
-        .iframe-container { width: 100%; height: 600px; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; background: var(--card); }
-        iframe { width: 100%; height: 100%; border: none; }
+        .drive-tabs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .drive-tabs .tab {
+            border: 1px solid var(--rule);
+            border-radius: var(--radius);
+            color: var(--navy);
+            font-weight: 600;
+        }
+
+        .drive-tabs .tab[aria-pressed="true"] {
+            background: var(--navy);
+            color: white;
+            border-color: var(--navy);
+        }
+
+        .iframe-container {
+            width: 100%;
+            height: 70vh;
+            min-height: 400px;
+            border: 1px solid var(--rule);
+            border-radius: 8px;
+            overflow: hidden;
+            background: var(--card);
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
     </style>
 </head>
 
@@ -27,19 +60,26 @@
 
     <main class="wrap" style="padding-top: 30px; padding-bottom: 64px;">
         <nav class="tabs drive-tabs" id="drive-tabs">
-            <button class="tab" aria-pressed="true" data-url="https://drive.google.com/embeddedfolderview?id=11mf7DxGRfDchwZG6BM2Lv7O-bzHxrvUV#grid">Past Papers</button>
-            <button class="tab" aria-pressed="false" data-url="https://drive.google.com/embeddedfolderview?id=1w_hzb7hyvQWlUJgVVk-EWIKJfHx-i-H4#grid">Printable Assignment Papers</button>
+            <button class="tab" aria-pressed="true"
+                data-url="https://drive.google.com/embeddedfolderview?id=11mf7DxGRfDchwZG6BM2Lv7O-bzHxrvUV#grid">Past
+                Papers</button>
+            <button class="tab" aria-pressed="false"
+                data-url="https://drive.google.com/embeddedfolderview?id=1w_hzb7hyvQWlUJgVVk-EWIKJfHx-i-H4#grid">Printable
+                Assignment Papers</button>
         </nav>
 
         <div class="iframe-container">
-            <iframe id="drive-frame" src="https://drive.google.com/embeddedfolderview?id=11mf7DxGRfDchwZG6BM2Lv7O-bzHxrvUV#list"></iframe>
+            <iframe id="drive-frame"
+                src="https://drive.google.com/embeddedfolderview?id=11mf7DxGRfDchwZG6BM2Lv7O-bzHxrvUV#list"></iframe>
         </div>
     </main>
 
     <footer class="site-footer">
         <div class="wrap footer-grid" style="grid-template-columns: 1fr;">
             <div class="footer-col footer-about" style="text-align: center;">
-                <p>Created by the CS Department Student Community.<br>This website is made by third-parties, while some of the content used is part of the university's official materials.<br><a href="../index.html"><b><u>Back to Hub</u></b></a></p>
+                <p>Created by the CS Department Student Community.<br>This website is made by third-parties, while some
+                    of the content used is part of the university's official materials.<br><a
+                        href="../index.html"><b><u>Back to Hub</u></b></a></p>
             </div>
         </div>
     </footer>
@@ -57,4 +97,5 @@
         });
     </script>
 </body>
+
 </html>

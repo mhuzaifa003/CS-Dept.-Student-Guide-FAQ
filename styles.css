@@ -107,7 +107,7 @@ body {
 }
 
 #search {
-  flex: 1 1 320px;
+  flex: 1 1 min(100%, 320px);
   font-family: var(--font-body);
   font-size: 15px;
   padding: 13px 16px;
@@ -258,7 +258,7 @@ body {
 }
 
 .faq-card[open] summary::after {
-  content: "\2212"; /* minus */
+  content: "\2212";
   color: var(--red);
 }
 
@@ -437,7 +437,7 @@ body {
 @media (max-width: 560px) {
   .wrap { padding: 0 18px; }
   .site-header { padding-top: 40px; }
-  .faq-answer { padding-left: 4px; }
+  .faq-answer { padding: 14px 18px; }
   .faq-index { display: none; }
   .footer-grid { grid-template-columns: 1fr; }
 }
@@ -447,7 +447,6 @@ body {
   .tab, .faq-card summary::after { transition: none; }
 }
 
-/* --- Landing Page Hub Grid --- */
 .landing-hero {
   text-align: center;
   padding: 60px 24px 40px;
@@ -460,7 +459,7 @@ body {
 
 .landing-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
   gap: 24px;
   padding: 20px 0 80px;
 }
@@ -513,7 +512,6 @@ body {
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
-  /* Creates a clean white ring to isolate the logo's gradient from the header's blue */
   background: white; 
   padding: 4px; 
   border-radius: 50%;
@@ -521,9 +519,8 @@ body {
 }
 
 .cust-logo {
-  width: 90px; /* Adjust size as needed */
+  width: 90px;
   height: 90px;
   object-fit: cover;
-  /* Crops the square image into a perfect circle */
   border-radius: 50%; 
 }
