@@ -439,7 +439,8 @@ body {
   .site-header { padding-top: 40px; }
   .faq-answer { padding: 14px 18px; }
   .faq-index { display: none; }
-  .footer-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; padding-top: 14px; }
+  .layout { padding-top: 14px; padding-bottom: 14px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -523,4 +524,34 @@ body {
   height: 90px;
   object-fit: cover;
   border-radius: 50%; 
+}
+
+
+/* Index Page Specific Styling */
+.countdown-banner {
+    background: var(--red);
+    color: white;
+    text-align: center;
+    padding: 12px 24px;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    display: none;
+    /* Hides the banner by default unless JS calls for it */
+}
+
+.countdown-banner span {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-left: 10px;
+}
+
+@media (max-width: 560px) {
+    .countdown-banner span {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 6px;
+    }
 }

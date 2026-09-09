@@ -1,14 +1,14 @@
 # 🎓 CS Department Student Guide & FAQ
 
-**🌐 For Students:** If you are looking for the actual guide to find answers or view the campus map, please visit the **[Live Website](https://mhuzaifa003.github.io/CS-Dept.-Student-Guide-FAQ/)**.
+**🌐 For Students:** If you are looking for the actual guide to find answers or view the campus map, please visit the **[Live Website](https://mhuzaifa003.github.io/CS-Dept.-Student-Guide-FAQ/)**, this repository is only for maintainers.
 
 ---
 
 ## 🛠️ For Future Ambassadors & Maintainers
 
-Welcome to the repository for the Capital University of Science and Technology (CUST) Computer Science Student Guide. This documentation is specifically written for future Student Ambassadors and administrators of the CS Student Body who will fork, maintain, and expand this project in the future.
+This documentation is specifically written for future Student Ambassadors and administrators of the CS Student Body who may fork, maintain, and/or expand this project in the future.
 
-This lightweight web application was deliberately designed without complex build tools, ensuring that anyone stepping into the ambassador role can easily update the content and maintain the codebase with basic web development knowledge.
+This interactive website was deliberately designed without complex build tools, ensuring that anyone stepping into the ambassador role can easily update the content and maintain the codebase with basic web development knowledge (HTML, CSS, JS).
 
 ### 📂 Architecture & File Structure
 *   **`index.html`**: The main dashboard housing the search input, category sidebar, dynamic FAQ list container, and footer navigation.

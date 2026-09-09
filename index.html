@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,36 +8,24 @@
     <link rel="icon" type="image/x-icon" href="files/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <header class="site-header landing-hero">
         <div class="wrap">
-          <p class="eyebrow">DEPARTMENT OF COMPUTER SCIENCE</p>
-          <h1 style="font-size: clamp(38px, 5vw, 52px);">Student Hub</h1>
-          <p class="subtitle">Your central dashboard for academic resources, campus navigation, and administrative guidance.</p>
+            <p class="eyebrow">DEPARTMENT OF COMPUTER SCIENCE</p>
+            <h1 style="font-size: clamp(38px, 5vw, 52px);">Student Hub</h1>
+            <p class="subtitle">Your central dashboard for academic resources, campus navigation, and administrative
+                guidance.</p>
         </div>
         <div class="brand-seal">
-          <img src="files/CUST.png" alt="University Logo" class="cust-logo">
+            <img src="files/CUST.png" alt="University Logo" class="cust-logo">
         </div>
     </header>
-
-    <style>
-        .countdown-banner {
-            background: var(--red);
-            color: white;
-            text-align: center;
-            padding: 12px 24px;
-            font-family: var(--font-mono);
-            font-size: 14px;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            display: none; /* Hidden by default until JS finds an upcoming date */
-        }
-        .countdown-banner span { background: rgba(0,0,0,0.2); padding: 4px 8px; border-radius: 4px; margin-left: 10px; }
-    </style>
 
     <div class="countdown-banner" id="countdown-banner">
         <span id="cd-event"></span>
@@ -54,16 +43,16 @@
 
                 if (upcoming) {
                     const daysLeft = Math.ceil(
-                    (new Date(upcoming.date) - now) / (1000 * 60 * 60 * 24)
+                        (new Date(upcoming.date) - now) / (1000 * 60 * 60 * 24)
                     );
 
                     // Only show banner if event is 14 days or less away
                     if (daysLeft <= 14) {
-                    document.getElementById('countdown-banner').style.display = 'block';
-                    document.getElementById('cd-event').textContent =
-                        `UPCOMING: ${upcoming.name}`;
-                    document.getElementById('cd-time').textContent =
-                        daysLeft === 0 ? "TODAY" : `${daysLeft} Days Left`;
+                        document.getElementById('countdown-banner').style.display = 'block';
+                        document.getElementById('cd-event').textContent =
+                            `UPCOMING: ${upcoming.name}`;
+                        document.getElementById('cd-time').textContent =
+                            daysLeft === 0 ? "TODAY" : `${daysLeft} Days Left`;
                     }
                 }
             } catch (error) {
@@ -80,14 +69,16 @@
             <a href="data/faq.html" class="landing-card">
                 <span class="tag">Knowledge Base</span>
                 <h2>Student Guide & FAQ</h2>
-                <p>Answers to common questions regarding registration, policies, IT support, and university guidelines.</p>
+                <p>Answers to common questions regarding registration, policies, IT support, and university guidelines.
+                </p>
             </a>
-        
+
             <!-- Links to the Interactive Campus Map -->
             <a href="data/map.html" class="landing-card">
                 <span class="tag">Navigation</span>
                 <h2>Interactive Campus Map</h2>
-                <p>Find your way around the campus block with essenntial departmental locations and an interactive legend.</p>
+                <p>Find your way around the campus block with essenntial departmental locations and an interactive
+                    legend.</p>
             </a>
 
             <!-- Links to the Course Visualizer -->
@@ -101,7 +92,8 @@
             <a href="data/title-generator.html" class="landing-card">
                 <span class="tag">Tools</span>
                 <h2>Title Page Generator</h2>
-                <p>Generate assignment cover pages with your details for printable / online submissions. Please verify with your professor regarding the use of printed pages before using this tool.</p>
+                <p>Generate assignment cover pages with your details for printable / online submissions. Please verify
+                    with your professor regarding the use of printed pages before using this tool.</p>
             </a>
 
             <!-- Links to the File Archive -->
@@ -116,9 +108,12 @@
     <footer class="site-footer">
         <div class="wrap footer-grid" style="grid-template-columns: 1fr;">
             <div class="footer-col footer-about" style="text-align: center;">
-                <p>Created by the CS Department Student Community.<br>This website is made by third-parties, while some of the content used is part of the university's official materials.<br>No sort of tracking is done, generations are done locally within your browser. Powered by GitHub Pages.</p>
+                <p>Created by the CS Department Student Community.<br>This website is made by third-parties, while some
+                    of the content used is part of the university's official materials.<br>No sort of tracking is done,
+                    generations are done locally within your browser. Powered by GitHub Pages.</p>
             </div>
         </div>
     </footer>
 </body>
+
 </html>

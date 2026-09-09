@@ -1,6 +1,7 @@
 <!-- faq.html -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,20 +9,24 @@
     <link rel="icon" type="image/x-icon" href="../files/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="../styles.css">
 </head>
 
 <body>
     <header class="site-header">
         <div class="wrap">
+            <a href="../index.html" class="eyebrow">&larr; Back to Hub</a>
             <p class="eyebrow">KNOWLEDGE BASE</p>
             <h1 id="site-title">Student Guide & FAQ</h1>
             <p class="subtitle" id="site-subtitle">Loading…</p>
 
             <div class="search-row">
                 <label for="search" class="visually-hidden">Search questions</label>
-                <input type="search" id="search" placeholder="Search a question, e.g. “add/drop deadline”" autocomplete="off">
+                <input type="search" id="search" placeholder="Search a question, e.g. “add/drop deadline”"
+                    autocomplete="off">
                 <span class="result-count" id="result-count" aria-live="polite"></span>
             </div>
         </div>
@@ -35,10 +40,11 @@
         </aside>
 
         <main class="content">
-          <div id="faq-list" class="faq-list">
-              <p class="loading">Fetching answers…</p>
-          </div>
-          <p class="empty-state" id="empty-state" hidden>No questions match “<span id="empty-query"></span>”. Try a different word, or contact the Student Ambassador.</p>
+            <div id="faq-list" class="faq-list">
+                <p class="loading">Fetching answers…</p>
+            </div>
+            <p class="empty-state" id="empty-state" hidden>No questions match “<span id="empty-query"></span>”. Try a
+                different word, or contact the Student Ambassador.</p>
         </main>
     </div>
 
@@ -47,31 +53,196 @@
             <nav class="footer-col" aria-label="Quick links">
                 <p class="footer-heading">Quick Links</p>
                 <ul>
-                  <li><a href="../files/timetable.pdf" target="_blank">Department Timetable</a></li>
-                  <li><a href="../files/important_dates.pdf" target="_blank">Dates To Remember</a></li>
-                  <li><a href="../files/course_offerings.pdf" target="_blank">Course Catalog</a></li>
-                  <li><a href="../files/datesheet.pdf" target="_blank">Exam Datesheet</a></li>
+                    <li><a href="../files/timetable.pdf" target="_blank">Department Timetable</a></li>
+                    <li><a href="../files/important_dates.pdf" target="_blank">Dates To Remember</a></li>
+                    <li><a href="../files/course_offerings.pdf" target="_blank">Course Catalog</a></li>
+                    <li><a href="../files/datesheet.pdf" target="_blank">Exam Datesheet</a></li>
                 </ul>
             </nav>
 
             <nav class="footer-col" aria-label="Resources">
                 <p class="footer-heading" aria-hidden="true" style="visibility:hidden">Quick Links</p>
                 <ul>
-                  <li><a href="https://tasjeel.cust.edu.pk/student/dashboard" target="_blank">Student Portal</a></li>
-                  <li><a href="https://cust.edu.pk/directory/" target="_blank">University Contact Directory</a></li>
-                  <li><a href="https://cust.edu.pk/downloads/" target="_blank">Downloads</a></li>
-                  <li><a href="map.html" target="_blank" style="visibility:hidden">Campus Map</a></li>
+                    <li><a href="https://tasjeel.cust.edu.pk/student/dashboard" target="_blank">Student Portal</a></li>
+                    <li><a href="https://cust.edu.pk/directory/" target="_blank">University Contact Directory</a></li>
+                    <li><a href="https://cust.edu.pk/downloads/" target="_blank">Downloads</a></li>
+                    <li><a href="map.html" target="_blank" style="visibility:hidden">Campus Map</a></li>
                 </ul>
             </nav>
 
             <div class="footer-col footer-about">
                 <p id="contact-line"></p>
-                <p><a href="../index.html"><b><u>Back to Hub</u></b></a></p>
                 <p class="updated" id="updated-line"></p>
             </div>
         </div>
     </footer>
+    <script>
+        const state = {
+            faqs: [],
+            activeCategory: "All",
+            query: ""
+        };
 
-<script src="../app.js"></script>
+        const els = {
+            title: document.getElementById("site-title"),
+            subtitle: document.getElementById("site-subtitle"),
+            tabs: document.getElementById("tabs"),
+            list: document.getElementById("faq-list"),
+            search: document.getElementById("search"),
+            resultCount: document.getElementById("result-count"),
+            emptyState: document.getElementById("empty-state"),
+            emptyQuery: document.getElementById("empty-query"),
+            contact: document.getElementById("contact-line"),
+            updated: document.getElementById("updated-line"),
+        };
+
+        init();
+
+        async function init() {
+            let data;
+            try {
+                const res = await fetch("faq.json", { cache: "no-store" });
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                data = await res.json();
+            } catch (err) {
+                if (els.list) {
+                    els.list.innerHTML = `<p class="loading">Couldn't load faq.json (${err.message}).</p>`;
+                }
+                return;
+            }
+
+            renderMeta(data.meta || {});
+            state.faqs = data.faqs || [];
+
+            assignDisplayIds(state.faqs, data.categories || []);
+            renderTabs(["All", ...(data.categories || [])]);
+            renderList();
+
+            if (els.search) {
+                els.search.addEventListener("input", (e) => {
+                    state.query = e.target.value.trim().toLowerCase();
+                    renderList();
+                });
+            }
+        }
+
+        function assignDisplayIds(faqs, categories) {
+            const prefixes = buildCategoryPrefixes(categories);
+            const counters = {};
+            faqs.forEach((item) => {
+                const prefix = prefixes[item.category] || "GEN";
+                counters[prefix] = (counters[prefix] || 0) + 1;
+                item.displayId = `${prefix}-${String(counters[prefix]).padStart(3, "0")}`;
+            });
+        }
+
+        function buildCategoryPrefixes(categories) {
+            const used = new Set();
+            const map = {};
+            categories.forEach((cat) => {
+                const words = cat.split(/[\s&]+/).filter(Boolean);
+                const base = words.length === 1
+                    ? words[0].slice(0, 3).toUpperCase()
+                    : words.slice(0, 3).map((w) => w[0]).join("").toUpperCase();
+
+                let prefix = base;
+                let n = 1;
+                while (used.has(prefix)) {
+                    n += 1;
+                    prefix = `${base}${n}`;
+                }
+                used.add(prefix);
+                map[cat] = prefix;
+            });
+            return map;
+        }
+
+        function renderMeta(meta) {
+            if (meta.title && els.title) els.title.textContent = meta.title;
+            if (meta.subtitle && els.subtitle) els.subtitle.textContent = meta.subtitle;
+            if (els.contact) els.contact.innerHTML = meta.contact || "";
+            if (els.updated) els.updated.textContent = meta.lastUpdated ? `Last updated ${meta.lastUpdated}` : "";
+        }
+
+        function renderTabs(categories) {
+            if (!els.tabs) return;
+            els.tabs.innerHTML = "";
+            categories.forEach((cat) => {
+                const btn = document.createElement("button");
+                btn.type = "button";
+                btn.className = "tab";
+                btn.textContent = cat;
+                btn.setAttribute("aria-pressed", cat === state.activeCategory ? "true" : "false");
+                btn.addEventListener("click", () => {
+                    state.activeCategory = cat;
+                    [...els.tabs.children].forEach((c) =>
+                        c.setAttribute("aria-pressed", c === btn ? "true" : "false")
+                    );
+                    renderList();
+                });
+                els.tabs.appendChild(btn);
+            });
+        }
+
+        function renderList() {
+            const q = state.query;
+            const filtered = state.faqs.filter((item) => {
+                const matchesCategory = state.activeCategory === "All" || item.category === state.activeCategory;
+                if (!matchesCategory) return false;
+                if (!q) return true;
+                const haystack = `${item.question} ${item.answer} ${item.category}`.toLowerCase();
+                return haystack.includes(q);
+            });
+
+            if (els.resultCount) els.resultCount.textContent = `${filtered.length} of ${state.faqs.length} answers`;
+            if (!els.list) return;
+            els.list.innerHTML = "";
+
+            if (filtered.length === 0) {
+                if (els.emptyQuery) els.emptyQuery.textContent = state.query || state.activeCategory;
+                if (els.emptyState) els.emptyState.hidden = false;
+                return;
+            }
+            if (els.emptyState) els.emptyState.hidden = true;
+
+            filtered.forEach((item) => {
+                els.list.appendChild(buildCard(item));
+            });
+        }
+
+        function buildCard(item) {
+            const details = document.createElement("details");
+            details.className = "faq-card";
+            details.name = "faq-accordion";
+
+            const summary = document.createElement("summary");
+            summary.innerHTML = `
+                <span class="faq-index">${escapeHtml(item.displayId || "")}</span>
+                <span class="faq-question-block">
+                    <span class="faq-category">${escapeHtml(item.category || "")}</span>
+                    <span class="faq-question">${escapeHtml(item.question)}</span>
+                </span>
+            `;
+
+            const answer = document.createElement("div");
+            answer.className = "faq-answer";
+            const paragraphs = String(item.answer || "")
+                .split(/\n\s*\n/)
+                .map((p) => `<p>${p.trim()}</p>`)
+                .join("");
+            answer.innerHTML = paragraphs;
+
+            details.appendChild(summary);
+            details.appendChild(answer);
+            return details;
+        }
+
+        function escapeHtml(str) {
+            const div = document.createElement("div");
+            div.textContent = str;
+            return div.innerHTML;
+        }
+    </script>
 </body>
+
 </html>

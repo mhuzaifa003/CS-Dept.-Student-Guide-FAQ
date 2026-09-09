@@ -1,10 +1,10 @@
 [
   {
-    "name": "Online Course Registration",
+    "name": "Course Registration Starts",
     "date": "2026-08-18"
   },
   {
-    "name": "Online Course Registration Closes",
+    "name": "Course Registration Closes",
     "date": "2026-08-23"
   },
   {
@@ -16,7 +16,7 @@
     "date": "2026-10-19"
   },
   {
-    "name": "Classes Resume | Sports Week Ends",
+    "name": "Sports Week Ends",
     "date": "2026-10-23"
   },
   {
@@ -24,11 +24,11 @@
     "date": "2026-11-21"
   },
   {
-    "name": "Mid Term Results Announcement",
+    "name": "Mid Term Results",
     "date": "2026-12-02"
   },
   {
-    "name": "Final Course Withdrawal Date",
+    "name": "Last Course Withdrawal Date",
     "date": "2026-12-04"
   },
   {
@@ -36,7 +36,7 @@
     "date": "2026-12-17"
   },
   {
-    "name": "Last Date to Submit Final Grades | End of Classes",
+    "name": "Classes End",
     "date": "2027-01-22"
   },
   {
@@ -44,11 +44,7 @@
     "date": "2027-01-25"
   },
   {
-    "name": "Semester Ends | Final Exams End",
-    "date": "2027-02-06"
-  },
-  {
-    "name": "Semester Grades Announcement",
+    "name": "Grade Announcement",
     "date": "2027-02-10"
   }
 ]
