@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,15 +11,71 @@
     <link rel="stylesheet" href="../styles.css">
     <script src="https://unpkg.com/pdf-lib@1.4.0/dist/pdf-lib.min.js"></script>
     <style>
-        .generator-container { max-width: 600px; margin: 40px auto; padding: 0 20px; }
-        .controls-card { background: var(--card); border: 1px solid var(--rule); border-radius: 8px; padding: 30px; box-shadow: 0 4px 14px rgba(15, 42, 82, 0.09); }
-        .form-group { margin-bottom: 16px; }
-        .form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--navy); }
-        .form-group input, .form-group textarea { width: 100%; padding: 10px; border: 1px solid var(--rule); border-radius: var(--radius); font-family: 'Times New Roman', Times, serif; font-size: 15px; box-sizing: border-box; }
-        .form-group textarea { resize: vertical; height: 80px; }
-        .btn-download { background: var(--navy); color: white; border: none; padding: 12px; border-radius: var(--radius); cursor: pointer; font-weight: 600; width: 100%; font-size: 15px; margin-top: 10px; transition: background 0.15s ease; }
-        .btn-download:hover { background: var(--navy-soft); }
-        a:link, a:visited { color: white; text-decoration: bold, underline; }
+        .generator-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .controls-card {
+            background: var(--card);
+            border: 1px solid var(--rule);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 14px rgba(15, 42, 82, 0.09);
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--navy);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--rule);
+            border-radius: var(--radius);
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 15px;
+            box-sizing: border-box;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            height: 80px;
+        }
+
+        .btn-download {
+            background: var(--navy);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            font-size: 15px;
+            margin-top: 10px;
+            transition: background 0.15s ease;
+        }
+
+        .btn-download:hover {
+            background: var(--navy-soft);
+        }
+
+        a:link,
+        a:visited {
+            color: white;
+            text-decoration: bold, underline;
+        }
     </style>
 </head>
 
@@ -26,7 +83,8 @@
     <header class="site-header">
         <div class="wrap" style="max-width: 600px; margin: 0 auto; padding: 0 20px;">
             <h1>Title Page Generator</h1>
-            <p class="subtitle">The form below will generate a title page for your assignment. Visit <a href="archive.html">the Archive</a> for blank Title Pages.</p>
+            <p class="subtitle">The form below will generate a title page for your assignment. Visit <a
+                    href="archive.html">the Archive</a> for blank Title Pages.</p>
         </div>
     </header>
 
@@ -40,7 +98,7 @@
                     </div>
                     <div class="form-group">
                         <label for="in-reg">Registration ID</label>
-                        <input type="text" id="in-reg" required placeholder="E.g. 123456 | Auto BCS Prefix | Numeric Input Only" maxlength="6" minlength="6" pattern="\d{6}" inputmode="numeric">
+                        <input type="text" id="in-reg" required placeholder="E.g. BCS123456">
                     </div>
                     <div class="form-group">
                         <label>Date</label>
@@ -60,7 +118,8 @@
                     </div>
                     <div class="form-group">
                         <label>Description / Topic</label>
-                        <textarea id="in-desc" required placeholder="Assignment description... Note: Too long of a description may cause text clipping"></textarea>
+                        <textarea id="in-desc" required
+                            placeholder="Assignment description... Note: Too long of a description may cause text clipping"></textarea>
                     </div>
                     <div class="form-group">
                         <label>Submitted To</label>
@@ -75,7 +134,9 @@
     <footer class="site-footer">
         <div class="wrap footer-grid" style="grid-template-columns: 1fr;">
             <div class="footer-col footer-about" style="text-align: center;">
-                <p>Created by the CS Department Student Community.<br>This website is made by third-parties, while some of the content used is part of the university's official materials.<br><a href="../index.html"><b><u>Back to Hub</u></b></a></p>
+                <p>Created by the CS Department Student Community.<br>This website is made by third-parties, while some
+                    of the content used is part of the university's official materials.<br><a
+                        href="../index.html"><b><u>Back to Hub</u></b></a></p>
             </div>
         </div>
     </footer>
@@ -97,7 +158,7 @@
                 const fontSize = 14;
 
                 const name = document.getElementById('in-name').value;
-                const reg = 'BCS' + document.getElementById('in-reg').value;
+                const reg = document.getElementById('in-reg').value;
                 const dateStr = document.getElementById('in-date').value;
                 const course = document.getElementById('in-course').value;
                 const section = document.getElementById('in-section').value;
@@ -106,12 +167,12 @@
                 const teacher = document.getElementById('in-teacher').value;
 
                 const drawField = (text, x, yFromTop, maxWidth = undefined) => {
-                    firstPage.drawText(text, { 
-                        x: x, 
-                        y: height - yFromTop, 
-                        size: fontSize, 
-                        font: timesFont, 
-                        ...(maxWidth ? { maxWidth } : {}) 
+                    firstPage.drawText(text, {
+                        x: x,
+                        y: height - yFromTop,
+                        size: fontSize,
+                        font: timesFont,
+                        ...(maxWidth ? { maxWidth } : {})
                     });
                 };
 
@@ -142,4 +203,5 @@
         }
     </script>
 </body>
+
 </html>
