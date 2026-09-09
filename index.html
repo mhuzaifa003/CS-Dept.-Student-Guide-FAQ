@@ -47,7 +47,7 @@
         async function initCountdown() {
             try {
                 // Fetch deadline data
-                const response = await fetch('/data/index.json');
+                const response = await fetch('data/index.json');
                 const deadlines = await response.json();
                 const now = new Date();
                 const upcoming = deadlines.find(d => new Date(d.date) >= now);

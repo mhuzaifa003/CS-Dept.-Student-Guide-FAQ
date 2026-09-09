@@ -470,7 +470,7 @@
             };
 
             if (mode === "full") {
-              // Default view: every course, with no relationship edges.
+                // Default view: every course, with no relationship edges.
                 for (const course of state.courses) {
                     addRole(course.courseId, "related");
                 }
@@ -480,6 +480,7 @@
             }
 
             if (mode === "course") {
+                // Course lookup view: find the selected course and its dependencies.
                 const q = normalise(state.selectedCourse);
                 const target = getCourse(state.selectedCourse) ||
                     state.courses.find(c => normalise(c.courseId) === q) ||
@@ -498,9 +499,6 @@
                     post.forEach(id => { if (!pre.has(id)) addRole(id, "post"); });
                     co.forEach(id => { if (id !== target.courseId) addRole(id, "co"); });
 
-                    // Co-requisites are intentionally limited to the focus course. They do not
-                    // cascade through the dependency graph and are omitted entirely when the
-                    // toggle is off.
                     if (state.includeCo) {
                         co.forEach(id => addEdge(target.courseId, id, "co"));
                     }
@@ -521,6 +519,7 @@
             }
 
             if (mode === "semester") {
+                // Semester lookup view: find all courses in the selected semester and their dependencies.
                 const semester = Number(state.selectedSemester);
                 if (semester) {
                     const current = state.courses.filter(c => Number(c.semester) === semester);
@@ -535,8 +534,6 @@
                     post.forEach(id => { if (!pre.has(id) && !currentIds.has(id)) addRole(id, "post"); });
 
                     if (state.includeCo) {
-                        // Only show immediate co-requisites of the selected semester's courses.
-                        // They are optional context, not another recursive branch of the graph.
                         for (const course of current) {
                             for (const coId of getDirectCo(course)) {
                                 if (!getCourse(coId) || currentIds.has(coId)) continue;
@@ -658,23 +655,18 @@
               let d;
 
               if (sameColumn) {
-                // Co-requisites (or any same-semester relation) route vertically around
-                // the right edge of the source/target cards. The edge layer is intentionally
-                // above cards so the path remains visible; the hovered/tapped card rises above it.
+                // Co-requisites (or any same-semester relation) route vertically around the right edge of the source/target cards.
                 const sideX = Math.max(a.x2, b.x2) + 12;
                 const startY = a.cy;
                 const endY = b.cy;
                 d = `M ${a.x2} ${startY} L ${sideX} ${startY} L ${sideX} ${endY} L ${b.x2} ${endY}`;
               } else if (b.x1 >= a.x1) {
-                // Relationships flow directly from source to destination, even when that
-                // means crossing another card. This is deliberate: the edge layer is above
-                // cards, which makes long dependency chains easier to visually trace.
+                // Relationships flow directly from source to destination., Card crossing is deliberate: to make long dependency chains easier to visually trace.
                 const startX = a.x2;
                 const endX = b.x1;
                 const bendX = (startX + endX) / 2;
                 d = `M ${startX} ${a.cy} L ${bendX} ${a.cy} L ${bendX} ${b.cy} L ${endX} ${b.cy}`;
               } else {
-                // Defensive handling for any reverse-semester relationship.
                 const startX = a.x1;
                 const endX = b.x2;
                 const bendX = (startX + endX) / 2;
@@ -685,7 +677,6 @@
           }
         }
 
-        // A tapped/clicked card rises above the edge layer, matching hover behavior on desktop.
         $("course-grid").addEventListener("click", (event) => {
             const card = event.target.closest(".course-card");
             if (!card) return;
@@ -728,7 +719,7 @@
 
         async function loadCourses() {
             try {
-                const response = await fetch("../course-requirements.json", { cache:"no-store" });
+                const response = await fetch("course-requirements.json", { cache:"no-store" });
                 if (!response.ok) throw new Error("JSON request failed");
                 const parsed = await response.json();
                 if (!Array.isArray(parsed) || !parsed.length) throw new Error("Invalid course data");
