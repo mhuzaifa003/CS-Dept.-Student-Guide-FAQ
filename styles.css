@@ -56,11 +56,30 @@ body {
 }
 
 .site-header {
+  position: relative;
   border-bottom: 3px solid var(--red);
   padding: 52px 0 26px;
-  background: var(--navy);
+  overflow: hidden;
+  z-index: 1;
 }
 
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  background: url('files/CUST Banner.webp') center/cover no-repeat;
+  filter: blur(8px);
+  z-index: -2;
+}
+
+.site-header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--navy);
+  opacity: 0.8;
+  z-index: -1;
+}
 .eyebrow {
   font-family: var(--font-mono);
   font-size: 12px;
