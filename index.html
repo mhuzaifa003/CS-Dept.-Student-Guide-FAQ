@@ -70,6 +70,67 @@
         }
 
         initCountdown();
+
+        function toggleCalendarDropdown(event) {
+            event.stopPropagation();
+            const menu = document.getElementById('calendarMenu');
+            const btn = event.currentTarget;
+            const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+
+            btn.setAttribute('aria-expanded', !isExpanded);
+            menu.classList.toggle('show');
+        }
+
+        document.addEventListener('click', () => {
+            document.getElementById('calendarMenu').classList.remove('show');
+            document.querySelector('.calendar-btn').setAttribute('aria-expanded', 'false');
+        });
+
+        function formatToIso(date) {
+            return date.toISOString().replace(/-|:|\.\d\d\d/g, "");
+        }
+
+        function updateCalendarButtons(title, description, startDate, endDate) {
+            const startISO = formatToIso(startDate);
+            const endISO = formatToIso(endDate);
+            const cleanTitle = encodeURIComponent(title);
+            const cleanDesc = encodeURIComponent(description);
+
+            const googleUrl = `https://google.com{cleanTitle}&dates=${startISO}/${endISO}&details=${cleanDesc}`;
+            document.getElementById('googleCalLink').href = googleUrl;
+
+            const icsContent = [
+                "BEGIN:VCALENDAR",
+                "VERSION:2.0",
+                "PRODID:-//CS Dept Student Hub//Calendar Event//EN",
+                "BEGIN:VEVENT",
+                `UID:${Date.now()}@cs.student.hub`,
+                `DTSTAMP:${formatToIso(new Date())}`,
+                `DTSTART:${startISO}`,
+                `DTEND:${endISO}`,
+                `SUMMARY:${title}`,
+                `DESCRIPTION:${description}`,
+                "END:VEVENT",
+                "END:VCALENDAR"
+            ].join("\r\n");
+
+            const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+            const nativeLink = document.getElementById('nativeCalLink');
+
+            if (nativeLink.href.startsWith('blob:')) {
+                URL.revokeObjectURL(nativeLink.href);
+            }
+
+            nativeLink.href = URL.createObjectURL(blob);
+            nativeLink.download = `${title.toLowerCase().replace(/\s+/g, '-')}.ics`;
+        }
+
+        const eventName = "Finals Week Starts";
+        const eventDetails = "Make sure to bring your student ID and double-check room assignments!";
+        const start = new Date("2026-06-01T09:00:00Z");
+        const end = new Date("2026-06-01T17:00:00Z");
+
+        updateCalendarButtons(eventName, eventDetails, start, end);
     </script>
 
     <main class="wrap">
