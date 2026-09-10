@@ -30,6 +30,15 @@
     <div class="countdown-banner" id="countdown-banner">
         <span id="cd-event"></span>
         <span id="cd-time"></span>
+        <div class="calendar-dropdown">
+            <button class="calendar-btn" aria-expanded="false" onclick="toggleCalendarDropdown(event)">
+                📅 Add to Calendar
+            </button>
+            <div class="calendar-menu" id="calendarMenu">
+                <a href="#" id="googleCalLink" target="_blank" rel="noopener">Google Calendar</a>
+                <a href="#" id="nativeCalLink" download="files/calendar.ics">Apple / Outlook (.ics)</a>
+            </div>
+        </div>
     </div>
 
     <script>
