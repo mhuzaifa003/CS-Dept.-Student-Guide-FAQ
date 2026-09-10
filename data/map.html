@@ -34,13 +34,13 @@
 <body>
     <header class="site-header">
         <div class="wrap">
-            <a href="../index.html" class="eyebrow">&larr; Back to Hub</a>
             <p class="eyebrow">NAVIGATION</p>
             <h1>Interactive Campus Map</h1>
             <p class="subtitle">Tailored specifically for incoming students, this visual guide is designed to help you
                 navigate the campus with ease. While it highlights essential departmental locations, key facilities, and
                 vital campus resources, please note that it covers select primary areas rather than the entire
                 university grounds.</p>
+            <a href="../index.html" class="eyebrow">&larr; Back to Hub</a>
         </div>
     </header>
 
@@ -79,7 +79,7 @@
         var h = 824;
         var bounds = [[0, 0], [h, w]];
 
-        var image = L.imageOverlay('campus-map.png', bounds).addTo(map);
+        var image = L.imageOverlay('../files/campus-map.png', bounds).addTo(map);
 
         map.setView([h / 2, w / 2], 0.25);
         map.setMaxBounds(bounds);

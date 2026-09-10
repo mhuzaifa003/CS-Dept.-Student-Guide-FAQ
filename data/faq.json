@@ -11,6 +11,7 @@
     "University Policies & Guidelines",
     "Campus Facilities & Services",
     "Academic Registration & Enrollment",
+    "Academia & Courses",
     "IT Support & Student Portal",
     "Scholarships & Financial Aid",
     "Graduation & Alumni Services"
@@ -31,12 +32,12 @@
     {
       "category": "Campus Facilities & Services",
       "question": "What are the standard university office timings?",
-      "answer": "<p>Main administrative offices operate from 9:00 AM to 5:00 PM, Monday through Friday.</p>"
+      "answer": "<p>Main administrative offices operate from 9:00 AM - 1:00PM & 2:00 PM - 5:00 PM, Monday through Friday.</p>"
     },
     {
       "category": "Campus Facilities & Services",
       "question": "How do I register my vehicle for university parking?",
-      "answer": "<p>To register your vehicle, complete the <a href='https://docs.google.com/forms/d/e/1FAIpQLSc13RZSn0yZUb6JAqn8Srsp0ppB8xrUYKv_Hly6e1FItlRdiQ/viewform' target='_blank'><b><u>parking registration form</u></b></a> available on the <a href='https://www.facebook.com/share/p/1BHDxyCX9t/' target='_blank'><b><u>Student Affairs Facebook Page</u></b></a>.</p><p>Following submission, present your registered vehicle along with your student ID at the Main Entry Gate to collect your parking sticker.</p>"
+      "answer": "<p>To register your vehicle, complete the <a href='https://docs.google.com/forms/d/e/1FAIpQLSc13RZSn0yZUb6JAqn8Srsp0ppB8xrUYKv_Hly6e1FItlRdiQ/viewform' target='_blank'><b><u>parking registration form</u></b></a> available on the <a href='https://www.facebook.com/share/p/1BHDxyCX9t/' target='_blank'><b><u>Student Affairs Facebook Page</u></b></a>.</p><p>Following submission, present your registered vehicle along with your student ID at the Main Entry Gate to collect your parking sticker. A student can have one registered vehicle for free, additional vehicles will incur a fee of 2000/- PKR.</p>"
     },
     
     {
@@ -54,11 +55,17 @@
       "question": "What is the procedure to clear or remove a grade bracket?",
       "answer": "<p>Please visit the Examination Office directly for guidance regarding clearing or removing brackets.</p>"
     },
+
+    {
+      "category": "Academia & Courses",
+      "question": "What courses do I need to pick? Does the HEC credit hour requirement change apply to me?",
+      "answer": "<p><b><u>Batch 253 and onwards:</u></b> You are required to complete/take all offered courses.</p><p><b><u>Batch 251 and earlier:</u></b> You must take the additional course 'Pakistan Studies' along with your regular courses, even if you've studied 'Ideology & Constitution of Pakistan'. If you did not study 'Taleem-ul-Quran', you are required to study 'Fehm-ul-Quran I'.</p><p>For any further clarification, please contact the HOD Office.</p>"
+    },
     
     {
       "category": "IT Support & Student Portal",
-      "question": "My student portal or Microsoft Teams account is blocked. How can I unblock it?",
-      "answer": "<p>For any portal or MS Teams access errors, email <b><u>sysadmins@cust.edu.pk</u></b> with your account details and an attached screenshot of the error message.</p>"
+      "question": "My Student Portal or Microsoft Teams account is blocked/in-accessible. How can I unblock it?",
+      "answer": "<p>Write an email with your complete student details, description of the error, along with any screenshots of the error and an image of your Student Card and send them to the respective emails:<ul><li>Tasjeel/Portal Errors: activation@cust.edu.pk</u></b></li><li>MS Teams Errors: sysadmins@cust.edu.pk</u></b></li></ul></p>"
     },
     {
       "category": "IT Support & Student Portal",
