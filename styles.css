@@ -560,11 +560,26 @@ body {
     /* Hides the banner by default unless JS calls for it */
 }
 
-.countdown-banner span {
+.countdown-banner span, .countdown-banner a {
     background: rgba(0, 0, 0, 0.2);
     padding: 4px 8px;
     border-radius: 4px;
     margin-left: 10px;
+}
+
+.countdown-banner a {
+    color: white;
+    text-decoration: underline;
+}
+
+.flashing-text {
+  animation: blinker 1s linear 2;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
 }
 
 @media (max-width: 560px) {
