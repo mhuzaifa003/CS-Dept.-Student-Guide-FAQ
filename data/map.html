@@ -28,6 +28,25 @@
             box-shadow: 0 4px 14px rgba(15, 42, 82, 0.09);
             z-index: 1;
         }
+
+        .custom-pin {
+            background: none !important;
+            border: none !important;
+        }
+
+        .tabs .tab {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tab-indicator {
+            width: 4px;
+            height: 16px;
+            border-radius: 2px;
+            background-color: var(--cat-color, #000000);
+            flex-shrink: 0;
+        }
     </style>
 </head>
 
@@ -48,7 +67,7 @@
 
     <main class="layout wrap" style="padding-top: 40px; padding-bottom: 60px;">
         <aside class="sidebar">
-            <p class="sidebar-heading">Map Legend</p>
+            <p class="sidebar-heading">Map Legend (Click to Cycle)</p>
             <nav class="tabs" id="legend-tabs" aria-label="Map Legend"></nav>
         </aside>
 
@@ -108,7 +127,6 @@
             attributionControl: false
         });
 
-        // Dimensions must match the raw dimensions for campus-map.png
         var w = 1640;
         var h = 824;
         var bounds = [[0, 0], [h, w]];
@@ -124,23 +142,52 @@
                 if (!response.ok) throw new Error('Network response was not ok');
 
                 const data = await response.json();
-
                 const categoryDefinitions = data.categoryDefinitions;
                 const locations = data.locations;
 
                 var groupedLocations = {};
 
+                // Generates custom SVG pin icons
+                function createPinIcon(color = '#2A81CB') {
+                    return L.divIcon({
+                        className: 'custom-pin',
+                        html: `<svg width="25" height="41" viewBox="0 0 25 41" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.5 0C5.6 0 0 5.6 0 12.5C0 21.9 12.5 41 12.5 41C12.5 41 25 21.9 25 12.5C25 5.6 19.4 0 12.5 0Z" fill="${color}"/>
+                        <circle cx="12.5" cy="12.5" r="5" fill="#FFFFFF"/>
+                       </svg>`,
+                        iconSize: [25, 41],
+                        iconAnchor: [12.5, 41],
+                        popupAnchor: [1, -34]
+                    });
+                }
+
                 // Populates pins and groups them by category
                 locations.forEach(function (loc) {
-                    var marker = L.marker([loc.y, loc.x]).addTo(map);
+                    var primaryTag = Array.isArray(loc.tags) ? loc.tags[0] : loc.tags;
+
+                    // Fetch color from location object, category definition, or fallback to default blue
+                    var pinColor = loc.color
+                        || (categoryDefinitions[primaryTag] && categoryDefinitions[primaryTag].color)
+                        || '#2A81CB';
+
+                    var marker = L.marker([loc.y, loc.x], { icon: createPinIcon(pinColor) }).addTo(map);
                     marker.bindPopup(`<b>${loc.name}</b><br><span style="color: #55627a; font-size: 13px; line-height: 1.4; display: inline-block; margin-top: 4px;">${loc.desc}</span>`);
                     loc.markerRef = marker;
 
+                    // Define and process tags per location
                     var tags = Array.isArray(loc.tags) ? loc.tags : [loc.tags];
                     tags.forEach(function (tag) {
                         if (!categoryDefinitions[tag]) return;
                         if (!groupedLocations[tag]) {
-                            groupedLocations[tag] = { label: categoryDefinitions[tag], index: 0, pins: [] };
+                            var categoryLabel = categoryDefinitions[tag].label || categoryDefinitions[tag];
+                            var categoryColor = categoryDefinitions[tag].color || '#2A81CB';
+
+                            groupedLocations[tag] = {
+                                label: categoryLabel,
+                                color: categoryColor,
+                                index: 0,
+                                pins: []
+                            };
                         }
                         groupedLocations[tag].pins.push(loc);
                     });
@@ -151,19 +198,20 @@
                 Object.keys(categoryDefinitions).forEach(function (tag) {
                     if (!groupedLocations[tag]) return;
 
+                    var group = groupedLocations[tag];
                     var btn = document.createElement("button");
                     btn.className = "tab";
-                    btn.textContent = groupedLocations[tag].label;
+                    btn.style.setProperty('--cat-color', group.color);
+
+                    // Color bar indicator alongside category text
+                    btn.innerHTML = `<span class="tab-indicator"></span><span>${group.label}</span>`;
 
                     btn.addEventListener('click', function () {
-                        var group = groupedLocations[tag];
                         var targetPin = group.pins[group.index];
 
-                        // Panning and popup functionality
                         map.flyTo([targetPin.y, targetPin.x], 1.5, { duration: 0.5 });
                         targetPin.markerRef.openPopup();
 
-                        // Category cycling logic
                         group.index = (group.index + 1) % group.pins.length;
 
                         Array.from(legendContainer.children).forEach(c => c.setAttribute("aria-pressed", "false"));
@@ -180,7 +228,7 @@
         initializeMap();
 
         // Click-to-log Helper Function | uncomment to use
-        // map.on('click', function(e) {
+        // map.on('click', function (e) {
         //     var x = Math.round(e.latlng.lng);
         //     var y = Math.round(e.latlng.lat);
         //     console.log(`Clicked Coordinates -> y: ${y}, x: ${x}`);

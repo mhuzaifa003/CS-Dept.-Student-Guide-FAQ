@@ -1,0 +1,107 @@
+{
+  "categories": [
+    "Executive & Academic Leadership",
+    "Registrar & Academic Operations",
+    "Administration & Finance",
+    "IT & Admissions",
+    "Faculty"
+  ],
+  "contacts": [
+    {
+        "category": "Executive & Academic Leadership",
+        "name": "Dr. Mansoor Ahmed",
+        "email": "mansoor@cust.edu.pk",
+        "designation": "Vice Chancellor, VC",
+        "location": ""
+    },
+    {
+        "category": "Executive & Academic Leadership",
+        "name": "Dr. Muhammad Abdul Qadir",
+        "email": "aqadir@cust.edu.pk",
+        "designation": "Dean, Faculty of Computing",
+        "location": ""
+    },
+    {
+        "category": "Executive & Academic Leadership",
+        "name": "Dr. M. Masroor Ahmed",
+        "email": "masroor.ahmed@cust.edu.pk",
+        "designation": "Head of Department (HoD), Computer Sciences",
+        "location": ""
+    },
+    
+    {
+        "category": "Registrar & Academic Operations",
+        "name": "Dr. Tahir Hameed Ullah Khan",
+        "email": "registrar@cust.edu.pk",
+        "designation": "Registrar",
+        "location": ""
+    },
+    {
+        "category": "Registrar & Academic Operations",
+        "name": "Mr. Ahsan Razzaq",
+        "email": "dy.registrar@cust.edu.pk",
+        "designation": "Deputy Registrar",
+        "location": ""
+    },
+    {
+        "category": "Registrar & Academic Operations",
+        "name": "Mr. Hassan Mahmood Awan",
+        "email": "coe@cust.edu.pk",
+        "designation": "Controller of Examinations",
+        "location": ""
+    },
+
+    {
+        "category": "Administration & Finance",
+        "name": "Dr. Wasim Nasir",
+        "email": "wasim@cust.edu.pk",
+        "designation": "Treasurer",
+        "location": ""
+    },
+    {
+        "category": "Administration & Finance",
+        "name": "Mr. Amjad Tariq",
+        "email": "amjadtariq@cust.edu.pk",
+        "designation": "Deputy Director Admin",
+        "location": ""
+    },
+
+    {
+        "category": "IT & Admissions",
+        "name": "Mr. Qamar Zaman",
+        "email": "qamar.zaman@cust.edu.pk",
+        "designation": "Manager IT",
+        "location": ""
+    },
+    {
+        "category": "IT & Admissions",
+        "name": "Mr. Tijamal Hussain",
+        "email": "admissions@cust.edu.pk",
+        "designation": "Manager Admissions",
+        "location": ""
+    },
+
+
+    {
+        "category": "Faculty",
+        "name": "Sir Salman Ahmad",
+        "email": "salman.ahmed@cust.edu.pk",
+        "designation": "Senior Lecturer",
+        "location": "Block M, 2nd Floor"
+    },
+    {
+        "category": "Faculty",
+        "name": "Dr. Najam Aziz",
+        "email": "najam.aziz@cust.edu.pk",
+        "designation": "Assistant Professor",
+        "location": "Block M, 2nd Floor"
+    },
+    {
+        "category": "Faculty",
+        "name": "Mr. Hammad Ullah",
+        "email": "hammad.ullah@cust.edu.pk",
+        "designation": "Lab Instructor",
+        "location": ""
+    }
+  ]
+}

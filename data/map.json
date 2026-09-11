@@ -1,14 +1,15 @@
 {
     "categoryDefinitions": {
-        "administrative": "Administrative Offices",
-        "bookshop": "Bookstore & Supplies",
-        "studentServices": "Common Rooms & Student Services",
-        "libraries": "Libraries & Study Rooms",
-        "health": "Health & Wellness",
-        "dining": "Dining & Shops",
-        "parking": "Parking",
-        "religious": "Religious Facilities",
-        "recreation": "Recreation"
+        "administrative": { "label": "Administrative Offices", "color": "#E74C3C" },
+        "bookshop": { "label": "Bookstore & Supplies", "color": "#F39C12" },
+        "studentServices": { "label": "Common Rooms & Student Services", "color": "#9B59B6" },
+        "libraries": { "label": "Libraries & Study Rooms", "color": "#2980B9" },
+        "health": { "label": "Health & Wellness", "color": "#2ECC71" },
+        "dining": { "label": "Dining & Shops", "color": "#E67E22" },
+        "parking": { "label": "Parking", "color": "#546E7A" },
+        "religious": { "label": "Religious Facilities", "color": "#16A085" },
+        "recreation": { "label": "Recreation", "color": "#FF5722" }, 
+        "blocks": { "label": "Campus Blocks", "color": "#94A3B8" }
     },
 
     "locations": [
@@ -22,6 +23,12 @@
             { "name": "Riverside Bookshop", "tags": ["bookshop"], "x": 582, "y": 246, "desc": "" },
             { "name": "Faculty / Visitors Parking Lot", "tags": ["parking"], "x": 975, "y": 245, "desc": "" },
             { "name": "Student Parking Lot", "tags": ["parking"], "x": 627, "y": 484, "desc": "" },
-            { "name": "Mosque", "tags": ["religious"], "x": 811, "y": 473, "desc": "<b>Houses:</b><br>• Prayer Hall<br>• Ablution Area" }
+            { "name": "Mosque", "tags": ["religious"], "x": 811, "y": 473, "desc": "<b>Houses:</b><br>• Prayer Hall<br>• Ablution Area" },
+            { "name": "Block B", "tags": ["blocks"], "x": 607, "y": 307, "desc":"" },
+            { "name": "Block C", "tags": ["blocks"], "x": 626, "y": 385, "desc":"" },
+            { "name": "Block D", "tags": ["blocks"], "x": 644, "y": 316, "desc":"" },
+            { "name": "Block M", "tags": ["blocks"], "color": "#00E5FF", "x": 835, "y": 468, "desc":"<b>CS Department HQ</b>" },
+            { "name": "Block F", "tags": ["blocks"], "x": 797, "y": 558, "desc":"" },
+            { "name": "Block J", "tags": ["blocks"], "x": 851, "y": 576, "desc":"" }
     ]
 }

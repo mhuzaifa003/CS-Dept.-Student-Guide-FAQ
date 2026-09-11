@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Directory - CS Dept.</title>
+    <link rel="icon" type="image/x-icon" href="../files/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .contact-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .contact-card {
+            background: var(--card);
+            border: 1px solid var(--rule);
+            border-left: 4px solid var(--navy-soft);
+            border-radius: 8px;
+            padding: 20px 24px;
+            box-shadow: 0 1px 3px rgba(15, 42, 82, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+            transition: box-shadow 0.15s ease, border-color 0.15s ease;
+        }
+
+        .contact-card:hover {
+            border-color: #c7d0e0;
+            box-shadow: 0 4px 14px rgba(15, 42, 82, 0.09);
+            border-left-color: var(--red);
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: baseline;
+            gap: 16px;
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-name {
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 18px;
+            color: var(--navy);
+            margin: 0 0 4px;
+        }
+
+        .contact-designation {
+            font-size: 14px;
+            color: var(--ink-soft);
+            margin: 0 0 6px;
+        }
+
+        .contact-location {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--navy-soft);
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin: 0;
+        }
+
+        .contact-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+
+        .contact-email-action {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            background: rgba(15, 42, 82, 0.05);
+            color: var(--navy-soft);
+            padding: 8px 14px;
+            border-radius: var(--radius);
+            text-decoration: none;
+            border: 1px solid var(--rule);
+            transition: background 0.15s ease, color 0.15s ease;
+            white-space: nowrap;
+        }
+
+        .contact-email-action:hover {
+            background: var(--navy);
+            color: var(--card);
+            border-color: var(--navy);
+        }
+
+        .subtitle a {
+            color: white;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="wrap">
+            <nav class="breadcrumbs">
+                <a href="../index.html" class="eyebrow">&#129044;HOME</a>
+                <span class="eyebrow">/ CONTACT DIRECTORY</span>
+            </nav>
+            <h1 id="site-title">Department Contact Directory</h1>
+            <p class="subtitle" id="site-subtitle">Direct communication channels, offices, and personnel for key
+                department services.</p>
+            <p class="subtitle" id="site-subtitle">Not sure where a block is located? Check the <a
+                    href="map.html">map</a>.</p>
+
+            <div class="search-row">
+                <label for="search" class="visually-hidden">Search contacts</label>
+                <input type="search" id="search" placeholder="Search by name, designation, email, or office..."
+                    autocomplete="off">
+                <span class="result-count" id="result-count" aria-live="polite"></span>
+            </div>
+        </div>
+    </header>
+
+    <div class="layout wrap">
+        <aside class="sidebar">
+            <p class="sidebar-heading">Categories</p>
+            <nav class="tabs" id="tabs" aria-label="Filter by category"></nav>
+        </aside>
+
+        <main class="content">
+            <div id="contact-list" class="contact-list">
+                <p class="loading">Fetching directory…</p>
+            </div>
+            <p class="empty-state" id="empty-state" hidden>No contacts match “<span id="empty-query"></span>”. Try a
+                different keyword.</p>
+        </main>
+    </div>
+
+    <footer class="site-footer">
+        <div class="wrap footer-grid">
+            <div class="footer-col footer-brand">
+                <img src="../files/CUST.png" alt="CUST Logo" class="footer-logo">
+                <p class="footer-tagline">Supporting students every step of the way.</p>
+            </div>
+
+            <nav class="footer-col" aria-label="Quick Links">
+                <p class="footer-heading">Quick Links</p>
+                <ul>
+                    <li><a href="../files/timetable.pdf" target="_blank">Department Timetable</a></li>
+                    <li><a href="../files/important_dates.pdf" target="_blank">Dates To Remember</a></li>
+                    <li><a href="../files/course_offerings.pdf" target="_blank">Course Catalog</a></li>
+                    <li><a href="../files/datesheet.pdf" target="_blank">Exam Datesheet</a></li>
+                </ul>
+            </nav>
+
+            <nav class="footer-col" aria-label="Resources">
+                <p class="footer-heading">Resources</p>
+                <ul>
+                    <li><a href="https://tasjeel.cust.edu.pk/student/dashboard" target="_blank">Student Portal</a></li>
+                    <li><a href="https://cust.edu.pk/downloads/" target="_blank">University Downloads Page</a></li>
+                    <li><a href="https://cust.edu.pk/directory/" target="_blank">Official Contact Directory</a></li>
+                    <li><a href="contact-dir.html" target="_blank">Unofficial Contact Directory</a></li>
+                </ul>
+            </nav>
+
+            <div class="footer-col footer-support">
+                <p class="footer-heading">Support</p>
+                <p id="contact-line">Still have questions? Contact your Student Ambassador via <b><u>WhatsApp</u></b>.
+                </p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="wrap footer-bottom-inner">
+                <p class="updated" id="updated-line">Last updated 2026-09-11</p>
+                <p class="copyright">&copy; 2026 @mhuzaifa003. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const state = {
+            contacts: [],
+            activeCategory: "All",
+            query: ""
+        };
+
+        const els = {
+            tabs: document.getElementById("tabs"),
+            list: document.getElementById("contact-list"),
+            search: document.getElementById("search"),
+            resultCount: document.getElementById("result-count"),
+            emptyState: document.getElementById("empty-state"),
+            emptyQuery: document.getElementById("empty-query"),
+        };
+
+        init();
+
+        async function init() {
+            let data;
+            try {
+                const res = await fetch("contact-dir.json", { cache: "no-store" });
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                data = await res.json();
+            } catch (err) {
+                if (els.list) {
+                    els.list.innerHTML = `<p class="loading">Couldn't load contact-dir.json (${err.message}).</p>`;
+                }
+                return;
+            }
+
+            state.contacts = data.contacts || [];
+
+            assignDisplayIds(state.contacts, data.categories || []);
+            renderTabs(["All", ...(data.categories || [])]);
+            renderList();
+
+            if (els.search) {
+                els.search.addEventListener("input", (e) => {
+                    state.query = e.target.value.trim().toLowerCase();
+                    renderList();
+                });
+            }
+        }
+
+        function assignDisplayIds(contacts, categories) {
+            const prefixes = buildCategoryPrefixes(categories);
+            const counters = {};
+            contacts.forEach((item) => {
+                const prefix = prefixes[item.category] || "DIR";
+                counters[prefix] = (counters[prefix] || 0) + 1;
+                item.displayId = `${prefix}-${String(counters[prefix]).padStart(3, "0")}`;
+            });
+        }
+
+        function buildCategoryPrefixes(categories) {
+            const used = new Set();
+            const map = {};
+            categories.forEach((cat) => {
+                const words = cat.split(/[\s&]+/).filter(Boolean);
+                const base = words.length === 1
+                    ? words[0].slice(0, 3).toUpperCase()
+                    : words.slice(0, 3).map((w) => w[0]).join("").toUpperCase();
+
+                let prefix = base;
+                let n = 1;
+                while (used.has(prefix)) {
+                    n += 1;
+                    prefix = `${base}${n}`;
+                }
+                used.add(prefix);
+                map[cat] = prefix;
+            });
+            return map;
+        }
+
+        function renderTabs(categories) {
+            if (!els.tabs) return;
+            els.tabs.innerHTML = "";
+            categories.forEach((cat) => {
+                const btn = document.createElement("button");
+                btn.type = "button";
+                btn.className = "tab";
+                btn.textContent = cat;
+                btn.setAttribute("aria-pressed", cat === state.activeCategory ? "true" : "false");
+                btn.addEventListener("click", () => {
+                    state.activeCategory = cat;
+                    [...els.tabs.children].forEach((c) =>
+                        c.setAttribute("aria-pressed", c === btn ? "true" : "false")
+                    );
+                    renderList();
+                });
+                els.tabs.appendChild(btn);
+            });
+        }
+
+        function renderList() {
+            const q = state.query;
+            const filtered = state.contacts.filter((item) => {
+                const matchesCategory = state.activeCategory === "All" || item.category === state.activeCategory;
+                if (!matchesCategory) return false;
+                if (!q) return true;
+                const haystack = `${item.name} ${item.email} ${item.designation} ${item.location} ${item.category}`.toLowerCase();
+                return haystack.includes(q);
+            });
+
+            if (els.resultCount) els.resultCount.textContent = `${filtered.length} of ${state.contacts.length} contacts`;
+            if (!els.list) return;
+            els.list.innerHTML = "";
+
+            if (filtered.length === 0) {
+                if (els.emptyQuery) els.emptyQuery.textContent = state.query || state.activeCategory;
+                if (els.emptyState) els.emptyState.hidden = false;
+                return;
+            }
+            if (els.emptyState) els.emptyState.hidden = true;
+
+            filtered.forEach((item) => {
+                els.list.appendChild(buildCard(item));
+            });
+        }
+
+        function buildCard(item) {
+            const card = document.createElement("div");
+            card.className = "contact-card";
+
+            card.innerHTML = `
+                <div class="contact-info">
+                    <span class="faq-index">${escapeHtml(item.displayId || "")}</span>
+                    <div class="contact-details">
+                        <span class="faq-category">${escapeHtml(item.category || "")}</span>
+                        <h2 class="contact-name">${escapeHtml(item.name)}</h2>
+                        <p class="contact-designation">${escapeHtml(item.designation)}</p>
+                        <p class="contact-location">&#128205; ${escapeHtml(item.location)}</p>
+                    </div>
+                </div>
+                <div class="contact-actions">
+                    <a href="mailto:${escapeHtml(item.email)}" class="contact-email-action">&#9993; ${escapeHtml(item.email)}</a>
+                </div>
+            `;
+            return card;
+        }
+
+        function escapeHtml(str) {
+            const div = document.createElement("div");
+            div.textContent = str;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+
+</html>

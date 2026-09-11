@@ -238,14 +238,14 @@
                     });
                 };
 
-                drawField(name, 141, 209);
-                drawField(reg, 141, 246);
-                drawField(dateStr, 141, 279);
-                drawField(course, 141, 310);
-                drawField(section, 141, 343);
-                drawField(assign, 189, 391);
-                drawField(desc, 172, 441, 360);
-                drawField(teacher, 185, 535);
+                drawField(name, 140, 212);
+                drawField(reg, 140, 243);
+                drawField(dateStr, 138, 276);
+                drawField(course, 146, 307);
+                drawField(section, 146, 338);
+                drawField(assign, 189, 370);
+                drawField(desc, 172, 430, 360);
+                drawField(teacher, 175, 528);
 
                 const pdfBytes = await pdfDoc.save();
                 const blob = new Blob([pdfBytes], { type: 'application/pdf' });
