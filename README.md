@@ -11,9 +11,9 @@ This documentation is specifically written for future Student Ambassadors and ad
 This interactive website was deliberately designed without complex build tools, ensuring that anyone stepping into the ambassador role can easily update the content and maintain the codebase with basic web development knowledge (HTML, CSS, JS).
 
 ### 📂 Architecture & File Structure
-*   **`index.html`**: The main dashboard housing the search input, category sidebar, dynamic FAQ list container, and footer navigation.
-*   **`app.js`**: The core logic controller that fetches data from `faq.json`, auto-generates display IDs (e.g., `GEN-001`), renders category tabs, and powers the live search filtering.
-*   **`faq.json`**: The central data store containing the page metadata (like the last updated date) and an array of categorized questions alongside their HTML-formatted answers.
+*   **`index.html`**: The main dashboard houses links to all other pages for the website (Referred to as 'features').
+*   **`faq.html & faq.json`**: The core logic controller that fetches data from `faq.json`, auto-generates display IDs (e.g., `GEN-001`), renders category tabs, and powers the live search filtering.
+*   **`faq`**: The central data store containing the page metadata (like the last updated date) and an array of categorized questions alongside their HTML-formatted answers.
 *   **`styles.css`**: The global stylesheet defining the university color palette, typography, and responsive grid layout that adapts to mobile screens.
 *   **`map.html`**: A standalone interactive map page utilizing the Leaflet.js library (`L.CRS.Simple`) to overlay the custom `campus-map.png` onto a coordinate system.
 

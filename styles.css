@@ -545,6 +545,16 @@ body {
   border-radius: 50%; 
 }
 
+/* ----- GLOBAL Styling ----- */
+.site-header a.eyebrow {
+  color: var(--red);
+  text-decoration: underline;
+  transition: opacity 0.15s ease;
+}
+
+.site-header a.eyebrow:hover {
+  opacity: 0.8;
+}
 
 /* Index Page Specific Styling */
 .countdown-banner {
@@ -589,3 +599,4 @@ body {
         gap: 6px;
     }
 }
+
