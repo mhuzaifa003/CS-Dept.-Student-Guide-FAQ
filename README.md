@@ -71,7 +71,9 @@ Because most pages fetch their data asynchronously (`fetch('...json')`), opening
 
 1. Fork and clone the repository to your machine.
 2. Start a local development server in the project directory, e.g.:
-   ```bash python -m http.server 8000```
+   ```bash 
+   python -m http.server 8000
+   ```
 3. Open `http://localhost:8000` (or your chosen port) in your browser.
 
 ---

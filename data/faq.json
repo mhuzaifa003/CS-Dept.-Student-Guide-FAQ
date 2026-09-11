@@ -1,12 +1,4 @@
 {
-  "meta": {
-    "department": "Computer Science",
-    "title": "Student Guide & FAQ",
-    "subtitle": "A growing library of answers to commonly asked questions and general guidance for students — accessible and up-to-date to fill gaps when needed.",
-    "contact": "Still have questions? Contact your Student Ambassador via <b><u>WhatsApp</u></b>.",
-    "lastUpdated": "2026-09-08"
-  },
-
   "categories": [
     "University Policies & Guidelines",
     "Campus Facilities & Services",

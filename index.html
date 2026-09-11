@@ -12,6 +12,51 @@
         href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .countdown-banner {
+            background: var(--red);
+            color: white;
+            text-align: center;
+            padding: 12px 24px;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            display: none;
+            /* Hides the banner by default unless JS calls for it */
+        }
+
+        .countdown-banner span,
+        .countdown-banner a {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-left: 10px;
+        }
+
+        .countdown-banner a {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .flashing-text {
+            animation: blinker 1s linear 2;
+        }
+
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .countdown-banner span {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -107,11 +152,16 @@
     </main>
 
     <footer class="site-footer">
-        <div class="wrap footer-grid" style="grid-template-columns: 1fr;">
-            <div class="footer-col footer-about" style="text-align: center;">
-                <p>Created by the CS Department Student Community.<br>This website is made by third-parties, while some
-                    of the content used is part of the university's official materials.<br>No sort of tracking is done,
-                    generations are done locally within your browser. Powered by GitHub Pages.</p>
+        <div class="wrap footer-grid" style="grid-template-columns: 1fr; justify-items: center; text-align: center;">
+            <div class="footer-col footer-about" style="text-align: center; max-width: 600px;">
+                <p>Developed independently by the CS Department Student Community. While some materials incorporate
+                    official university content, this is a third-party resource.</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="wrap footer-bottom-inner" style="justify-content: center; text-align: center;">
+                <p class="copyright">&copy; 2026 @mhuzaifa003. All rights reserved.</p>
             </div>
         </div>
     </footer>

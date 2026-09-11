@@ -12,7 +12,7 @@
     <script src="https://unpkg.com/pdf-lib@1.4.0/dist/pdf-lib.min.js"></script>
     <style>
         .generator-container {
-            max-width: 600px;
+            max-width: 860px;
             margin: 40px auto;
             padding: 0 20px;
         }
@@ -21,12 +21,29 @@
             background: var(--card);
             border: 1px solid var(--rule);
             border-radius: 8px;
-            padding: 30px;
+            padding: 35px;
             box-shadow: 0 4px 14px rgba(15, 42, 82, 0.09);
         }
 
+        /* Two-column form grid layout */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        /* Span full width for elements that need it */
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
         .form-group {
-            margin-bottom: 16px;
+            margin-bottom: 0;
+        }
+
+        /* Add spacing back specifically for stacked rows or keep grid gaps handling it */
+        .form-grid .form-group {
+            margin-bottom: 18px;
         }
 
         .form-group label {
@@ -50,7 +67,7 @@
 
         .form-group textarea {
             resize: vertical;
-            height: 80px;
+            height: 90px;
         }
 
         .btn-download {
@@ -76,12 +93,18 @@
             color: white;
             text-decoration: bold, underline;
         }
+
+        @media (max-width: 700px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 
 <body>
     <header class="site-header">
-        <div class="wrap" style="max-width: 600px; margin: 0 auto; padding: 0 20px;">
+        <div class="wrap">
             <nav class="breadcrumbs">
                 <a href="../index.html" class="eyebrow">&#129044;HOME</a>
                 <span class="eyebrow">/ TOOLS</span>
@@ -96,49 +119,86 @@
         <div class="generator-container">
             <div class="controls-card">
                 <form id="pdf-form" onsubmit="generatePDF(event)">
-                    <div class="form-group">
-                        <label>Student Name</label>
-                        <input type="text" id="in-name" required placeholder="E.g. Muhammad Huzaifa">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Student Name</label>
+                            <input type="text" id="in-name" required placeholder="E.g. Muhammad Huzaifa">
+                        </div>
+                        <div class="form-group">
+                            <label for="in-reg">Registration ID</label>
+                            <input type="text" id="in-reg" required placeholder="E.g. BCS123456">
+                        </div>
+                        <div class="form-group">
+                            <label>Date</label>
+                            <input type="date" id="in-date" required placeholder="E.g. Month/Date/Year">
+                        </div>
+                        <div class="form-group">
+                            <label>Course Title</label>
+                            <input type="text" id="in-course" required placeholder="E.g. Introduction to Programming">
+                        </div>
+                        <div class="form-group">
+                            <label>Section</label>
+                            <input type="text" id="in-section" required placeholder="E.g. 1, 2, 3">
+                        </div>
+                        <div class="form-group">
+                            <label>Assignment No.</label>
+                            <input type="text" id="in-assign" required placeholder="E.g. 1, 2, 3, 4">
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Description / Topic</label>
+                            <textarea id="in-desc" required
+                                placeholder="Assignment description... Note: Too long of a description may cause text clipping"></textarea>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Submitted To</label>
+                            <input type="text" id="in-teacher" required>
+                        </div>
+                        <div class="form-group full-width" style="margin-top: 5px;">
+                            <button type="submit" class="btn-download" id="submit-btn">Download Title Page</button>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="in-reg">Registration ID</label>
-                        <input type="text" id="in-reg" required placeholder="E.g. BCS123456">
-                    </div>
-                    <div class="form-group">
-                        <label>Date</label>
-                        <input type="date" id="in-date" required placeholder="E.g. Month/Date/Year">
-                    </div>
-                    <div class="form-group">
-                        <label>Course Title</label>
-                        <input type="text" id="in-course" required placeholder="E.g. Introduction to Programming">
-                    </div>
-                    <div class="form-group">
-                        <label>Section</label>
-                        <input type="text" id="in-section" required placeholder="E.g. 1, 2, 3">
-                    </div>
-                    <div class="form-group">
-                        <label>Assignment No.</label>
-                        <input type="text" id="in-assign" required placeholder="E.g. 1, 2, 3, 4">
-                    </div>
-                    <div class="form-group">
-                        <label>Description / Topic</label>
-                        <textarea id="in-desc" required
-                            placeholder="Assignment description... Note: Too long of a description may cause text clipping"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Submitted To</label>
-                        <input type="text" id="in-teacher" required>
-                    </div>
-                    <button type="submit" class="btn-download" id="submit-btn">Download Title Page</button>
                 </form>
             </div>
         </div>
     </main>
 
     <footer class="site-footer">
-        <div class="wrap footer-grid" style="grid-template-columns: 1fr;">
-            <div class="footer-col footer-about" style="text-align: center;">
-                <p>Created by the CS Department Student Community.</p>
+        <div class="wrap footer-grid">
+            <div class="footer-col footer-brand">
+                <img src="../files/CUST.png" alt="CUST Logo" class="footer-logo">
+                <p class="footer-tagline">Supporting students every step of the way.</p>
+            </div>
+
+            <nav class="footer-col" aria-label="Quick Links">
+                <p class="footer-heading">Quick Links</p>
+                <ul>
+                    <li><a href="../files/timetable.pdf" target="_blank">Department Timetable</a></li>
+                    <li><a href="../files/important_dates.pdf" target="_blank">Dates To Remember</a></li>
+                    <li><a href="../files/course_offerings.pdf" target="_blank">Course Catalog</a></li>
+                    <li><a href="../files/datesheet.pdf" target="_blank">Exam Datesheet</a></li>
+                </ul>
+            </nav>
+
+            <nav class="footer-col" aria-label="Resources">
+                <p class="footer-heading">Resources</p>
+                <ul>
+                    <li><a href="https://tasjeel.cust.edu.pk/student/dashboard" target="_blank">Student Portal</a></li>
+                    <li><a href="https://cust.edu.pk/directory/" target="_blank">University Contact Directory</a></li>
+                    <li><a href="https://cust.edu.pk/downloads/" target="_blank">Downloads</a></li>
+                </ul>
+            </nav>
+
+            <div class="footer-col footer-about">
+                <p class="footer-heading">Support</p>
+                <p id="contact-line">Still have questions? Contact your Student Ambassador via <a href="#"
+                        target="_blank">WhatsApp</a>.</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="wrap footer-bottom-inner">
+                <p class="updated" id="updated-line">Last updated 2026-09-11</p>
+                <p class="copyright">&copy; 2026 @mhuzaifa003. All rights reserved.</p>
             </div>
         </div>
     </footer>
