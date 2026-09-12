@@ -12,110 +12,12 @@
         href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="../styles.css">
-    <style>
-        .contact-list {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
-
-        .contact-card {
-            background: var(--card);
-            border: 1px solid var(--rule);
-            border-left: 4px solid var(--navy-soft);
-            border-radius: 8px;
-            padding: 20px 24px;
-            box-shadow: 0 1px 3px rgba(15, 42, 82, 0.06);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-            flex-wrap: wrap;
-            transition: box-shadow 0.15s ease, border-color 0.15s ease;
-        }
-
-        .contact-card:hover {
-            border-color: #c7d0e0;
-            box-shadow: 0 4px 14px rgba(15, 42, 82, 0.09);
-            border-left-color: var(--red);
-        }
-
-        .contact-info {
-            display: flex;
-            align-items: baseline;
-            gap: 16px;
-            flex: 1;
-            min-width: 250px;
-        }
-
-        .contact-details {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .contact-name {
-            font-family: var(--font-display);
-            font-weight: 600;
-            font-size: 18px;
-            color: var(--navy);
-            margin: 0 0 4px;
-        }
-
-        .contact-designation {
-            font-size: 14px;
-            color: var(--ink-soft);
-            margin: 0 0 6px;
-        }
-
-        .contact-location {
-            font-family: var(--font-mono);
-            font-size: 12px;
-            color: var(--navy-soft);
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            margin: 0;
-        }
-
-        .contact-actions {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 8px;
-        }
-
-        .contact-email-action {
-            font-family: var(--font-mono);
-            font-size: 13px;
-            background: rgba(15, 42, 82, 0.05);
-            color: var(--navy-soft);
-            padding: 8px 14px;
-            border-radius: var(--radius);
-            text-decoration: none;
-            border: 1px solid var(--rule);
-            transition: background 0.15s ease, color 0.15s ease;
-            white-space: nowrap;
-            cursor: pointer;
-            display: inline-block;
-        }
-
-        .contact-email-action:hover {
-            background: var(--navy);
-            color: var(--card);
-            border-color: var(--navy);
-        }
-
-        .subtitle a {
-            color: white;
-            text-decoration: underline;
-        }
-    </style>
 </head>
 
 <body>
     <header class="site-header">
         <div class="wrap">
-            <nav class="breadcrumbs">
+            <nav class="breadcrumbs" aria-label="Breadcrumbs">
                 <a href="../index.html" class="eyebrow">&#129044;HOME</a>
                 <span class="eyebrow">/ CONTACT DIRECTORY</span>
             </nav>
@@ -332,7 +234,6 @@
                 </div>
             `;
 
-            // Attach copy-to-clipboard functionality to the email UI element
             const copyBtn = card.querySelector(".copy-email-btn");
             copyBtn.addEventListener("click", () => {
                 navigator.clipboard.writeText(item.email).then(() => {

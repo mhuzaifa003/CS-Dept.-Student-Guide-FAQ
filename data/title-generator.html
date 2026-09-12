@@ -9,103 +9,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="../styles.css">
-    <script src="https://unpkg.com/pdf-lib@1.4.0/dist/pdf-lib.min.js"></script>
-    <style>
-        .generator-container {
-            max-width: 860px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        .controls-card {
-            background: var(--card);
-            border: 1px solid var(--rule);
-            border-radius: 8px;
-            padding: 35px;
-            box-shadow: 0 4px 14px rgba(15, 42, 82, 0.09);
-        }
-
-        /* Two-column form grid layout */
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        /* Span full width for elements that need it */
-        .form-group.full-width {
-            grid-column: 1 / -1;
-        }
-
-        .form-group {
-            margin-bottom: 0;
-        }
-
-        /* Add spacing back specifically for stacked rows or keep grid gaps handling it */
-        .form-grid .form-group {
-            margin-bottom: 18px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 6px;
-            color: var(--navy);
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid var(--rule);
-            border-radius: var(--radius);
-            font-family: 'Times New Roman', Times, serif;
-            font-size: 15px;
-            box-sizing: border-box;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            height: 90px;
-        }
-
-        .btn-download {
-            background: var(--navy);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: var(--radius);
-            cursor: pointer;
-            font-weight: 600;
-            width: 100%;
-            font-size: 15px;
-            margin-top: 10px;
-            transition: background 0.15s ease;
-        }
-
-        .btn-download:hover {
-            background: var(--navy-soft);
-        }
-
-        a:link,
-        a:visited {
-            color: white;
-            text-decoration: bold, underline;
-        }
-
-        @media (max-width: 700px) {
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <script src="https://unpkg.com/pdf-lib@1.4.0/dist/pdf-lib.min.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <header class="site-header">
         <div class="wrap">
-            <nav class="breadcrumbs">
+            <nav class="breadcrumbs" aria-label="Breadcrumbs">
                 <a href="../index.html" class="eyebrow">&#129044;HOME</a>
                 <span class="eyebrow">/ TOOLS</span>
             </nav>
@@ -121,7 +31,7 @@
                 <form id="pdf-form" onsubmit="generatePDF(event)">
                     <div class="form-grid">
                         <div class="form-group">
-                            <label>Student Name</label>
+                            <label for="in-name">Student Name</label>
                             <input type="text" id="in-name" required placeholder="E.g. Muhammad Huzaifa">
                         </div>
                         <div class="form-group">
@@ -129,28 +39,28 @@
                             <input type="text" id="in-reg" required placeholder="E.g. BCS123456">
                         </div>
                         <div class="form-group">
-                            <label>Date</label>
+                            <label for="in-date">Date</label>
                             <input type="date" id="in-date" required placeholder="E.g. Month/Date/Year">
                         </div>
                         <div class="form-group">
-                            <label>Course Title</label>
+                            <label for="in-course">Course Title</label>
                             <input type="text" id="in-course" required placeholder="E.g. Introduction to Programming">
                         </div>
                         <div class="form-group">
-                            <label>Section</label>
+                            <label for="in-section">Section</label>
                             <input type="text" id="in-section" required placeholder="E.g. 1, 2, 3">
                         </div>
                         <div class="form-group">
-                            <label>Assignment No.</label>
+                            <label for="in-assign">Assignment No.</label>
                             <input type="text" id="in-assign" required placeholder="E.g. 1, 2, 3, 4">
                         </div>
                         <div class="form-group full-width">
-                            <label>Description / Topic</label>
+                            <label for="in-desc">Description / Topic</label>
                             <textarea id="in-desc" required
                                 placeholder="Assignment description... Note: Too long of a description may cause text clipping"></textarea>
                         </div>
                         <div class="form-group full-width">
-                            <label>Submitted To</label>
+                            <label for="in-teacher">Submitted To</label>
                             <input type="text" id="in-teacher" required>
                         </div>
                         <div class="form-group full-width" style="margin-top: 5px;">
@@ -183,15 +93,14 @@
                 <p class="footer-heading">Resources</p>
                 <ul>
                     <li><a href="https://tasjeel.cust.edu.pk/student/dashboard" target="_blank">Student Portal</a></li>
-                    <li><a href="https://cust.edu.pk/directory/" target="_blank">University Contact Directory</a></li>
-                    <li><a href="https://cust.edu.pk/downloads/" target="_blank">Downloads</a></li>
+                    <li><a href="https://cust.edu.pk/downloads/" target="_blank">University Downloads Page</a></li>
+                    <li><a href="https://cust.edu.pk/directory/" target="_blank">Official Contact Directory</a></li>
                 </ul>
             </nav>
 
-            <div class="footer-col footer-about">
+            <div class="footer-col footer-support">
                 <p class="footer-heading">Support</p>
-                <p id="contact-line">Still have questions? Contact your Student Ambassador via <a href="#"
-                        target="_blank">WhatsApp</a>.</p>
+                <p id="contact-line">Still have questions? Contact your Student Ambassador via <b>WhatsApp</b>.</p>
             </div>
         </div>
 
