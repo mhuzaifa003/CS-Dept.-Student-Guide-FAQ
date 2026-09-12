@@ -13,12 +13,13 @@
     },
 
     "locations": [
-            { "name": "Block A", "tags": ["libraries"], "x": 591, "y": 370, "desc": "<b>Houses:</b><br>• Computer Lab<br>• Main Library<br>• Study Room" },
-            { "name": "Block E", "tags": ["administrative"], "x": 796, "y": 454, "desc": "<b>Houses:</b><br>• Student Affairs Office<br>• Admissions Office" },
-            { "name": "Block K", "tags": ["studentServices"], "x": 838, "y": 535, "desc": "<b>Houses:</b><br>• Girl's Common Room" },
-            { "name": "Block X", "tags": ["recreation"], "x": 795, "y": 622, "desc": "<b>Houses:</b><br>• Sports Room<br>• Gymnasium" },
-            { "name": "Block H", "tags": ["libraries"], "x": 853, "y": 615, "desc": "<b>Houses:</b><br>• Library<br>• Study Room" },
-            { "name": "Block I", "tags": ["health"], "x": 805, "y": 639, "desc": "<b>Houses:</b><br>• Infirmary" },
+            { "name": "Block M", "tags": ["blocks"], "color": "#00E5FF", "x": 835, "y": 468, "desc":"<b>CS Department HQ</b>" },
+            { "name": "Block A", "tags": ["libraries", "blocks"], "x": 591, "y": 370, "desc": "<b>Houses:</b><br>• Computer Lab<br>• Main Library<br>• Study Room" },
+            { "name": "Block E", "tags": ["administrative", "blocks"], "x": 796, "y": 454, "desc": "<b>Houses:</b><br>• Student Affairs Office<br>• Admissions Office" },
+            { "name": "Block K", "tags": ["studentServices", "blocks"], "x": 838, "y": 535, "desc": "<b>Houses:</b><br>• Girl's Common Room" },
+            { "name": "Block X", "tags": ["recreation", "blocks"], "x": 795, "y": 622, "desc": "<b>Houses:</b><br>• Sports Room<br>• Gymnasium" },
+            { "name": "Block H", "tags": ["libraries", "blocks"], "x": 853, "y": 615, "desc": "<b>Houses:</b><br>• Library<br>• Study Room" },
+            { "name": "Block I", "tags": ["health", "blocks"], "x": 805, "y": 639, "desc": "<b>Houses:</b><br>• Infirmary" },
             { "name": "Cafeteria", "tags": ["dining", "bookshop"], "x": 718, "y": 543, "desc": "<b>Houses:</b><br>• Indoor Dining Area<br>• Book Store" },
             { "name": "Riverside Bookshop", "tags": ["bookshop"], "x": 582, "y": 246, "desc": "" },
             { "name": "Faculty / Visitors Parking Lot", "tags": ["parking"], "x": 975, "y": 245, "desc": "" },
@@ -27,7 +28,6 @@
             { "name": "Block B", "tags": ["blocks"], "x": 607, "y": 307, "desc":"" },
             { "name": "Block C", "tags": ["blocks"], "x": 626, "y": 385, "desc":"" },
             { "name": "Block D", "tags": ["blocks"], "x": 644, "y": 316, "desc":"" },
-            { "name": "Block M", "tags": ["blocks"], "color": "#00E5FF", "x": 835, "y": 468, "desc":"<b>CS Department HQ</b>" },
             { "name": "Block F", "tags": ["blocks"], "x": 797, "y": 558, "desc":"" },
             { "name": "Block J", "tags": ["blocks"], "x": 851, "y": 576, "desc":"" }
     ]

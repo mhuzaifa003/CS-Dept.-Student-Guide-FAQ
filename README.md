@@ -69,16 +69,21 @@ The site is deliberately built without frameworks or a build step, so anyone ste
 
 Because most pages fetch their data asynchronously (`fetch('...json')`), opening the files directly from your file system will throw a CORS error and the dynamic content won't load. To test changes locally before pushing:
 
-1. Fork and clone the repository to your machine.
-2. Start a local development server in the project directory, e.g.:
+1. Start a local development server in the project directory, e.g.:
    ```bash 
    python -m http.server 8000
    ```
-3. Open `http://localhost:8000` (or your chosen port) in your browser.
+2. Open `http://localhost:8000` (or your chosen port) in your browser.
+3. Always test your changes locally before pushing an update publicly.
 
 ---
 
 ## 🤝 Content & Maintenance Guide
+
+### 💡 General Tips
+**Files:** All
+
+- Always update the value of `<p class="updated" id="updated-line">` inside the `div.footer-bottom` in `body/footer` of the `HTML` file you're edited, along with reflecting the same change on `index.html`.
 
 ### 🏠 Home Page & Notification Banner
 **Files:** `index.html`, `data/index.json`
@@ -98,7 +103,6 @@ Because most pages fetch their data asynchronously (`fetch('...json')`), opening
 - Structure:
   ```json
   {
-    "meta": { "title": "...", "subtitle": "...", "contact": "HTML allowed", "lastUpdated": "YYYY-MM-DD" },
     "categories": ["Category A", "Category B"],
     "faqs": [
       { "category": "Category A", "question": "...", "answer": "<p>HTML allowed here</p>" }
@@ -118,9 +122,12 @@ To add a pin:
 3. **Re-comment the helper function** before pushing to production; it's a debug-only tool.
 4. Add a new object to the `locations` array in `map.json` using the coordinates you copied:
    ```json
-   { "name": "Block Z", "tags": ["administrative"], "x": 700, "y": 400, "desc": "<b>Houses:</b><br>• Office Name" }
+   { "name": "PIN_NAME", "tags": ["tagKey"], "color": "HEX_CODE (Color is Optional - if Missing, Category Color will be used)", "x": 000, "y": 9999, "desc": "<b>Houses:</b><br>• Key Area" }
    ```
-5. If the pin needs a new category, add it to `categoryDefinitions` first (`"tagKey": "Sidebar Label"`) — its position there also controls where it appears in the legend.
+5. If the pin needs a new category, add it to `categoryDefinitions` first - its position there also controls where it appears in the legend:
+   ```json
+   "blocks": { "tagKey": "CATEGORY_NAME", "color": "HEX_CODE (Color is Mandatory, used as a default for that category and for visual flair)" }
+   ```
 
 If `campus-map.png` is ever replaced, update the `w` and `h` values in `map.html`'s script to match the new image's exact pixel dimensions, or every pin will drift out of place.
 
@@ -161,6 +168,21 @@ Rebuild this once per semester using the course-offerings PDF as your source of 
 - This only needs work when the university changes the physical title page template.
 - If that happens, replace `files/Title Page.pdf`, then re-measure and update the x/y coordinates in each `drawField(...)` call inside the script block so text lands correctly on the new template.
 
+### 📒 Contact Directory
+**Files:** `data/contact-dir.html`, `data/contact-dir.json`
+
+- Edit `contact-dir.json` to add, edit, or remove Contact Information. The order of items in the `categories` and `contacts` arrays controls ther display order on the site - reorder by moving an entry's position in the file.
+- Structure:
+  ```json
+  {
+    "categories": ["Category A", "Category B"],
+    "contacts": [
+      { "category": "Category A", "name": "...", "email": "Official @cust.edu.pk Email Address", "designation": "...", "location": "..." }
+    ]
+  }
+  ```
+- The `email` field becomes a `mailto:` link on the front-end.
+- The small ID tags next to each contact (e.g. `FAC-001`) are generated automatically from each category's initials — you never need to number them by hand.
 ---
 
 Originally established by Muhammad Huzaifa (mhuzaifa003) for the CUST CS Student Body.

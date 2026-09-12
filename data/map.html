@@ -99,7 +99,6 @@
                     <li><a href="https://tasjeel.cust.edu.pk/student/dashboard" target="_blank">Student Portal</a></li>
                     <li><a href="https://cust.edu.pk/downloads/" target="_blank">University Downloads Page</a></li>
                     <li><a href="https://cust.edu.pk/directory/" target="_blank">Official Contact Directory</a></li>
-                    <li><a href="contact-dir.html" target="_blank">Unofficial Contact Directory</a></li>
                 </ul>
             </nav>
 
@@ -111,7 +110,7 @@
 
         <div class="footer-bottom">
             <div class="wrap footer-bottom-inner">
-                <p class="updated" id="updated-line">Last updated 2026-09-11</p>
+                <p class="updated" id="updated-line">Last updated 2026-09-12</p>
                 <p class="copyright">&copy; 2026 @mhuzaifa003. All rights reserved.</p>
             </div>
         </div>
@@ -127,6 +126,7 @@
             attributionControl: false
         });
 
+        // Dimensions must match the raw dimensions for campus-map.png
         var w = 1640;
         var h = 824;
         var bounds = [[0, 0], [h, w]];
@@ -147,7 +147,6 @@
 
                 var groupedLocations = {};
 
-                // Generates custom SVG pin icons
                 function createPinIcon(color = '#2A81CB') {
                     return L.divIcon({
                         className: 'custom-pin',
@@ -161,11 +160,9 @@
                     });
                 }
 
-                // Populates pins and groups them by category
                 locations.forEach(function (loc) {
                     var primaryTag = Array.isArray(loc.tags) ? loc.tags[0] : loc.tags;
 
-                    // Fetch color from location object, category definition, or fallback to default blue
                     var pinColor = loc.color
                         || (categoryDefinitions[primaryTag] && categoryDefinitions[primaryTag].color)
                         || '#2A81CB';
@@ -174,7 +171,6 @@
                     marker.bindPopup(`<b>${loc.name}</b><br><span style="color: #55627a; font-size: 13px; line-height: 1.4; display: inline-block; margin-top: 4px;">${loc.desc}</span>`);
                     loc.markerRef = marker;
 
-                    // Define and process tags per location
                     var tags = Array.isArray(loc.tags) ? loc.tags : [loc.tags];
                     tags.forEach(function (tag) {
                         if (!categoryDefinitions[tag]) return;
@@ -193,7 +189,6 @@
                     });
                 });
 
-                // Generates Sidebar Categories list
                 var legendContainer = document.getElementById('legend-tabs');
                 Object.keys(categoryDefinitions).forEach(function (tag) {
                     if (!groupedLocations[tag]) return;
@@ -203,7 +198,6 @@
                     btn.className = "tab";
                     btn.style.setProperty('--cat-color', group.color);
 
-                    // Color bar indicator alongside category text
                     btn.innerHTML = `<span class="tab-indicator"></span><span>${group.label}</span>`;
 
                     btn.addEventListener('click', function () {

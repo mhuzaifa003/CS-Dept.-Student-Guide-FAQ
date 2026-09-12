@@ -95,6 +95,8 @@
             border: 1px solid var(--rule);
             transition: background 0.15s ease, color 0.15s ease;
             white-space: nowrap;
+            cursor: pointer;
+            display: inline-block;
         }
 
         .contact-email-action:hover {
@@ -121,7 +123,7 @@
             <p class="subtitle" id="site-subtitle">Direct communication channels, offices, and personnel for key
                 department services.</p>
             <p class="subtitle" id="site-subtitle">Not sure where a block is located? Check the <a
-                    href="map.html">map</a>.</p>
+                    href="map.html">Campus Map</a>.</p>
 
             <div class="search-row">
                 <label for="search" class="visually-hidden">Search contacts</label>
@@ -170,7 +172,6 @@
                     <li><a href="https://tasjeel.cust.edu.pk/student/dashboard" target="_blank">Student Portal</a></li>
                     <li><a href="https://cust.edu.pk/downloads/" target="_blank">University Downloads Page</a></li>
                     <li><a href="https://cust.edu.pk/directory/" target="_blank">Official Contact Directory</a></li>
-                    <li><a href="contact-dir.html" target="_blank">Unofficial Contact Directory</a></li>
                 </ul>
             </nav>
 
@@ -183,7 +184,7 @@
 
         <div class="footer-bottom">
             <div class="wrap footer-bottom-inner">
-                <p class="updated" id="updated-line">Last updated 2026-09-11</p>
+                <p class="updated" id="updated-line">Last updated 2026-09-12</p>
                 <p class="copyright">&copy; 2026 @mhuzaifa003. All rights reserved.</p>
             </div>
         </div>
@@ -326,9 +327,25 @@
                     </div>
                 </div>
                 <div class="contact-actions">
-                    <a href="mailto:${escapeHtml(item.email)}" class="contact-email-action">&#9993; ${escapeHtml(item.email)}</a>
+                    <button type="button" class="contact-email-action copy-email-btn" data-email="${escapeHtml(item.email)}">&#9993; ${escapeHtml(item.email)}</button>
+                    <a href="mailto:${escapeHtml(item.email)}" class="contact-email-action">&#9992; Send mail</a>
                 </div>
             `;
+
+            // Attach copy-to-clipboard functionality to the email UI element
+            const copyBtn = card.querySelector(".copy-email-btn");
+            copyBtn.addEventListener("click", () => {
+                navigator.clipboard.writeText(item.email).then(() => {
+                    const originalText = copyBtn.innerHTML;
+                    copyBtn.innerHTML = "&#10003; Copied!";
+                    setTimeout(() => {
+                        copyBtn.innerHTML = originalText;
+                    }, 1500);
+                }).catch(err => {
+                    console.error("Failed to copy email: ", err);
+                });
+            });
+
             return card;
         }
 
