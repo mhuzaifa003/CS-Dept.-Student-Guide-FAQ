@@ -18,6 +18,6 @@
         { "source": "/CS-Dept.-Student-Guide-FAQ/files/important_dates.pdf", "destination": "/files/important_dates.pdf" },
         { "source": "/CS-Dept.-Student-Guide-FAQ/files/course_offerings.pdf", "destination": "/files/course_offerings.pdf" },
         { "source": "/CS-Dept.-Student-Guide-FAQ/files/datesheet.pdf", "destination": "/files/datesheet.pdf" },
-        { "source": "/files/CUST Banner.webp", "destination": "files/CUST Banner.webp" }
+        { "source": "/CS-Dept.-Student-Guide-FAQ/files/CUST Banner.webp", "destination": "/files/CUST Banner.webp" }
     ]
 }

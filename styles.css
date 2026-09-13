@@ -86,7 +86,7 @@ body {
   content: "";
   position: absolute;
   inset: -20px;
-  background: url('/files/CUST Banner.webp') center/cover no-repeat;
+  background: url('/CS-Dept.-Student-Guide-FAQ/files/CUST Banner.webp') center/cover no-repeat;
   filter: blur(8px);
   z-index: -2;
 }
