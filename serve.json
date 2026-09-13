@@ -1,0 +1,23 @@
+{ 
+    "trailingSlash": true, 
+    "rewrites": [
+        { "source": "/CS-Dept.-Student-Guide-FAQ", "destination": "/index.html" },
+        { "source": "/file-archive", "destination": "/data/archive.html" },
+        { "source": "/academic-calendar", "destination": "/data/calendar.html" },
+        { "source": "/contact-directory", "destination": "/data/contact-dir.html" },
+        { "source": "/courses", "destination": "/data/course-visualizer.html" },
+        { "source": "/frequently-asked-questions", "destination": "/data/faq.html" },
+        { "source": "/campus-map", "destination": "/data/map.html" },
+        { "source": "/title-page-editor", "destination": "/data/title-generator.html" },
+
+        { "source": "/CS-Dept.-Student-Guide-FAQ/styles.css", "destination": "/styles.css" },
+        { "source": "/CS-Dept.-Student-Guide-FAQ/files/favicon.ico", "destination": "/files/favicon.ico"},
+        { "source": "/CS-Dept.-Student-Guide-FAQ/files/CUST.png", "destination": "/files/CUST.png" },
+        { "source": "/CS-Dept.-Student-Guide-FAQ/files/campus-map.png", "destination": "/files/campus-map.png" },
+        { "source": "/CS-Dept.-Student-Guide-FAQ/files/timetable.pdf", "destination": "/files/timetable.pdf" },
+        { "source": "/CS-Dept.-Student-Guide-FAQ/files/important_dates.pdf", "destination": "/files/important_dates.pdf" },
+        { "source": "/CS-Dept.-Student-Guide-FAQ/files/course_offerings.pdf", "destination": "/files/course_offerings.pdf" },
+        { "source": "/CS-Dept.-Student-Guide-FAQ/files/datesheet.pdf", "destination": "/files/datesheet.pdf" },
+        { "source": "/files/CUST Banner.webp", "destination": "files/CUST Banner.webp" }
+    ]
+}
