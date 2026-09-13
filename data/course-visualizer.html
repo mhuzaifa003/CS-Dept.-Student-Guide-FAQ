@@ -1,3 +1,7 @@
+---
+permalink: /courses/
+---
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +20,7 @@
     <header class="site-header">
         <div class="wrap">
             <nav class="breadcrumbs" aria-label="Breadcrumbs">
-                <a href="../index.html" class="eyebrow">&#129044;HOME</a>
+                <a href="home/" class="eyebrow">&#129044;HOME</a>
                 <span class="eyebrow">/ ACADEMICS</span>
             </nav>
             <h1>Course Requirement Visualizer</h1>
@@ -596,7 +600,7 @@
 
         async function loadCourses() {
             try {
-                const response = await fetch("course-requirements.json", { cache: "no-store" });
+                const response = await fetch("course-visualizer.json", { cache: "no-store" });
                 if (!response.ok) throw new Error("JSON request failed");
                 const parsed = await response.json();
                 if (!Array.isArray(parsed) || !parsed.length) throw new Error("Invalid course data");

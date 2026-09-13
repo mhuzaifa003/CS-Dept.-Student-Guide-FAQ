@@ -37,7 +37,7 @@ The site is deliberately built without frameworks or a build step, so anyone ste
 │   ├── map.html
 │   ├── map.json
 │   ├── course-visualizer.html
-│   ├── course-requirements.json
+│   ├── course-visualzer.json
 │   ├── title-generator.html
 │   └── archive.html
 │
@@ -58,7 +58,7 @@ The site is deliberately built without frameworks or a build step, so anyone ste
 | `index.html` | `data/index.json` | Landing dashboard + the deadline countdown banner |
 | `data/faq.html` | `data/faq.json` | Searchable, categorized Q&A knowledge base |
 | `data/map.html` | `data/map.json` | Leaflet.js map with categorized, clickable pins |
-| `data/course-visualizer.html` | `data/course-requirements.json` | Curriculum dependency graph |
+| `data/course-visualizer.html` | `data/course-visualizer.json` | Curriculum dependency graph |
 | `data/archive.html` | — | Tabbed Google Drive embeds (past papers, templates) |
 | `data/calendar.html` | — | Embedded Google Calendar for the current semester |
 | `data/title-generator.html` | `files/Title Page.pdf` | Client-side PDF cover-page generator |
@@ -132,7 +132,7 @@ To add a pin:
 If `campus-map.png` is ever replaced, update the `w` and `h` values in `map.html`'s script to match the new image's exact pixel dimensions, or every pin will drift out of place.
 
 ### 🧭 Course Visualizer
-**Files:** `data/course-visualizer.html`, `data/course-requirements.json`
+**Files:** `data/course-visualizer.html`, `data/course-visualizer.json`
 
 Rebuild this once per semester using the course-offerings PDF as your source of truth. Each course is one object in the array:
 ```json
@@ -148,7 +148,7 @@ Rebuild this once per semester using the course-offerings PDF as your source of 
 - `semester` is a **string** and controls which column the course lands in.
 - The three requisite arrays reference other courses' `courseId`s and drive both the dependency arrows and the lookup modes below. Keep both sides in sync — e.g. if `CS1143` lists `CS2143` as a post-requisite, `CS2143` should list `CS1143` back as a prerequisite.
 - The page offers three modes: **Full curriculum** (every course, grouped by semester, arrows hidden by default), **Course lookup** (search by code or name to see one course's full dependency chain), and **Semester lookup** (see every course in a semester plus what feeds into and out of it). Both lookup modes have a "Direct requisites" toggle to stop at one relationship step instead of following the full chain, and an "Include co-requisites" toggle.
-- A single placeholder course (`FALLBACK_COURSES`) is hard-coded in the script purely so the page never renders empty if `course-requirements.json` fails to load — you don't need to touch it.
+- A single placeholder course (`FALLBACK_COURSES`) is hard-coded in the script purely so the page never renders empty if `course-visualizer.json` fails to load — you don't need to touch it.
 
 ### 🗄️ Archive
 **File:** `data/archive.html`
