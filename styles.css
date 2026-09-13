@@ -1220,7 +1220,7 @@ a:link, a:visited {
   gap: 8px;
 }
 
-.contact-email-action {
+.contact-email-action, a.contact-email-action, a.contact-email-action:visited {
   font-family: var(--font-mono);
   font-size: 13px;
   background: rgba(15, 42, 82, 0.05);
@@ -1235,7 +1235,7 @@ a:link, a:visited {
   display: inline-block;
 }
 
-.contact-email-action:hover {
+.contact-email-action:hover, a.contact-email-action:hover{
   background: var(--navy);
   color: var(--card);
   border-color: var(--navy);
