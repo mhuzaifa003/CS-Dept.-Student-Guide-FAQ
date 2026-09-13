@@ -37,7 +37,7 @@ The site is deliberately built without frameworks or a build step, so anyone ste
 │   ├── map.html
 │   ├── map.json
 │   ├── course-visualizer.html
-│   ├── course-visualzer.json
+│   ├── course-visualizer.json
 │   ├── title-generator.html
 │   └── archive.html
 │
