@@ -29,6 +29,42 @@ permalink: /academic-calendar/
         </div>
     </header>
 
+    <div class="countdown-banner" id="countdown-banner">
+        <span class="flashing-text" id="cd-event"></span>
+        <span class="flashing-text" id="cd-time"></span>
+    </div>
+
+    <script>
+        async function initCountdown() {
+            try {
+                // Fetch deadline data
+                const response = await fetch('/CS-Dept.-Student-Guide-FAQ//data/index.json');
+                const deadlines = await response.json();
+                const now = new Date();
+                const upcoming = deadlines.find(d => new Date(d.date) >= now);
+
+                if (upcoming) {
+                    const daysLeft = Math.ceil(
+                        (new Date(upcoming.date) - now) / (1000 * 60 * 60 * 24)
+                    );
+
+                    // Only show banner if event is 14 days or less away
+                    if (daysLeft <= 14) {
+                        document.getElementById('countdown-banner').style.display = 'block';
+                        document.getElementById('cd-event').textContent =
+                            `UPCOMING: ${upcoming.name}`;
+                        document.getElementById('cd-time').textContent =
+                            daysLeft === 0 ? "TODAY" : `${daysLeft} Days Left`;
+                    }
+                }
+            } catch (error) {
+                console.error('Could not load notifications:', error);
+            }
+        }
+
+        initCountdown();
+    </script>
+
     <main class="wrap" style="padding-top: 30px; padding-bottom: 64px;">
         <div class="iframe-container">
             <iframe
