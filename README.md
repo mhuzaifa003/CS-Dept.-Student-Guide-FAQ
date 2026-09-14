@@ -114,7 +114,7 @@ Because most pages fetch their data asynchronously (`fetch('...json')`), opening
 
 - No code changes needed — everything (event titles, dates, descriptions) is managed directly from the linked Google Calendar.
 - Only touch the code if the embed's timezone, color, or size needs to change (the `ctz`, `color`, `width`, and `height` parameters on the iframe's `src`).
-- **The countdown banner:** the countdown banner from the Home Page `index.html` is copied over into the Calendar Page as well, with the `View Calendar` button removed, consult the guide for the Home Page for information on the countdown banner.
+- **The countdown banner:** the countdown banner from the Home Page `index.html` is copied over into the Calendar Page as well, with the `View Calendar` button removed, consult the guide for the Home Page for information on the countdown banner, the only difference with the original code being that this uses a different, extended timer on the banner so it always displays the next event regardless of how far it is.
 
 ### 📒 Contact Directory
 **Files:** `data/contact-dir.html`, `data/contact-dir.json`

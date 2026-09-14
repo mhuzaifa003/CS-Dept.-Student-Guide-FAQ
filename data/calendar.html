@@ -48,8 +48,9 @@ permalink: /academic-calendar/
                         (new Date(upcoming.date) - now) / (1000 * 60 * 60 * 24)
                     );
 
-                    // Only show banner if event is 14 days or less away
-                    if (daysLeft <= 14) {
+                    // Only show banner if event is 112 days or less away
+                    // 112 days = 16 weeks which is the entire semester, this generous timer should effectively disable the hiding logic of the banner, showing the next event regardless of how far away it is.
+                    if (daysLeft <= 112) {
                         document.getElementById('countdown-banner').style.display = 'block';
                         document.getElementById('cd-event').textContent =
                             `UPCOMING: ${upcoming.name}`;
