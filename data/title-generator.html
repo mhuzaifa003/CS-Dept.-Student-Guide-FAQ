@@ -36,11 +36,11 @@ permalink: /title-page-editor/
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="in-name">Student Name</label>
-                            <input type="text" id="in-name" required placeholder="E.g. Muhammad Huzaifa">
+                            <input type="text" id="in-name" maxlength="50" required placeholder="E.g. Muhammad Huzaifa">
                         </div>
                         <div class="form-group">
                             <label for="in-reg">Registration ID</label>
-                            <input type="text" id="in-reg" required placeholder="E.g. BCS123456">
+                            <input type="text" id="in-reg" maxlength="15" required placeholder="E.g. BCS123456">
                         </div>
                         <div class="form-group">
                             <label for="in-date">Date</label>
@@ -48,24 +48,25 @@ permalink: /title-page-editor/
                         </div>
                         <div class="form-group">
                             <label for="in-course">Course Title</label>
-                            <input type="text" id="in-course" required placeholder="E.g. Introduction to Programming">
+                            <input type="text" id="in-course" maxlength="100" required
+                                placeholder="E.g. Introduction to Programming">
                         </div>
                         <div class="form-group">
                             <label for="in-section">Section</label>
-                            <input type="text" id="in-section" required placeholder="E.g. 1, 2, 3">
+                            <input type="text" id="in-section" maxlength="5" required placeholder="E.g. 1, 2, 3">
                         </div>
                         <div class="form-group">
                             <label for="in-assign">Assignment No.</label>
-                            <input type="text" id="in-assign" required placeholder="E.g. 1, 2, 3, 4">
+                            <input type="text" id="in-assign" maxlength="5" required placeholder="E.g. 1, 2, 3, 4">
                         </div>
                         <div class="form-group full-width">
                             <label for="in-desc">Description / Topic</label>
-                            <textarea id="in-desc" required
+                            <textarea id="in-desc" maxlength="150" required
                                 placeholder="Assignment description... Note: Too long of a description may cause text clipping"></textarea>
                         </div>
                         <div class="form-group full-width">
                             <label for="in-teacher">Submitted To</label>
-                            <input type="text" id="in-teacher" required>
+                            <input type="text" id="in-teacher" maxlength="50" required>
                         </div>
                         <div class="form-group full-width" style="margin-top: 5px;">
                             <button type="submit" class="btn-download" id="submit-btn">Download Title Page</button>
