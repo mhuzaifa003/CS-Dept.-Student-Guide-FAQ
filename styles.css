@@ -36,6 +36,11 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+a:link, a:visited {
+  color: #FFFFFF;
+  text-decoration: bold, underline;
+}
+
 .wrap {
   max-width: var(--wrap);
   margin: 0 auto;
@@ -663,11 +668,6 @@ iframe {
 }
 
 .btn-download:hover { background: var(--navy-soft); }
-
-a:link, a:visited {
-  color: #FFFFFF;
-  text-decoration: bold, underline;
-}
 
 .site-header .subtitle { max-width: 100%; }
 
