@@ -1,0 +1,89 @@
+/* =============================================================================
+   contacts.css  ·  contact-dir.html
+   -----------------------------------------------------------------------------
+   Contact card innards. The card surface, list, ID and category labels come
+   from directory.css.
+   ============================================================================= */
+
+.contact-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px 24px;
+  border-left-color: var(--navy-soft);
+}
+
+.contact-card:hover { border-left-color: var(--red); }
+
+
+/* Left: who ---------------------------------------------------------------- */
+
+.contact-info {
+  flex: 1;
+  min-width: 250px;
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-name {
+  margin: 0 0 4px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--navy);
+}
+
+.contact-designation {
+  margin: 0 0 6px;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.contact-location {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--navy-soft);
+}
+
+
+/* Right: actions (a <button> and an <a> share one look) -------------------- */
+
+.contact-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.contact-email-action {
+  display: inline-block;
+  padding: 8px 14px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--navy-soft);
+  background: rgba(15, 42, 82, 0.05);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background var(--ease), color var(--ease);
+}
+
+.contact-email-action:hover {
+  color: var(--card);
+  background: var(--navy);
+  border-color: var(--navy);
+}

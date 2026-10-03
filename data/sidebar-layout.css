@@ -1,0 +1,104 @@
+/* =============================================================================
+   sidebar-layout.css  ·  faq.html, contact-dir.html, map.html
+   -----------------------------------------------------------------------------
+   Two-column page: navy sidebar with a vertical tab list + main content area.
+   On narrow screens the sidebar becomes a horizontal, wrapping tab strip.
+   ============================================================================= */
+
+.layout {
+  flex: 1 0 auto;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 44px;
+  align-items: start;
+  padding-top: 30px;
+  padding-bottom: 64px;
+}
+
+.content { min-width: 0; }
+
+
+/* Sidebar ------------------------------------------------------------------ */
+
+.sidebar {
+  position: sticky;
+  top: 24px;
+  padding: 18px 0 10px;
+  background: var(--navy);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.sidebar-heading {
+  margin: 0 18px 10px;
+  padding-bottom: 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--on-dark);
+  border-bottom: 1px solid var(--line-on-dark);
+}
+
+
+/* Tabs (scoped to the sidebar; the Archive page has its own tab style) ----- */
+
+.sidebar .tabs {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar .tab {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 18px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  text-align: left;
+  color: var(--on-dark);
+  background: transparent;
+  border: none;
+  border-left: 3px solid transparent;
+  cursor: pointer;
+  transition: background var(--ease), color var(--ease), border-color var(--ease);
+}
+
+.sidebar .tab:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--on-dark-strong);
+}
+
+.sidebar .tab[aria-pressed="true"] {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--on-dark-strong);
+  font-weight: 600;
+  border-left-color: var(--red);
+}
+
+
+/* Responsive --------------------------------------------------------------- */
+
+@media (max-width: 800px) {
+  .layout { grid-template-columns: 1fr; gap: 22px; }
+
+  .sidebar { position: static; padding: 6px; }
+  .sidebar-heading { display: none; }
+
+  .sidebar .tabs { flex-direction: row; flex-wrap: wrap; }
+
+  .sidebar .tab {
+    padding: 9px 14px;
+    border-left: none;
+    border-bottom: 3px solid transparent;
+    border-radius: var(--radius);
+  }
+
+  .sidebar .tab[aria-pressed="true"] { border-bottom-color: var(--red); }
+}
+
+@media (max-width: 560px) {
+  .layout { padding-block: 14px; }
+}

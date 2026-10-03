@@ -6,7 +6,7 @@
         { "source": "/academic-calendar", "destination": "/data/calendar.html" },
         { "source": "/contact-directory", "destination": "/data/contact-dir.html" },
         { "source": "/courses", "destination": "/data/course-visualizer.html" },
-        { "source": "/CS-Dept.-Student-Guide-FAQ/frequently-asked-questions", "destination": "/data/faq.html" },
+        { "source": "/frequently-asked-questions", "destination": "/data/faq.html" },
         { "source": "/campus-map", "destination": "/data/map.html" },
         { "source": "/title-page-editor", "destination": "/data/title-generator.html" },
 
@@ -16,7 +16,6 @@
         { "source": "/CS-Dept.-Student-Guide-FAQ//data/faq.json", "destination": "/data/faq.json" },
         { "source": "/CS-Dept.-Student-Guide-FAQ//data/map.json", "destination": "/data/map.json" },
 
-        { "source": "/CS-Dept.-Student-Guide-FAQ/styles.css", "destination": "/styles.css" },
         { "source": "/CS-Dept.-Student-Guide-FAQ/files/favicon.ico", "destination": "/files/favicon.ico"},
         { "source": "/CS-Dept.-Student-Guide-FAQ/files/CUST.png", "destination": "/files/CUST.png" },
         { "source": "/CS-Dept.-Student-Guide-FAQ/files/CUST2.png", "destination": "/files/CUST2.png" },

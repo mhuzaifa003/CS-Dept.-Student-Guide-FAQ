@@ -1,0 +1,103 @@
+/* =============================================================================
+   faq.css  ·  faq.html
+   -----------------------------------------------------------------------------
+   Accordion cards (<details>). The card surface, list, index and category
+   labels come from directory.css.
+   ============================================================================= */
+
+.faq-card { border-left-color: transparent; }
+
+/* Open state: red accent bar. Order matters: border-color first, then the
+   left side, otherwise the shorthand would wipe out the red. */
+.faq-card[open] {
+  border-color: var(--rule-strong);
+  border-left-color: var(--red);
+  box-shadow: var(--shadow-lg);
+}
+
+
+/* Question row ------------------------------------------------------------- */
+
+.faq-card summary {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 18px 20px;
+  list-style: none;
+  cursor: pointer;
+  border-radius: 7px;
+}
+
+.faq-card summary::-webkit-details-marker { display: none; }
+
+.faq-card summary:hover { background: rgba(15, 42, 82, 0.03); }
+
+.faq-card[open] summary {
+  background: rgba(15, 42, 82, 0.035);
+  border-bottom: 1px solid var(--rule);
+  border-radius: 7px 7px 0 0;
+}
+
+/* + / − indicator */
+.faq-card summary::after {
+  content: "+";
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  font-family: var(--font-mono);
+  font-size: 20px;
+  line-height: 1;
+  color: var(--navy-soft);
+}
+
+.faq-card[open] summary::after {
+  content: "\2212";
+  color: var(--red);
+}
+
+.faq-question-block {
+  flex: 1;
+  padding-right: 28px;
+}
+
+.faq-question {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 1.35;
+  color: var(--navy);
+}
+
+
+/* Answer ------------------------------------------------------------------- */
+
+.faq-answer {
+  max-width: 62ch;
+  padding: 18px 24px 24px 76px;   /* left pad lines the text up under the question */
+}
+
+.faq-answer p,
+.faq-answer ul,
+.faq-answer li {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.faq-answer p { margin: 0 0 12px; }
+.faq-answer p:last-of-type { margin-bottom: 0; }
+
+.faq-answer ul {
+  margin: 0 0 12px;
+  padding-left: 20px;
+}
+
+.faq-answer li { margin-bottom: 4px; }
+
+.faq-answer a { color: var(--navy-soft); }
+
+
+@media (max-width: 560px) {
+  .faq-answer { padding: 14px 18px; }
+}

@@ -1,0 +1,32 @@
+/* =============================================================================
+   map.css  ·  map.html
+   -----------------------------------------------------------------------------
+   Leaflet canvas + the coloured legend indicator on each sidebar tab.
+   (Layout and tab styling come from sidebar-layout.css.)
+   ============================================================================= */
+
+#campus-map {
+  z-index: 1;                           /* keep Leaflet panes below page chrome */
+  width: 100%;
+  height: 70vh;
+  min-height: 400px;
+  background: var(--navy);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+/* Leaflet wraps divIcons in a styled box; strip it so only our SVG pin shows. */
+.custom-pin {
+  background: none !important;
+  border: none !important;
+}
+
+/* Legend swatch: colour is injected per tab from JS via --cat-color. */
+.tab-indicator {
+  flex-shrink: 0;
+  width: 4px;
+  height: 16px;
+  border-radius: 2px;
+  background-color: var(--cat-color, #000000);
+}

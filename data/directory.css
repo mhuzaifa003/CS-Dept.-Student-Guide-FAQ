@@ -1,0 +1,109 @@
+/* =============================================================================
+   directory.css  ·  faq.html, contact-dir.html
+   -----------------------------------------------------------------------------
+   Everything the two "searchable list of cards" pages have in common:
+   search box, result count, loading / empty states, the card list, the card
+   surface itself, and the ID + category labels inside each card.
+   Page-specific card innards live in faq.css and contacts.css.
+   ============================================================================= */
+
+
+/* Search (sits inside the site header) ------------------------------------- */
+
+.search-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+}
+
+#search {
+  flex: 1 1 min(100%, 320px);
+  padding: 13px 16px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1.5px solid var(--navy);
+  border-radius: var(--radius);
+}
+
+#search::placeholder { color: #8a93a8; }
+
+.result-count {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--white);
+  white-space: nowrap;
+}
+
+
+/* Loading & empty states --------------------------------------------------- */
+
+.loading {
+  padding: 24px 0;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.empty-state {
+  padding: 42px 16px;
+  font-size: 15px;
+  font-style: italic;
+  text-align: center;
+  color: var(--ink-soft);
+}
+
+
+/* Card list & card surface ------------------------------------------------- */
+
+.faq-list,
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.faq-card,
+.contact-card {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-left-width: 4px;               /* colour is set per page */
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--ease), border-color var(--ease);
+}
+
+.faq-card:hover,
+.contact-card:hover {
+  border-color: var(--rule-strong);
+  box-shadow: var(--shadow-md);
+}
+
+
+/* Labels shared by both card types
+   (contact cards reuse the FAQ class names for their ID and category) ------ */
+
+.faq-index {
+  padding-top: 3px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--red);
+  white-space: nowrap;
+}
+
+.faq-category {
+  display: block;
+  margin-bottom: 5px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--navy-soft);
+}
+
+
+@media (max-width: 560px) {
+  .faq-index { display: none; }
+}
