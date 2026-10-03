@@ -245,7 +245,7 @@
 
 .chart {
   position: relative;
-  min-width: 1360px;
+  min-width: 1420px;
   padding: 28px 24px 36px;
 }
 
@@ -255,7 +255,7 @@
 .course-grid {
   display: grid;
   grid-template-columns: repeat(8, minmax(136px, 1fr));
-  gap: 32px;           /* wide gutters carry the edge lanes */
+  gap: 40px;           /* wide gutters carry the edge lanes */
 }
 
 .semester-heads {

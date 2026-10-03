@@ -106,15 +106,14 @@ permalink: /courses/
                         <div class="graph-grid" id="graph-grid"></div>
                         <svg class="edge-layer" id="edge-layer" aria-hidden="true">
                             <defs>
-                                <marker id="arrow-pre" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
-                                    <path d="M0,0 L6,3 L0,6 z" class="pre-arrow"></path>
+                                <marker id="arrow-pre" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto">
+                                    <path d="M0,0 L8,4 L0,8 z" class="pre-arrow"></path>
                                 </marker>
-                                <marker id="arrow-post" markerWidth="6" markerHeight="6" refX="5" refY="3"
-                                    orient="auto">
-                                    <path d="M0,0 L6,3 L0,6 z" class="post-arrow"></path>
+                                <marker id="arrow-post" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto">
+                                    <path d="M0,0 L8,4 L0,8 z" class="post-arrow"></path>
                                 </marker>
-                                <marker id="dot-co" markerWidth="4" markerHeight="4" refX="2" refY="2">
-                                    <circle cx="2" cy="2" r="2" class="co-dot"></circle>
+                                <marker id="dot-co" markerUnits="userSpaceOnUse" markerWidth="6" markerHeight="6" refX="3" refY="3">
+                                    <circle cx="3" cy="3" r="3" class="co-dot"></circle>
                                 </marker>
                             </defs>
                         </svg>
@@ -163,7 +162,7 @@ permalink: /courses/
 
         <div class="footer-bottom">
             <div class="wrap footer-bottom-inner">
-                <p class="updated" id="updated-line">Last updated 2026-10-03</p>
+                <p class="updated" id="updated-line">Last updated 2026-09-12</p>
                 <p class="copyright">&copy; 2026 @mhuzaifa003. All rights reserved.</p>
             </div>
         </div>
@@ -505,7 +504,7 @@ permalink: /courses/
             const last = colBox.length - 1;
             const gutter = g => g < 0 ? [colBox[0].x1 - 24, colBox[0].x1]
                 : g >= last ? [colBox[last].x2, colBox[last].x2 + 24]
-                    : [colBox[g].x2, colBox[g + 1].x1];
+                : [colBox[g].x2, colBox[g + 1].x1];
             const box = new Map();
             cards.forEach((el, id) => {
                 const r = el.getBoundingClientRect();
@@ -520,12 +519,14 @@ permalink: /courses/
                 const m = lanes.get(slot);
                 if (!m.has(key)) m.set(key, m.size);
             };
-            const pos = (slot, key, lo, hi) => {
+            const pos = (slot, key, lo, hi, pad = 6) => {
                 const m = lanes.get(slot), n = m.size;
-                const step = n > 1 ? Math.min(5, (hi - lo - 12) / (n - 1)) : 0;
+                const step = n > 1 ? Math.min(4, (hi - lo - 2 * pad) / (n - 1)) : 0;
                 return (lo + hi) / 2 - step * (n - 1) / 2 + m.get(key) * step;
             };
-            const gx = (g, key) => { const [lo, hi] = gutter(g); return pos(`g${g}`, key, lo, hi); };
+            // Lanes stay >=16px from the next column so every arrowhead gets a straight run-in
+            // (8px head + 6px corner radius) instead of landing on a bend.
+            const gx = (g, key) => { const [lo, hi] = gutter(g); return pos(`g${g}`, key, lo + 5, hi - 16, 0); };
             const gy = (side, key) => side === "top" ? pos("top", key, 0, 64) : pos("bot", key, H - 64, H);
 
             const seen = new Set(), plans = [];
