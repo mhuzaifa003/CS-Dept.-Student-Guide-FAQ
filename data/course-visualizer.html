@@ -26,7 +26,7 @@ permalink: /courses/
             </nav>
             <h1>Course Requirement Visualizer</h1>
             <p class="subtitle">See the complete curriculum dependency graph, or filter to track dependencies for a
-                specific course or semester. Tap on a course to hide dependency arrows.</p>
+                specific course or semester. Hover or tap a course to highlight its connections.</p>
         </div>
     </header>
 
@@ -106,17 +106,15 @@ permalink: /courses/
                         <div class="graph-grid" id="graph-grid"></div>
                         <svg class="edge-layer" id="edge-layer" aria-hidden="true">
                             <defs>
-                                <marker id="arrow-default" markerWidth="7" markerHeight="7" refX="6" refY="3.5"
-                                    orient="auto" markerUnits="strokeWidth">
-                                    <path d="M0,0 L7,3.5 L0,7 z" class="arrow"></path>
+                                <marker id="arrow-pre" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                                    <path d="M0,0 L6,3 L0,6 z" class="pre-arrow"></path>
                                 </marker>
-                                <marker id="arrow-pre" markerWidth="7" markerHeight="7" refX="6" refY="3.5"
-                                    orient="auto" markerUnits="strokeWidth">
-                                    <path d="M0,0 L7,3.5 L0,7 z" class="pre-arrow"></path>
+                                <marker id="arrow-post" markerWidth="6" markerHeight="6" refX="5" refY="3"
+                                    orient="auto">
+                                    <path d="M0,0 L6,3 L0,6 z" class="post-arrow"></path>
                                 </marker>
-                                <marker id="arrow-post" markerWidth="7" markerHeight="7" refX="6" refY="3.5"
-                                    orient="auto" markerUnits="strokeWidth">
-                                    <path d="M0,0 L7,3.5 L0,7 z" class="post-arrow"></path>
+                                <marker id="dot-co" markerWidth="4" markerHeight="4" refX="2" refY="2">
+                                    <circle cx="2" cy="2" r="2" class="co-dot"></circle>
                                 </marker>
                             </defs>
                         </svg>
@@ -165,7 +163,7 @@ permalink: /courses/
 
         <div class="footer-bottom">
             <div class="wrap footer-bottom-inner">
-                <p class="updated" id="updated-line">Last updated 2026-09-12</p>
+                <p class="updated" id="updated-line">Last updated 2026-10-03</p>
                 <p class="copyright">&copy; 2026 @mhuzaifa003. All rights reserved.</p>
             </div>
         </div>
@@ -292,6 +290,7 @@ permalink: /courses/
             const card = document.createElement("article");
             card.className = `course-card ${role || ""}`;
             card.dataset.courseId = course.courseId;
+            card.tabIndex = 0;
             card.innerHTML = `
                 <span class="course-code">${course.courseId}</span>
                 <div class="course-name">${course.courseName}</div>
@@ -446,6 +445,7 @@ permalink: /courses/
         }
 
         function render() {
+            state.hover = state.pinned = null;
             const { visibleCourses, roles, edges, title, note } = buildView();
             state.currentEdges = edges;
             $("view-heading").textContent = title;
@@ -489,87 +489,149 @@ permalink: /courses/
         }
 
         function drawEdges(edges = []) {
-            const svg = $("edge-layer");
-            const stage = $("graph-stage");
+            const svg = $("edge-layer"), stage = $("graph-stage"), H = stage.clientHeight;
             svg.setAttribute("width", stage.clientWidth);
-            svg.setAttribute("height", stage.clientHeight);
+            svg.setAttribute("height", H);
             clearEdges();
 
             const cards = new Map([...$("course-grid").querySelectorAll(".course-card")].map(el => [el.dataset.courseId, el]));
             if (!cards.size || !edges.length) return;
 
-            const stageRect = stage.getBoundingClientRect();
-            const cardMeta = new Map();
+            // Geometry, relative to the stage.
+            const sr = stage.getBoundingClientRect();
+            const cols = [...$("course-grid").querySelectorAll(".semester-col")];
+            const colIdx = new Map(cols.map((c, i) => [Number(c.dataset.semester), i]));
+            const colBox = cols.map(c => { const r = c.getBoundingClientRect(); return { x1: r.left - sr.left, x2: r.right - sr.left }; });
+            const last = colBox.length - 1;
+            const gutter = g => g < 0 ? [colBox[0].x1 - 24, colBox[0].x1]
+                : g >= last ? [colBox[last].x2, colBox[last].x2 + 24]
+                    : [colBox[g].x2, colBox[g + 1].x1];
+            const box = new Map();
             cards.forEach((el, id) => {
                 const r = el.getBoundingClientRect();
-                const course = getCourse(id);
-                cardMeta.set(id, {
-                    x1: r.left - stageRect.left,
-                    x2: r.right - stageRect.left,
-                    y1: r.top - stageRect.top,
-                    y2: r.bottom - stageRect.top,
-                    cy: r.top - stageRect.top + r.height / 2,
-                    semester: Number(course?.semester || 0)
-                });
+                box.set(id, { x1: r.left - sr.left, x2: r.right - sr.left, cy: r.top - sr.top + r.height / 2, col: colIdx.get(Number(getCourse(id)?.semester)) });
             });
 
-            function addPath(d, kind) {
-                const halo = document.createElementNS("http://www.w3.org/2000/svg", "path");
-                halo.setAttribute("d", d);
-                halo.setAttribute("class", "edge-halo");
-                svg.appendChild(halo);
+            // Edges never cross cards: they run in the gutters between columns and in the
+            // open corridors above/below the columns. Each source/target gets its own lane.
+            const lanes = new Map();
+            const reg = (slot, key) => {
+                if (!lanes.has(slot)) lanes.set(slot, new Map());
+                const m = lanes.get(slot);
+                if (!m.has(key)) m.set(key, m.size);
+            };
+            const pos = (slot, key, lo, hi) => {
+                const m = lanes.get(slot), n = m.size;
+                const step = n > 1 ? Math.min(5, (hi - lo - 12) / (n - 1)) : 0;
+                return (lo + hi) / 2 - step * (n - 1) / 2 + m.get(key) * step;
+            };
+            const gx = (g, key) => { const [lo, hi] = gutter(g); return pos(`g${g}`, key, lo, hi); };
+            const gy = (side, key) => side === "top" ? pos("top", key, 0, 64) : pos("bot", key, H - 64, H);
 
-                const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
-                p.setAttribute("d", d);
-                p.setAttribute("class", `edge ${kind}-edge`);
-                p.setAttribute("marker-end", kind === "pre" ? "url(#arrow-pre)" : kind === "post" ? "url(#arrow-post)" : "url(#arrow-default)");
-                svg.appendChild(p);
-            }
-
-            const seen = new Set();
-            for (const line of edges) {
-                if (!cards.has(line.from) || !cards.has(line.to)) continue;
-                const key = `${line.from}→${line.to}:${line.kind}`;
+            const seen = new Set(), plans = [];
+            for (const e of edges) {
+                if (!box.has(e.from) || !box.has(e.to)) continue;
+                const key = e.kind === "co" ? [e.from, e.to].sort().join("~") + ":co" : `${e.from}>${e.to}:${e.kind}`;
                 if (seen.has(key)) continue;
                 seen.add(key);
-
-                const a = cardMeta.get(line.from);
-                const b = cardMeta.get(line.to);
-                if (!a || !b) continue;
-
-                const sameColumn = a.semester === b.semester;
-                let d;
-
-                if (sameColumn) {
-                    // Co-requisites (or any same-semester relation) route vertically around the right edge of the source/target cards.
-                    const sideX = Math.max(a.x2, b.x2) + 12;
-                    const startY = a.cy;
-                    const endY = b.cy;
-                    d = `M ${a.x2} ${startY} L ${sideX} ${startY} L ${sideX} ${endY} L ${b.x2} ${endY}`;
-                } else if (b.x1 >= a.x1) {
-                    // Relationships flow directly from source to destination., Card crossing is deliberate: to make long dependency chains easier to visually trace.
-                    const startX = a.x2;
-                    const endX = b.x1;
-                    const bendX = (startX + endX) / 2;
-                    d = `M ${startX} ${a.cy} L ${bendX} ${a.cy} L ${bendX} ${b.cy} L ${endX} ${b.cy}`;
-                } else {
-                    const startX = a.x1;
-                    const endX = b.x2;
-                    const bendX = (startX + endX) / 2;
-                    d = `M ${startX} ${a.cy} L ${bendX} ${a.cy} L ${bendX} ${b.cy} L ${endX} ${b.cy}`;
+                const a = box.get(e.from), b = box.get(e.to);
+                const dir = Math.sign(b.col - a.col);
+                const p = { e, a, b, dir, key };
+                if (dir === 0) { p.g = a.col; reg(`g${p.g}`, "c" + key); }
+                else {
+                    p.eg = dir > 0 ? a.col : a.col - 1;
+                    p.ng = dir > 0 ? b.col - 1 : b.col;
+                    reg(`g${p.eg}`, "s" + e.from);
+                    if (p.ng !== p.eg) {
+                        reg(`g${p.ng}`, "d" + e.to);
+                        p.side = (a.cy + b.cy) / 2 < H / 2 ? "top" : "bot";
+                        reg(p.side, "s" + e.from + dir);
+                    }
                 }
-
-                addPath(d, line.kind);
+                plans.push(p);
             }
+
+            // Polyline with softly rounded corners.
+            const rounded = (pts, r = 6) => {
+                const q = pts.filter((v, i) => i === 0 || v[0] !== pts[i - 1][0] || v[1] !== pts[i - 1][1]);
+                let d = `M ${q[0][0]} ${q[0][1]}`;
+                for (let i = 1; i < q.length - 1; i++) {
+                    const [x0, y0] = q[i - 1], [x1, y1] = q[i], [x2, y2] = q[i + 1];
+                    const l1 = Math.hypot(x1 - x0, y1 - y0), l2 = Math.hypot(x2 - x1, y2 - y1), rr = Math.min(r, l1 / 2, l2 / 2);
+                    d += ` L ${x1 + (x0 - x1) / l1 * rr} ${y1 + (y0 - y1) / l1 * rr} Q ${x1} ${y1} ${x1 + (x2 - x1) / l2 * rr} ${y1 + (y2 - y1) / l2 * rr}`;
+                }
+                return d + ` L ${q.at(-1)[0]} ${q.at(-1)[1]}`;
+            };
+
+            const NS = "http://www.w3.org/2000/svg";
+            const mk = (tag, attrs, parent) => {
+                const el = document.createElementNS(NS, tag);
+                Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
+                parent.appendChild(el);
+                return el;
+            };
+
+            for (const { e, a, b, dir, key, g, eg, ng, side } of plans) {
+                let pts;
+                if (dir === 0) {
+                    const x = gx(g, "c" + key);
+                    pts = [[a.x2, a.cy], [x, a.cy], [x, b.cy], [b.x2, b.cy]];
+                } else {
+                    const sx = dir > 0 ? a.x2 : a.x1, tx = dir > 0 ? b.x1 : b.x2, xe = gx(eg, "s" + e.from);
+                    if (ng === eg) pts = [[sx, a.cy], [xe, a.cy], [xe, b.cy], [tx, b.cy]];
+                    else {
+                        const yc = gy(side, "s" + e.from + dir), xn = gx(ng, "d" + e.to);
+                        pts = [[sx, a.cy], [xe, a.cy], [xe, yc], [xn, yc], [xn, b.cy], [tx, b.cy]];
+                    }
+                }
+                const d = rounded(pts);
+                const group = mk("g", { class: "edge-group" }, svg);
+                group.dataset.from = e.from;
+                group.dataset.to = e.to;
+                mk("path", { d, class: "edge-halo" }, group);
+                const markers = e.kind === "co" ? { "marker-start": "url(#dot-co)", "marker-end": "url(#dot-co)" }
+                    : { "marker-end": e.kind === "pre" ? "url(#arrow-pre)" : "url(#arrow-post)" };
+                mk("path", { d, class: `edge ${e.kind}-edge`, ...markers }, group);
+            }
+            applyFocus();
         }
 
-        $("course-grid").addEventListener("click", (event) => {
-            const card = event.target.closest(".course-card");
-            if (!card) return;
-            $("course-grid").querySelectorAll(".course-card.is-raised").forEach(el => {
-                if (el !== card) el.classList.remove("is-raised");
+        // Hover / tap a course: highlight its edges and neighbours, dim the rest.
+        function applyFocus() {
+            const id = state.hover || state.pinned, edges = state.currentEdges || [];
+            const on = !!id && edges.length > 0;
+            const linked = new Set(on ? [id] : []);
+            if (on) edges.forEach(e => { if (e.from === id) linked.add(e.to); if (e.to === id) linked.add(e.from); });
+            const svg = $("edge-layer");
+            svg.classList.toggle("has-focus", on);
+            svg.querySelectorAll(".edge-group").forEach(g =>
+                g.classList.toggle("is-active", on && (g.dataset.from === id || g.dataset.to === id)));
+            $("course-grid").querySelectorAll(".course-card").forEach(c => {
+                c.classList.toggle("is-dim", on && !linked.has(c.dataset.courseId));
+                c.classList.toggle("is-selected", state.pinned === c.dataset.courseId);
             });
-            card.classList.toggle("is-raised");
+        }
+
+        const grid = $("course-grid");
+        const cardOf = (t) => t.closest && t.closest(".course-card");
+        grid.addEventListener("pointerover", (e) => {
+            const c = cardOf(e.target);
+            if (c && e.pointerType === "mouse") { state.hover = c.dataset.courseId; applyFocus(); }
+        });
+        grid.addEventListener("pointerout", (e) => {
+            const c = cardOf(e.target);
+            if (c && !c.contains(e.relatedTarget)) { state.hover = null; applyFocus(); }
+        });
+        grid.addEventListener("click", (e) => {
+            const c = cardOf(e.target);
+            if (!c) return;
+            const id = c.dataset.courseId;
+            state.pinned = state.pinned === id ? null : id;
+            applyFocus();
+        });
+        grid.addEventListener("keydown", (e) => {
+            const c = cardOf(e.target);
+            if (c && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); c.click(); }
         });
 
         $("mode-full").addEventListener("click", () => setMode("full"));
