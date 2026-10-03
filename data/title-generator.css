@@ -1,0 +1,75 @@
+/* =============================================================================
+   title-generator.css  ·  title-generator.html
+   ============================================================================= */
+
+.generator-container {
+  max-width: 860px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.controls-card {
+  padding: 35px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-group { margin-bottom: 18px; }
+
+.form-group.full-width { grid-column: 1 / -1; }
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  font-family: 'Times New Roman', Times, serif;   /* matches the PDF's font */
+  font-size: 15px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+}
+
+.form-group textarea {
+  height: 90px;
+  resize: vertical;
+}
+
+.btn-download {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--white);
+  background: var(--navy);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background var(--ease);
+}
+
+.btn-download:hover { background: var(--navy-soft); }
+
+.btn-download:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+
+@media (max-width: 700px) {
+  .form-grid { grid-template-columns: 1fr; }
+}

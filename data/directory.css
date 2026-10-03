@@ -69,7 +69,7 @@
 .contact-card {
   background: var(--card);
   border: 1px solid var(--rule);
-  border-left-width: 4px;               /* colour is set per page */
+  border-left: 4px solid var(--navy);   /* accent bar: navy at rest ... */
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
   transition: box-shadow var(--ease), border-color var(--ease);
@@ -78,6 +78,7 @@
 .faq-card:hover,
 .contact-card:hover {
   border-color: var(--rule-strong);
+  border-left-color: var(--red);        /* ... red on hover (and when a FAQ is open) */
   box-shadow: var(--shadow-md);
 }
 

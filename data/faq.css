@@ -5,10 +5,8 @@
    labels come from directory.css.
    ============================================================================= */
 
-.faq-card { border-left-color: transparent; }
-
-/* Open state: red accent bar. Order matters: border-color first, then the
-   left side, otherwise the shorthand would wipe out the red. */
+/* Open state: red accent bar (border-color first, then the left side, so the
+   shorthand doesn't wipe out the red). */
 .faq-card[open] {
   border-color: var(--rule-strong);
   border-left-color: var(--red);

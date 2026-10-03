@@ -1,0 +1,44 @@
+/* =============================================================================
+   countdown.css  ·  index.html, calendar.html
+   -----------------------------------------------------------------------------
+   "Upcoming deadline" banner. Hidden until the page script reveals it.
+   ============================================================================= */
+
+.countdown-banner {
+  display: none;                        /* script sets display:block when relevant */
+  padding: 12px 24px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-align: center;
+  color: var(--white);
+  background: var(--red);
+}
+
+.countdown-banner span,
+.countdown-banner a {
+  margin-left: 10px;
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: var(--radius);
+}
+
+.countdown-banner a {
+  color: var(--white);
+  text-decoration: underline;
+}
+
+.flashing-text { animation: blinker 1s linear 2; }
+
+@keyframes blinker {
+  50% { opacity: 0; }
+}
+
+@media (max-width: 560px) {
+  .countdown-banner span {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}

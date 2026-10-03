@@ -12,10 +12,7 @@
   justify-content: space-between;
   gap: 20px;
   padding: 20px 24px;
-  border-left-color: var(--navy-soft);
 }
-
-.contact-card:hover { border-left-color: var(--red); }
 
 
 /* Left: who ---------------------------------------------------------------- */

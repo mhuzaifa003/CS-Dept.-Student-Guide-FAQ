@@ -1,0 +1,41 @@
+/* =============================================================================
+   archive.css  ·  archive.html
+   -----------------------------------------------------------------------------
+   Horizontal folder tabs above the Drive iframe (frame itself: embed.css).
+   Light-background tabs, unlike the navy sidebar tabs in sidebar-layout.css.
+   ============================================================================= */
+
+.drive-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.drive-tabs .tab {
+  padding: 11px 18px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--navy);
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background var(--ease), color var(--ease), border-color var(--ease);
+}
+
+.drive-tabs .tab:hover {
+  background: rgba(15, 42, 82, 0.05);
+  border-color: var(--navy-soft);
+}
+
+.drive-tabs .tab[aria-pressed="true"] {
+  color: var(--white);
+  background: var(--navy);
+  border-color: var(--navy);
+}
+
+@media (max-width: 800px) {
+  .drive-tabs .tab { padding: 9px 14px; }
+}
