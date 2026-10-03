@@ -16,6 +16,13 @@
         { "source": "/CS-Dept.-Student-Guide-FAQ//data/faq.json", "destination": "/data/faq.json" },
         { "source": "/CS-Dept.-Student-Guide-FAQ//data/map.json", "destination": "/data/map.json" },
 
+        { "source": "/CS-Dept.-Student-Guide-FAQ/files/core.css", "destination": "/files/core.css" },
+        { "source": "/CS-Dept.-Student-Guide-FAQ/files/contacts.css", "destination": "/files/contacts.css" },
+        { "source": "/CS-Dept.-Student-Guide-FAQ/files/directory.css", "destination": "/files/directory.css" },
+        { "source": "/CS-Dept.-Student-Guide-FAQ/files/faq.css", "destination": "/files/faq.css" },
+        { "source": "/CS-Dept.-Student-Guide-FAQ/files/sidebar-layout.css", "destination": "/files/sidebar-layout.css" },
+        { "source": "/CS-Dept.-Student-Guide-FAQ/files/map.css", "destination": "/files/map.css" },
+
         { "source": "/CS-Dept.-Student-Guide-FAQ/files/favicon.ico", "destination": "/files/favicon.ico"},
         { "source": "/CS-Dept.-Student-Guide-FAQ/files/CUST.png", "destination": "/files/CUST.png" },
         { "source": "/CS-Dept.-Student-Guide-FAQ/files/CUST2.png", "destination": "/files/CUST2.png" },
