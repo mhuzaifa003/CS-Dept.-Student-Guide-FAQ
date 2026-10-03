@@ -37,21 +37,24 @@
   border-radius: 7px 7px 0 0;
 }
 
-/* + / − indicator */
+/* Chevron indicator: points down when closed, flips up (and turns red) when open.
+   Drawn with two borders on a rotated square, so no icon font or HTML is needed. */
 .faq-card summary::after {
-  content: "+";
+  content: "";
   position: absolute;
-  top: 16px;
-  right: 18px;
-  font-family: var(--font-mono);
-  font-size: 20px;
-  line-height: 1;
-  color: var(--navy-soft);
+  top: 24px;
+  right: 22px;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--navy-soft);
+  border-bottom: 2px solid var(--navy-soft);
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform var(--ease), border-color var(--ease);
 }
 
 .faq-card[open] summary::after {
-  content: "\2212";
-  color: var(--red);
+  border-color: var(--red);
+  transform: translateY(2px) rotate(-135deg);
 }
 
 .faq-question-block {

@@ -69,7 +69,7 @@
 .contact-card {
   background: var(--card);
   border: 1px solid var(--rule);
-  border-left: 4px solid var(--navy);   /* accent bar: navy at rest ... */
+  border-left: 4px solid var(--navy-soft); /* accent bar: blue at rest ... */
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
   transition: box-shadow var(--ease), border-color var(--ease);
