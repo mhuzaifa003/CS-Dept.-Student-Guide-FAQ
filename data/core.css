@@ -302,8 +302,42 @@ a { color: var(--navy-soft); }
 
 .footer-bottom .copyright { margin: 0; }
 
+/* 6. SCROLL-TO-TOP BUTTON =================================================== */
 
-/* 6. RESPONSIVE (core pieces only) ========================================== */
+.scroll-top {
+  --lift: 0px;                      /* handled via in-page JS */
+  position: fixed;
+  right: 20px;
+  bottom: calc(20px + var(--lift));
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  font: 600 20px/1 var(--font-mono);
+  color: var(--white);
+  background: var(--red);
+  border: 2px solid var(--white);
+  border-radius: 50%;
+  box-shadow: var(--shadow-lg);
+  cursor: pointer;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity var(--ease), visibility var(--ease), transform var(--ease), background var(--ease);
+}
+
+.scroll-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.scroll-top:hover { background: var(--navy-soft); }
+
+/* 7. RESPONSIVE (core pieces only) ========================================== */
 
 @media (max-width: 900px) {
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
@@ -314,12 +348,12 @@ a { color: var(--navy-soft); }
   .site-header { padding-top: 40px; }
   .footer-grid { grid-template-columns: 1fr; padding-block: 24px; }
   .footer-bottom-inner { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .scroll-top { right: 14px; bottom: calc(14px + var(--lift)); }
 }
 
 
-/* 7. ACCESSIBILITY ========================================================== */
+/* 8. ACCESSIBILITY ========================================================== */
 
-/* One rule replaces the per-component reduced-motion overrides. */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 

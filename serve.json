@@ -16,6 +16,8 @@
         { "source": "/CS-Dept.-Student-Guide-FAQ//data/faq.json", "destination": "/data/faq.json" },
         { "source": "/CS-Dept.-Student-Guide-FAQ//data/map.json", "destination": "/data/map.json" },
 
+        { "source": "/CS-Dept.-Student-Guide-FAQ/data/scroll-top.js", "destination": "/data/scroll-top.js"},
+        
         { "source": "/CS-Dept.-Student-Guide-FAQ/files/core.css", "destination": "/files/core.css" },
         { "source": "/CS-Dept.-Student-Guide-FAQ/files/archive.css", "destination": "/files/archive.css" },
         { "source": "/CS-Dept.-Student-Guide-FAQ/files/contact-dir.css", "destination": "/files/contact-dir.css" },
