@@ -303,23 +303,25 @@ a { color: var(--navy-soft); }
 .footer-bottom .copyright { margin: 0; }
 
 /* 6. SCROLL-TO-TOP BUTTON =================================================== */
+.layout:has(.scroll-top-rail) { padding-bottom: 0; }
 
-/* SCROLL-TO-TOP BUTTON ====================================================== */
-
-/* Zero-height rail at the end of <main>. It sticks 20px above the viewport
-   bottom while the content is on screen, and stops at the end of the content
-   so it can never overlap the footer. */
 .scroll-top-rail {
+  --edge: 24px;                     /* gap from viewport edge / footer */ /* distance from <main>'s right edge to the window's right edge */
+  --gutter: calc(max(0px, (100vw - var(--wrap)) / 2) + 24px);
+
   position: sticky;
-  bottom: 20px;
-  height: 0;
+  bottom: 0;
+  height: 64px;
   z-index: 100;
+  pointer-events: none;             /* the rail must never block clicks on cards */
 }
 
 .scroll-top {
   position: absolute;
-  right: 0;
-  bottom: 0;
+  right: calc(var(--edge) - var(--gutter));
+  bottom: var(--edge);
+  pointer-events: auto;
+
   display: grid;
   place-items: center;
   width: 44px;
@@ -358,7 +360,7 @@ a { color: var(--navy-soft); }
   .site-header { padding-top: 40px; }
   .footer-grid { grid-template-columns: 1fr; padding-block: 24px; }
   .footer-bottom-inner { flex-direction: column; align-items: flex-start; gap: 6px; }
-  .scroll-top-rail { bottom: 14px; }
+  .scroll-top-rail { --edge: 14px; --gutter: 18px; }
 }
 
 
