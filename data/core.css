@@ -304,12 +304,22 @@ a { color: var(--navy-soft); }
 
 /* 6. SCROLL-TO-TOP BUTTON =================================================== */
 
-.scroll-top {
-  --lift: 0px;                      /* handled via in-page JS */
-  position: fixed;
-  right: 20px;
-  bottom: calc(20px + var(--lift));
+/* SCROLL-TO-TOP BUTTON ====================================================== */
+
+/* Zero-height rail at the end of <main>. It sticks 20px above the viewport
+   bottom while the content is on screen, and stops at the end of the content
+   so it can never overlap the footer. */
+.scroll-top-rail {
+  position: sticky;
+  bottom: 20px;
+  height: 0;
   z-index: 100;
+}
+
+.scroll-top {
+  position: absolute;
+  right: 0;
+  bottom: 0;
   display: grid;
   place-items: center;
   width: 44px;
@@ -348,7 +358,7 @@ a { color: var(--navy-soft); }
   .site-header { padding-top: 40px; }
   .footer-grid { grid-template-columns: 1fr; padding-block: 24px; }
   .footer-bottom-inner { flex-direction: column; align-items: flex-start; gap: 6px; }
-  .scroll-top { right: 14px; bottom: calc(14px + var(--lift)); }
+  .scroll-top-rail { bottom: 14px; }
 }
 
 
