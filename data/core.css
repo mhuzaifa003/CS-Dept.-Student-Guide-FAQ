@@ -329,7 +329,7 @@ a { color: var(--navy-soft); }
   padding: 0;
   font: 600 20px/1 var(--font-mono);
   color: var(--white);
-  background: var(--red);
+  background: var(--navy-soft);
   border: 2px solid var(--white);
   border-radius: 50%;
   box-shadow: var(--shadow-lg);
@@ -347,7 +347,7 @@ a { color: var(--navy-soft); }
   transform: none;
 }
 
-.scroll-top:hover { background: var(--navy-soft); }
+.scroll-top:hover { background: var(--red); }
 
 /* 7. RESPONSIVE (core pieces only) ========================================== */
 

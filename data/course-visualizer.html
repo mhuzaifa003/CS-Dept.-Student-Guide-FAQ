@@ -15,7 +15,6 @@ permalink: /courses/
         rel="stylesheet">
     <link rel="stylesheet" href="/CS-Dept.-Student-Guide-FAQ/data/core.css">
     <link rel="stylesheet" href="/CS-Dept.-Student-Guide-FAQ/data/course-visualizer.css">
-    <script src="/CS-Dept.-Student-Guide-FAQ/data/scroll-top.js" defer></script>
 </head>
 
 <body class="visualizer-page">
@@ -42,7 +41,7 @@ permalink: /courses/
                     lookup</button>
             </div>
 
-            <div class="filters">
+            <div class="filters" id="filters">
                 <div class="field" id="course-field" hidden>
                     <label for="course-search">Search by course code or name</label>
                     <input class="control" id="course-search" list="course-options" type="search"
@@ -271,7 +270,9 @@ permalink: /courses/
             $("course-field").hidden = mode !== "course";
             $("semester-field").hidden = mode !== "semester";
             $("depth-field").hidden = mode === "full";
-            $("edge-field").hidden = mode === "full";
+            // Co-requisite toggle is only offered in Course lookup; Semester lookup always includes co-requisites.
+            $("edge-field").hidden = mode !== "course";
+            $("filters").classList.toggle("filters--semester", mode === "semester");
             updateModeButtons();
             if (mode === "full") {
                 $("control-helper").textContent = "The default view shows every course from the curriculum JSON, grouped by semester. Relationship arrows are omitted here for a cleaner overview.";
@@ -421,13 +422,12 @@ permalink: /courses/
                     pre.forEach(id => addRole(id, "pre"));
                     post.forEach(id => { if (!pre.has(id) && !currentIds.has(id)) addRole(id, "post"); });
 
-                    if (state.includeCo) {
-                        for (const course of current) {
-                            for (const coId of getDirectCo(course)) {
-                                if (!getCourse(coId) || currentIds.has(coId)) continue;
-                                addRole(coId, "co");
-                                addEdge(course.courseId, coId, "co");
-                            }
+                    // Co-requisites are always shown in semester lookup (no toggle).
+                    for (const course of current) {
+                        for (const coId of getDirectCo(course)) {
+                            if (!getCourse(coId) || currentIds.has(coId)) continue;
+                            addRole(coId, "co");
+                            addEdge(course.courseId, coId, "co");
                         }
                     }
 

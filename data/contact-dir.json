@@ -80,21 +80,159 @@
         "designation": "Manager Admissions",
         "location": ""
     },
-
-
-    {
-        "category": "Faculty",
-        "name": "Sir Salman Ahmad",
-        "email": "salman.ahmed@cust.edu.pk",
-        "designation": "Senior Lecturer",
-        "location": "Block M, 2nd Floor"
-    },
     {
         "category": "Faculty",
         "name": "Dr. Najam Aziz",
         "email": "najam.aziz@cust.edu.pk",
         "designation": "Assistant Professor",
         "location": "Block M, 2nd Floor"
+    },
+    {
+        "category": "Faculty",
+        "name": "Mr. Fahim Shahzad",
+        "email": "fahim.shahzad@cust.edu.pk ",
+        "designation": "Principal Lecturer",
+        "location": "Block M, 2nd Floor"
+    },
+    {
+        "category": "Faculty",
+        "name": "Ms. Aysha Nabeel",
+        "email": "aysha.nabeel@cust.edu.pk",
+        "designation": "Principal Lecturer",
+        "location": ""
+    },
+    {
+        "category": "Faculty",
+        "name": "Mr. Salman Ahmad",
+        "email": "salman.ahmed@cust.edu.pk",
+        "designation": "Senior Lecturer",
+        "location": "Block M, 2nd Floor"
+    },
+    {
+        "category": "Faculty",
+        "name": "Ms. Hina Shoaib",
+        "email": "hina.shoaib@cust.edu.pk",
+        "designation": "Lecturer",
+        "location": ""
+    },    
+    {
+        "category": "Faculty",
+        "name": "Ms. Faiza Asad",
+        "email": "faiza.asad@cust.edu.pk",
+        "designation": "Lecturer",
+        "location": ""
+    },    
+    {
+        "category": "Faculty",
+        "name": "Ms. Snober Naseer",
+        "email": "snober.naseer@cust.edu.pk",
+        "designation": "Lecturer",
+        "location": ""
+    },
+    {
+        "category": "Faculty",
+        "name": "Mr. S. Umair Kazmi",
+        "email": "syed.umair@cust.edu.pk",
+        "designation": "Lecturer",
+        "location": ""
+    },
+    {
+        "category": "Faculty",
+        "name": "Ms. Rida Haya",
+        "email": "rida.haya@cust.edu.pk",
+        "designation": "Associate Lecturer",
+        "location": ""
+    },
+    {
+        "category": "Faculty",
+        "name": "Mr. Islam Ud Din",
+        "email": "islam.uddin@cust.edu.pk",
+        "designation": "Associate Lecturer",
+        "location": "Block J, 3rd Floor"
+    },
+    {
+        "category": "Faculty",
+        "name": "Ms. Mehreen Tabassum",
+        "email": "mehreen.tabassum@cust.edu.pk",
+        "designation": "Associate Lecturer",
+        "location": ""
+    },
+    {
+        "category": "Faculty",
+        "name": "Ms. Muntaha Tabassum",
+        "email": "muntaha.tabassum@cust.edu.pk",
+        "designation": "Associate Lecturer",
+        "location": ""
+    },
+    {
+        "category": "Faculty",
+        "name": "Ms. Rafia Zafar",
+        "email": "rafia.zafar@cust.edu.pk",
+        "designation": "Associate Lecturer",
+        "location": ""
+    },
+    {
+        "category": "Faculty",
+        "name": "Ms. Ghanza Iqbal",
+        "email": "ghanza.iqbal@cust.edu.pk",
+        "designation": "Associate Lecturer",
+        "location": "Block E, 3rd Floor"
+    },
+    {
+        "category": "Faculty",
+        "name": "Mr. Rafah Ahmed",
+        "email": "rafah.ahmed@cust.edu.pk",
+        "designation": "Lab Instructor",
+        "location": ""
+    },
+    {
+        "category": "Faculty",
+        "name": "Mr. Ibtisam Zia",
+        "email": "ibtisam.zia@cust.edu.pk",
+        "designation": "Lab Instructor",
+        "location": "Block E, 3rd Floor"
+    },
+    {
+        "category": "Faculty",
+        "name": "Mr. Muhammad Daniyal",
+        "email": "muhammad.daniyal@cust.edu.pk",
+        "designation": "Lab Instructor",
+        "location": ""
+    },
+    {
+        "category": "Faculty",
+        "name": "Ms. Hira Firdous",
+        "email": "hira.firdous@cust.edu.pk",
+        "designation": "Lab Instructor",
+        "location": ""
+    },
+    {
+        "category": "Faculty",
+        "name": "Mr. Imran Javed",
+        "email": "imran.javed@cust.edu.pk",
+        "designation": "Lab Instructor",
+        "location": ""
+    },
+    {
+        "category": "Faculty",
+        "name": "Mr. Zohaib Ahmed",
+        "email": "zohaib.ahmed@cust.edu.pk",
+        "designation": "Lab Instructor",
+        "location": ""
+    },
+    {
+        "category": "Faculty",
+        "name": "Ms. Nayab Tariq",
+        "email": "nayab.tariq@cust.edu.pk",
+        "designation": "Lab Instructor",
+        "location": ""
+    },
+    {
+        "category": "Faculty",
+        "name": "Mr. Aqeel Ahmed",
+        "email": "aqeel.ahmed@cust.edu.pk",
+        "designation": "Lab Instructor",
+        "location": ""
     },
     {
         "category": "Faculty",
