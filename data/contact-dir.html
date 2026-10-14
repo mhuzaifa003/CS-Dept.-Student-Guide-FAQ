@@ -236,7 +236,7 @@ permalink: /contact-directory/
                         <span class="faq-category">${escapeHtml(item.category || "")}</span>
                         <h2 class="contact-name">${escapeHtml(item.name)}</h2>
                         <p class="contact-designation">${escapeHtml(item.designation)}</p>
-                        <p class="contact-location">&#128205; ${escapeHtml(item.location)}</p>
+                        ${item.location ? `<p class="contact-location">&#128205; ${escapeHtml(item.location)}</p>` : ""}
                     </div>
                 </div>
                 <div class="contact-actions">

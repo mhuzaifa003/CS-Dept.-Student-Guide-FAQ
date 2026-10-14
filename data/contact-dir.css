@@ -84,3 +84,37 @@
   background: var(--navy);
   border-color: var(--navy);
 }
+
+@media (max-width: 560px) {
+  .contact-card {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    padding: 16px 18px;
+  }
+
+  .contact-info {
+    min-width: 0;
+    flex: 0 0 auto;
+  }
+
+  .contact-details { min-width: 0; }
+
+  .contact-name { font-size: 17px; }
+
+  .contact-actions {
+    width: 100%;
+    align-items: stretch;
+    gap: 8px;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .contact-email-action {
+    width: 100%;
+    padding: 10px 12px;
+    text-align: center;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+}
