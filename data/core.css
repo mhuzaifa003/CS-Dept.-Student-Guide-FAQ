@@ -359,6 +359,8 @@ a { color: var(--navy-soft); }
   .wrap { padding-inline: 18px; }
   .site-header { padding-top: 40px; }
   .footer-grid { grid-template-columns: 1fr; padding-block: 24px; }
+  .footer-col { align-items: center; text-align: center; }
+  .footer-bottom { align-items: center; }
   .footer-bottom-inner { flex-direction: column; align-items: flex-start; gap: 6px; }
   .scroll-top-rail { --edge: 14px; --gutter: 18px; }
 }
