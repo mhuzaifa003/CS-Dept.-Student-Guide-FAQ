@@ -14,7 +14,7 @@
 
     "locations": [
             { "name": "Block M", "tags": ["blocks"], "color": "#00E5FF", "x": 835, "y": 468, "desc":"<b>CS Department HQ</b>" },
-            { "name": "Block A", "tags": ["libraries", "blocks"], "x": 591, "y": 370, "desc": "<b>Houses:</b><br>• Computer Lab<br>• Main Library<br>• Study Room" },
+            { "name": "Block A", "tags": ["libraries", "blocks", "studentServices"], "x": 591, "y": 370, "desc": "<b>Ground Floor:</b><br>• Girl's Common Room<br>• Auditorium's A1, A2<br><b>Second Floor</b><br>• Computer Lab<br><b>Third Floor</b><br>• Main Library<br>• Study Room" },
             { "name": "Block E", "tags": ["administrative", "blocks"], "x": 796, "y": 454, "desc": "<b>Houses:</b><br>• Student Affairs Office<br>• Admissions Office" },
             { "name": "Block K", "tags": ["studentServices", "blocks"], "x": 838, "y": 535, "desc": "<b>Houses:</b><br>• Girl's Common Room" },
             { "name": "Block X", "tags": ["recreation", "blocks"], "x": 795, "y": 622, "desc": "<b>Houses:</b><br>• Sports Room<br>• Gymnasium" },
