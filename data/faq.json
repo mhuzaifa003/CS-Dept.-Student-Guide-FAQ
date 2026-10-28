@@ -1,26 +1,15 @@
 {
   "categories": [
-    "University Policies & Guidelines",
     "Campus Facilities & Services",
     "Academic Registration & Enrollment",
     "Academia & Courses",
     "IT Support & Student Portal",
     "Scholarships & Financial Aid",
-    "Graduation & Alumni Services"
+    "Graduation & Alumni Services",
+    "University Policies & Guidelines"
   ],
 
-  "faqs": [
-    {
-      "category": "University Policies & Guidelines",
-      "question": "Where can I find the official university rulebook?",
-      "answer": "<p>Access the official university rulebook <a href='https://cust.edu.pk/wp-content/uploads/2026/01/Academic-Regulations-Book.pdf' target='_blank'><b><u>here</u></b></a>. Chapter 1 outlines foundational definitions, while Chapter 2 details Bachelor's degree regulations.</p><p>Where necessary, frequently applicable guidelines are summarized within this catalog for convenient reference.</p><p>In the event of any discrepancies, the official university rulebook shall take precedence.</p>"
-    },
-    {
-      "category": "University Policies & Guidelines",
-      "question": "What is the procedure for transferring to another university?",
-      "answer": "<p>To initiate a transfer to another institution, you must first contact the administration of the target university to discuss your specific case and verify their transfer eligibility criteria and required documentation.</p><p>Once the target university provides the required list of documents, please visit the <b><u>Administrative Offices at CUST</u></b> to request and collect the official records needed to complete your transfer process.</p>"
-    },
-    
+  "faqs": [    
     {
       "category": "Campus Facilities & Services",
       "question": "What are the standard university office timings?",
@@ -47,11 +36,6 @@
       "question": "What steps should I take if I accumulate three probations?",
       "answer": "<p>Probation matters must be addressed directly with the Student Affairs Office prior to the closing of course enrollment for the upcoming semester.</p>"
     },
-    {
-      "category": "Academic Registration & Enrollment",
-      "question": "What is the procedure to clear or remove a grade bracket?",
-      "answer": "<p>Please visit the Examination Office directly for guidance regarding clearing or removing brackets.</p>"
-    },
 
     {
       "category": "Academia & Courses",
@@ -73,13 +57,25 @@
     {
       "category": "Scholarships & Financial Aid",
       "question": "How do I apply for kinship scholarships?",
-      "answer": "<p>Kinship scholarships are processed on a per-semester basis. To apply, visit the Registration Office after semester registration closes but before tuition fee payment is due.</p>"
+      "answer": "<p>Kinship scholarships are processed on a per-semester basis. To apply, visit the Registration Office after semester registration closes but before tuition fee payment is due with relevant documents such as CNICs of Parent and Kin(s).</p>"
     },
     
     {
       "category": "Graduation & Alumni Services",
       "question": "How do I obtain my official transcript and degree certificate following graduation?",
       "answer": "<p>Graduating students can request their official transcripts and degree certificates directly through the <b><u>Examination Office</u></b>.</p>"
+    },
+
+    
+    {
+      "category": "University Policies & Guidelines",
+      "question": "Where can I find the official university rulebook?",
+      "answer": "<p>Access the official university rulebook <a href='https://cust.edu.pk/wp-content/uploads/2026/01/Academic-Regulations-Book.pdf' target='_blank'><b><u>here</u></b></a>. Chapter 1 outlines foundational definitions, while Chapter 2 details Bachelor's degree regulations.</p><p>Where necessary, frequently applicable guidelines are summarized within this catalog for convenient reference.</p><p>In the event of any discrepancies, the official university rulebook shall take precedence.</p>"
+    },
+    {
+      "category": "University Policies & Guidelines",
+      "question": "What is the procedure for transferring to another university?",
+      "answer": "<p>To initiate a transfer to another institution, you must first contact the administration of the target university to discuss your specific case and verify their transfer eligibility criteria and required documentation.</p><p>Once the target university provides the required list of documents, please visit the <b><u>Administrative Offices at CUST</u></b> to request and collect the official records needed to complete your transfer process.</p>"
     }
   ]
 }
