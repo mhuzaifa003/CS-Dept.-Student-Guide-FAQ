@@ -9,6 +9,7 @@
         { "source": "/frequently-asked-questions", "destination": "/data/faq.html" },
         { "source": "/campus-map", "destination": "/data/map.html" },
         { "source": "/title-page-editor", "destination": "/data/title-generator.html" },
+        { "source": "/jspark-society", "destination": "/data/jspark-society.html" },
 
         { "source": "/CS-Dept.-Student-Guide-FAQ//data/index.json", "destination": "/data/index.json" },
         { "source": "/CS-Dept.-Student-Guide-FAQ//data/contact-dir.json", "destination": "/data/contact-dir.json" },
@@ -17,7 +18,7 @@
         { "source": "/CS-Dept.-Student-Guide-FAQ//data/map.json", "destination": "/data/map.json" },
 
         { "source": "/CS-Dept.-Student-Guide-FAQ/data/scroll-top.js", "destination": "/data/scroll-top.js"},
-        
+
         { "source": "/CS-Dept.-Student-Guide-FAQ/files/core.css", "destination": "/files/core.css" },
         { "source": "/CS-Dept.-Student-Guide-FAQ/files/archive.css", "destination": "/files/archive.css" },
         { "source": "/CS-Dept.-Student-Guide-FAQ/files/contact-dir.css", "destination": "/files/contact-dir.css" },
